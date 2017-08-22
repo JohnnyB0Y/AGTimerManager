@@ -15,7 +15,7 @@ end
 ```objective-c
 __weak typeof(self) weakSelf = self;
     _countdownKey = 
-    [[ag_sharedTimerManager() ag_startTimer:[self _countdownTi] countdown:^BOOL(NSUInteger surplusCount) {
+    [[ag_sharedTimerManager() ag_startTimer:60 countdown:^BOOL(NSUInteger surplusCount) {
         
         // ———————————————— 倒计时显示 ——————————————————
         __strong typeof(weakSelf) strongSelf = weakSelf;
