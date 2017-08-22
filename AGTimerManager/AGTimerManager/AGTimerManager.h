@@ -24,11 +24,7 @@ typedef BOOL(^AGTimerManagerRepeatBlock)(void);
      [strongSelf.rightBtn ag_setDisTitle:[NSString stringWithFormat:@"从新获取%lu", (unsigned long)surplusCount]];
      
      // ———————————————— 结束 timer ——————————————————
-     if ( strongSelf == nil ) {
-         return NO;
-     }
- 
-     return YES;
+     return strongSelf ? YES : NO;
  
  } completion:^{
  

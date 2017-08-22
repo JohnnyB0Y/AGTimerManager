@@ -326,6 +326,7 @@
 				3AEA526D1F4C2AF200779EB3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
