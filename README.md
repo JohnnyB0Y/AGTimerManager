@@ -41,7 +41,8 @@ __weak typeof(self) weakSelf = self;
 ## 开始定时任务
 ```objective-c
 __weak typeof(self) weakSelf = self;
-    _timerKey = [ag_sharedTimerManager() ag_startTimerWithTimeInterval:1. repeat:^BOOL{
+    _timerKey = 
+    [ag_sharedTimerManager() ag_startTimerWithTimeInterval:1. repeat:^BOOL{
         // ———————————————— 定时任务调用 ——————————————————
         __strong typeof(weakSelf) strongSelf = weakSelf;
         NSUInteger ti = [strongSelf _timerTi];
