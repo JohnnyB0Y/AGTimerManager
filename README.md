@@ -29,6 +29,7 @@ __weak typeof(self) weakSelf = self;
         // ———————————————— 完成倒计时 ——————————————————
         __strong typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.view.backgroundColor = [UIColor orangeColor];
+        
     }];
 
 ```
@@ -43,6 +44,7 @@ __weak typeof(self) weakSelf = self;
 __weak typeof(self) weakSelf = self;
     _timerKey = 
     [ag_sharedTimerManager() ag_startTimerWithTimeInterval:1. repeat:^BOOL{
+    
         // ———————————————— 定时任务调用 ——————————————————
         __strong typeof(weakSelf) strongSelf = weakSelf;
         NSUInteger ti = [strongSelf _timerTi];
