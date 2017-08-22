@@ -26,14 +26,15 @@
     NSString *_timerKey;
 }
 
+#pragma mark - ----------- Life Cycle ----------
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
-    // 开始计时
+    // 开始计时器
     [self _startTimer];
 }
 
+#pragma mark - ---------- Event Methods ----------
 - (IBAction)countdownClick:(UISwitch *)sender
 {
     sender.isOn ? [self _startCountdownTimer] : [self _stopCountdownTimer];
@@ -58,13 +59,14 @@
 - (void) _startCountdownTimer
 {
     __weak typeof(self) weakSelf = self;
-    _countdownKey = [[AGTimerManager sharedInstance] ag_startTimer:[self _countdownTi] countdown:^BOOL(NSUInteger surplusCount) {
+    _countdownKey =
+    [ag_sharedTimerManager() ag_startTimer:[self _countdownTi] countdown:^BOOL(NSUInteger surplusCount) {
         
-        // ———————————————— 设置计时 ——————————————————
+        // ———————————————— 倒计时显示 ——————————————————
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.countdownLabel setText:[NSString stringWithFormat:@"%@", @(surplusCount)]];
         
-        // ———————————————— 结束 timer ——————————————————
+        // ———————————————— 继续 Timer ——————————————————
         return strongSelf ? YES : NO;
         
     } completion:^{
@@ -72,7 +74,9 @@
         // ———————————————— 完成倒计时 ——————————————————
         __strong typeof(weakSelf) strongSelf = weakSelf;
         strongSelf.view.backgroundColor = [UIColor orangeColor];
+        
     }];
+    
 }
 
 - (void) _stopCountdownTimer
@@ -84,12 +88,13 @@
 {
     __weak typeof(self) weakSelf = self;
     _timerKey = [ag_sharedTimerManager() ag_startTimerWithTimeInterval:1. repeat:^BOOL{
-        // ———————————————— 设置计时 ——————————————————
+        
+        // ———————————————— 定时任务调用 ——————————————————
         __strong typeof(weakSelf) strongSelf = weakSelf;
         NSUInteger ti = [strongSelf _timerTi];
         [strongSelf.timerLabel setText:[NSString stringWithFormat:@"%@", @(++ti)]];
         
-        // ———————————————— 结束 timer ——————————————————
+        // ———————————————— 继续 Timer ——————————————————
         return strongSelf ? YES : NO;
         
     }];

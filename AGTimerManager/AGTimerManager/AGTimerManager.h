@@ -1,10 +1,10 @@
 //
-//  AGCountdownManager.h
+//  AGTimerManager.h
 //  
 //
 //  Created by JohnnyB0Y on 2017/5/3.
 //  Copyright © 2017年 JohnnyB0Y. All rights reserved.
-//  倒计时 manager
+//
 
 #import <Foundation/Foundation.h>
 
@@ -15,23 +15,21 @@ typedef BOOL(^AGTimerManagerRepeatBlock)(void);
 /** 
  
  __weak typeof(self) weakSelf = self;
+ _countdownKey = [[AGTimerManager sharedInstance] ag_startTimer:[self _countdownTi]
+                                                      countdown:^BOOL(NSUInteger surplusCount) {
  
- [[AGTimerManager sharedInstance] ag_startTimer:60 countdown:^BOOL(NSUInteger surplusCount) {
- 
-     // ———————————————— 设置计时按钮 ——————————————————
+     // ———————————————— 倒计时显示 ——————————————————
      __strong typeof(weakSelf) strongSelf = weakSelf;
-     [strongSelf.rightBtn setEnabled:NO];
-     [strongSelf.rightBtn ag_setDisTitle:[NSString stringWithFormat:@"从新获取%lu", (unsigned long)surplusCount]];
+     [strongSelf.countdownLabel setText:[NSString stringWithFormat:@"%@", @(surplusCount)]];
      
-     // ———————————————— 结束 timer ——————————————————
+     // ———————————————— 继续 Timer ——————————————————
      return strongSelf ? YES : NO;
- 
+     
  } completion:^{
- 
+     
      // ———————————————— 完成倒计时 ——————————————————
      __strong typeof(weakSelf) strongSelf = weakSelf;
-     [strongSelf.rightBtn setEnabled:YES];
- 
+     strongSelf.view.backgroundColor = [UIColor orangeColor];
  }];
  
  */
@@ -40,7 +38,7 @@ typedef BOOL(^AGTimerManagerRepeatBlock)(void);
 @interface AGTimerManager : NSObject
 
 /** timer count */
-@property (nonatomic, assign, readonly) NSUInteger timerCount;
+@property (readonly) NSUInteger timerCount;
 
 
 #pragma mark - 定时器⏰
