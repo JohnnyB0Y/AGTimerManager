@@ -1,10 +1,21 @@
 # AGTimerManager
 倒计时 - 定时器
 
+### cocoapods 集成
+```
+platform :ios, '7.0'
+target 'AGTimerManager' do
+
+pod 'AGTimerManager'
+
+end
+```
+
 ## 开始倒计时
 ```objective-c
 __weak typeof(self) weakSelf = self;
-    _countdownKey = [[AGTimerManager sharedInstance] ag_startTimer:[self _countdownTi] countdown:^BOOL(NSUInteger surplusCount) {
+    _countdownKey = [[AGTimerManager sharedInstance] ag_startTimer:[self _countdownTi] 
+                                                         countdown:^BOOL(NSUInteger surplusCount) {
         
         // ———————————————— 设置计时 ——————————————————
         __strong typeof(weakSelf) strongSelf = weakSelf;
