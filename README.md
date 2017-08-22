@@ -14,8 +14,8 @@ end
 ## 开始倒计时
 ```objective-c
 __weak typeof(self) weakSelf = self;
-    _countdownKey = [[AGTimerManager sharedInstance] ag_startTimer:[self _countdownTi] 
-                                                         countdown:^BOOL(NSUInteger surplusCount) {
+    _countdownKey = 
+    [[ag_sharedTimerManager() ag_startTimer:[self _countdownTi] countdown:^BOOL(NSUInteger surplusCount) {
         
         // ———————————————— 倒计时显示 ——————————————————
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -34,7 +34,7 @@ __weak typeof(self) weakSelf = self;
 ```
 ### 提前结束倒计时
 ```objective-c
-[[AGTimerManager sharedInstance] ag_stopTimer:_countdownKey];
+[ag_sharedTimerManager() ag_stopTimer:_countdownKey];
 
 ```
 
