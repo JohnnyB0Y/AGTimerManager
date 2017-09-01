@@ -17,8 +17,18 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
 
 @interface AGTimerManager ()
 
+/** 方法调用锁 */
+@property (nonatomic, strong) NSLock *invokeLock;
+
+/** 令牌集合 */
+@property (nonatomic, strong) NSMapTable *tokenMapTable;
+
+/** 当前调用令牌 */
+@property (nonatomic, strong) id currentToken;
+
 /** timer 信息字典 */
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSMutableDictionary *> *timerInfo;
+
 
 @end
 
@@ -32,6 +42,10 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] init];
     });
+    
+    // 调用前 - 上锁
+    BOOL canLock = [instance.invokeLock tryLock];
+    NSAssert(canLock, @"您可能在某处单独调用了 ag_sharedTimerManager() !");
     
     return instance;
 }
@@ -47,46 +61,49 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
     if ( ! countdownBlock && ! completionBlock ) return nil;
     if ( count <= 0 || ti <= 0 ) return nil;
     
-    @synchronized (self) {
-        // 准备 timer
-        NSTimer *timer = [self _timerWithTimeInterval:ti
-                                          repeatBlock:^BOOL(NSTimer *timer,
-                                                            NSMutableDictionary *timerInfo) {
-            // 倒计时
-            NSUInteger ti = [timerInfo[kAGTimerManagerCountdownCount] unsignedIntegerValue];
-            ti--;
-            timerInfo[kAGTimerManagerCountdownCount] = [NSNumber numberWithUnsignedInteger:ti];
+    // 准备 timer
+    NSTimer *timer =
+    [self _timerWithTimeInterval:ti repeatBlock:^BOOL(NSTimer *timer,
+                                                    NSMutableDictionary *timerInfo) {
+        // 倒计时
+        NSUInteger ti = [timerInfo[kAGTimerManagerCountdownCount] unsignedIntegerValue];
+        ti--;
+        timerInfo[kAGTimerManagerCountdownCount] = [NSNumber numberWithUnsignedInteger:ti];
+        
+        // 用户计数 block
+        AGTimerManagerCountdownBlock countdownBlock = timerInfo[kAGTimerManagerRepeatBlock];
+        BOOL repeat = countdownBlock ? countdownBlock(ti) : YES;
+        if ( ti <= 0 || ! repeat ) {
+            // 计时为零 停止计时并调用完成代码块
+            AGTimerManagerCompletionBlock completionBlock =
+            timerInfo[kAGTimerManagerCompletionBlock];
             
-            // 用户计数 block
-            AGTimerManagerCountdownBlock countdownBlock = timerInfo[kAGTimerManagerRepeatBlock];
-            BOOL repeat = countdownBlock ? countdownBlock(ti) : YES;
-            if ( ti <= 0 || ! repeat ) {
-                // 计时为零 停止计时并调用完成代码块
-                AGTimerManagerCompletionBlock completionBlock =
-                timerInfo[kAGTimerManagerCompletionBlock];
-                
-                completionBlock ? completionBlock() : nil;
-                
-                return NO;
-            }
+            completionBlock ? completionBlock() : nil;
             
-            // 继续倒计时
-            return YES;
-        }];
+            return NO;
+        }
         
-        // 记录 timer info
-        NSMutableDictionary *timerInfo = [self _timerInfoWithTimer:timer
-                                                    countdownCount:count+1
-                                                       repeatBlock:countdownBlock
-                                                   completionBlock:completionBlock];
-        
-        NSString *timerKey = [self _keyWithTimer:timer];
-        [self.timerInfo setObject:timerInfo forKey:timerKey];
-        
-        // 开始 timer
-        [self _startTimer:timer forMode:mode];
-        return timerKey;
-    }
+        // 继续倒计时
+        return YES;
+    }];
+    
+    // 记录 timer info
+    NSMutableDictionary *timerInfo = [self _timerInfoWithTimer:timer
+                                                countdownCount:count+1
+                                                   repeatBlock:countdownBlock
+                                               completionBlock:completionBlock];
+    
+    NSString *timerKey = [self _keyWithTimer:timer];
+    [self.timerInfo setObject:timerInfo forKey:timerKey];
+    
+    // 开始 timer
+    [self _startTimer:timer forMode:mode];
+    
+    
+    // 调用完 - 解锁
+    [self.invokeLock unlock];
+    
+    return timerKey;
 }
 
 - (NSString *) ag_startTimer:(NSUInteger)count
@@ -125,29 +142,32 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
 {
     if ( ! repeatBlock || ti <= 0 ) return nil;
     
-    @synchronized (self) {
-        // 准备 timer
-        NSTimer *timer = [self _timerWithTimeInterval:ti
-                                          repeatBlock:^BOOL(NSTimer *timer,
-                                                            NSMutableDictionary *timerInfo) {
-            // 定时任务 block
-            AGTimerManagerRepeatBlock repeatBlock = timerInfo[kAGTimerManagerRepeatBlock];
-            return repeatBlock ? repeatBlock() : YES;
-        }];
-        
-        // 记录 timer info
-        NSMutableDictionary *timerInfo = [self _timerInfoWithTimer:timer
-                                                    countdownCount:ti
-                                                       repeatBlock:repeatBlock
-                                                   completionBlock:nil];
-        
-        NSString *timerKey = [self _keyWithTimer:timer];
-        [self.timerInfo setObject:timerInfo forKey:timerKey];
-        
-        // 开始 timer
-        [self _startTimer:timer forMode:mode];
-        return timerKey;
-    }
+    // 准备 timer
+    NSTimer *timer =
+    [self _timerWithTimeInterval:ti repeatBlock:^BOOL(NSTimer *timer,
+                                       NSMutableDictionary *timerInfo) {
+        // 定时任务 block
+        AGTimerManagerRepeatBlock repeatBlock = timerInfo[kAGTimerManagerRepeatBlock];
+        return repeatBlock ? repeatBlock() : YES;
+    }];
+    
+    // 记录 timer info
+    NSMutableDictionary *timerInfo = [self _timerInfoWithTimer:timer
+                                                countdownCount:ti
+                                                   repeatBlock:repeatBlock
+                                               completionBlock:nil];
+    
+    NSString *timerKey = [self _keyWithTimer:timer];
+    [self.timerInfo setObject:timerInfo forKey:timerKey];
+    
+    // 开始 timer
+    [self _startTimer:timer forMode:mode];
+    
+    
+    // 调用完 - 解锁
+    [self.invokeLock unlock];
+    
+    return timerKey;
 }
 
 /**
@@ -157,19 +177,21 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
  */
 - (void) ag_stopTimer:(NSString *)key
 {
-    @synchronized (self) {
-        if ( key ) {
-            [self.timerInfo removeObjectForKey:key];
-        }
+    if ( key ) {
+        [self.timerInfo removeObjectForKey:key];
     }
+    
+    // 调用完 - 解锁
+    [self.invokeLock unlock];
 }
 
 /** 停止所有 timer */
 - (void) ag_stopAllTimers
 {
-    @synchronized (self) {
-        [self.timerInfo removeAllObjects];
-    }
+    [self.timerInfo removeAllObjects];
+    
+    // 调用完 - 解锁
+    [self.invokeLock unlock];
 }
 
 #pragma mark - ---------- Private Methods ----------
@@ -234,6 +256,23 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
     return _timerInfo;
 }
 
+- (NSMapTable *)tokenMapTable
+{
+    if (_tokenMapTable == nil) {
+        _tokenMapTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsWeakMemory
+                                               valueOptions:NSPointerFunctionsStrongMemory];
+    }
+    return _tokenMapTable;
+}
+
+- (NSLock *)invokeLock
+{
+    if (_invokeLock == nil) {
+        _invokeLock = [[NSLock alloc] init];
+    }
+    return _invokeLock;
+}
+
 - (NSUInteger)timerCount
 {
     @synchronized (self) {
@@ -245,7 +284,9 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
 
 
 /** 获取 timer manager */
-AGTimerManager * ag_sharedTimerManager()
+AGTimerManager * ag_sharedTimerManager(id token)
 {
-    return [AGTimerManager sharedInstance];
+    AGTimerManager *tm = [AGTimerManager sharedInstance];
+    tm.currentToken = token;
+    return tm;
 }

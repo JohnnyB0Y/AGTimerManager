@@ -18,6 +18,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 - (IBAction)timerClick:(UISwitch *)sender;
 
+/** 令牌集合 */
+@property (nonatomic, strong) NSMapTable *tokenMapTable;
+
+/** key */
+@property (nonatomic, strong) NSArray *key;
 
 @end
 
@@ -30,8 +35,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.key = @[@1];
+    [self.tokenMapTable setObject:@"abc" forKey:self.key];
+    [self.tokenMapTable setObject:@"ABC" forKey:self.key];
+    
+    ag_sharedTimerManager(self);
+    
     // 开始计时器
     [self _startTimer];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    NSLog(@"%@", self.tokenMapTable);
+    
+    NSLog(@"%@", [self.tokenMapTable objectForKey:self.key]);
+    
+    self.key = nil;
+    
+    NSLog(@"%@", self.tokenMapTable);
 }
 
 #pragma mark - ---------- Event Methods ----------
@@ -60,7 +82,7 @@
 {
     __weak typeof(self) weakSelf = self;
     _countdownKey =
-    [ag_sharedTimerManager() ag_startTimer:[self _countdownTi] countdown:^BOOL(NSUInteger surplusCount) {
+    [ag_sharedTimerManager(self) ag_startTimer:[self _countdownTi] countdown:^BOOL(NSUInteger surplusCount) {
         
         // ———————————————— 倒计时显示 ——————————————————
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -81,13 +103,13 @@
 
 - (void) _stopCountdownTimer
 {
-    [ag_sharedTimerManager() ag_stopTimer:_countdownKey];
+    [ag_sharedTimerManager(self) ag_stopTimer:_countdownKey];
 }
 
 - (void) _startTimer
 {
     __weak typeof(self) weakSelf = self;
-    _timerKey = [ag_sharedTimerManager() ag_startTimerWithTimeInterval:1. repeat:^BOOL{
+    _timerKey = [ag_sharedTimerManager(self) ag_startTimerWithTimeInterval:1. repeat:^BOOL{
         
         // ———————————————— 定时任务调用 ——————————————————
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -102,7 +124,18 @@
 
 - (void) _stopTimer
 {
-    [ag_sharedTimerManager() ag_stopTimer:_timerKey];
+    [ag_sharedTimerManager(self) ag_stopTimer:_timerKey];
+}
+
+
+#pragma mark - ----------- Getter Methods ----------
+- (NSMapTable *)tokenMapTable
+{
+    if (_tokenMapTable == nil) {
+        _tokenMapTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsWeakMemory
+                                               valueOptions:NSPointerFunctionsStrongMemory];
+    }
+    return _tokenMapTable;
 }
 
 @end

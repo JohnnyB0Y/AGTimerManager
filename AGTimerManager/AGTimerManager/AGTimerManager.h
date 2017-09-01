@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef BOOL(^AGTimerManagerCountdownBlock)(NSUInteger surplusCount);
 typedef void(^AGTimerManagerCompletionBlock)(void);
 typedef BOOL(^AGTimerManagerRepeatBlock)(void);
@@ -122,11 +124,11 @@ typedef BOOL(^AGTimerManagerRepeatBlock)(void);
 /** 停止所有 timer */
 - (void) ag_stopAllTimers;
 
-#pragma mark - 获取对象🙈
-+ (instancetype) sharedInstance;
 
 @end
 
 /** 获取 timer manager */
-AGTimerManager * ag_sharedTimerManager();
+AGTimerManager * ag_sharedTimerManager(id token);
 
+
+NS_ASSUME_NONNULL_END
