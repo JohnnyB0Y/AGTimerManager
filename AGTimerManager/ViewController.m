@@ -18,12 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 - (IBAction)timerClick:(UISwitch *)sender;
 
-/** 令牌集合 */
-@property (nonatomic, strong) NSMapTable *tokenMapTable;
-
-/** key */
-@property (nonatomic, strong) NSArray *key;
-
 @end
 
 @implementation ViewController {
@@ -35,11 +29,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.key = @[@1];
-    [self.tokenMapTable setObject:@"abc" forKey:self.key];
-    [self.tokenMapTable setObject:@"ABC" forKey:self.key];
     
-    ag_sharedTimerManager(self);
+    
+    [ag_sharedTimerManager(self.timerLabel) ag_startTimer:12 countdown:^BOOL(NSUInteger surplusCount) {
+        
+        NSLog(@"----- %@", @(surplusCount));
+        return YES;
+        
+    } completion:^{
+        NSLog(@"xxxxxx");
+    }];
     
     // 开始计时器
     [self _startTimer];
@@ -47,13 +46,9 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"%@", self.tokenMapTable);
+    NSLog(@"");
     
-    NSLog(@"%@", [self.tokenMapTable objectForKey:self.key]);
-    
-    self.key = nil;
-    
-    NSLog(@"%@", self.tokenMapTable);
+    [ag_sharedTimerManager(self) ag_stopAllTimers];
 }
 
 #pragma mark - ---------- Event Methods ----------
@@ -129,13 +124,6 @@
 
 
 #pragma mark - ----------- Getter Methods ----------
-- (NSMapTable *)tokenMapTable
-{
-    if (_tokenMapTable == nil) {
-        _tokenMapTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsWeakMemory
-                                               valueOptions:NSPointerFunctionsStrongMemory];
-    }
-    return _tokenMapTable;
-}
+
 
 @end

@@ -39,10 +39,6 @@ typedef BOOL(^AGTimerManagerRepeatBlock)(void);
 
 @interface AGTimerManager : NSObject
 
-/** timer count */
-@property (readonly) NSUInteger timerCount;
-
-
 #pragma mark - 定时器⏰
 /**
  开始重复调用 repeatBlock，直到返回 NO  (NSRunLoopCommonModes)
