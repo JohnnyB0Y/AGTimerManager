@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 - (IBAction)timerClick:(UISwitch *)sender;
 
+/** 测试 nil 时，定时器是否停止 */
+@property (nonatomic, strong) UITextView *textView;
+
 @end
 
 @implementation ViewController {
@@ -29,16 +32,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 测试 nil 时，定时器是否停止
+    self.textView = [[UITextView alloc] init];
+    
+    for (NSInteger i = 0; i<24; i++) {
+        [ag_sharedTimerManager(self.textView) ag_startTimer:24 countdown:^BOOL(NSUInteger surplusCount) {
+            
+            NSLog(@"----- %@", @(surplusCount));
+            return YES;
+            
+        } completion:^{
+            
+            NSLog(@"完成倒计时！");
+        }];
+    }
+    
+    // 5 秒后，制空 self.textView
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5. * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.textView = nil;
+    });
     
     
-    [ag_sharedTimerManager(self.timerLabel) ag_startTimer:12 countdown:^BOOL(NSUInteger surplusCount) {
-        
-        NSLog(@"----- %@", @(surplusCount));
-        return YES;
-        
-    } completion:^{
-        NSLog(@"xxxxxx");
-    }];
+    
     
     // 开始计时器
     [self _startTimer];
@@ -46,9 +61,9 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    NSLog(@"");
+    NSLog(@"——————");
     
-    [ag_sharedTimerManager(self) ag_stopAllTimers];
+    //[ag_sharedTimerManager(self) ag_stopAllTimers];
 }
 
 #pragma mark - ---------- Event Methods ----------
@@ -93,7 +108,6 @@
         strongSelf.view.backgroundColor = [UIColor orangeColor];
         
     }];
-    
 }
 
 - (void) _stopCountdownTimer

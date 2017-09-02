@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+@class AGTimerManager;
 NS_ASSUME_NONNULL_BEGIN
 
 typedef BOOL(^AGTimerManagerCountdownBlock)(NSUInteger surplusCount);
@@ -15,10 +15,23 @@ typedef void(^AGTimerManagerCompletionBlock)(void);
 typedef BOOL(^AGTimerManagerRepeatBlock)(void);
 
 /** 
+ // 使用须知
+ 1. ag_sharedTimerManager(id token)，一个 token 对应一组 Timer；
+ 调用 ag_stopAllTimers，会移除该 token 对应的所有 Timer；
  
+ 2. token 必须是 oc 对象，当对象销毁时，定时器会自动停止并移除。一般传 self 就可以了。
+ 如果传常量或全局变量作为 token 就要手动管理好定时器了。
+ 
+ 3. 如果用 LLDB 打印信息，token 传 nil 就好了。传 nil 后调用 ag_stopAllTimers 是移除内部全部 timer。
+ 
+ 4. 不支持异步线程调用。不太好上锁。😅😅😅😅😅😅
+ 
+ 
+ 
+ // 使用示例
  __weak typeof(self) weakSelf = self;
- _countdownKey = [[AGTimerManager sharedInstance] ag_startTimer:[self _countdownTi]
-                                                      countdown:^BOOL(NSUInteger surplusCount) {
+ _countdownKey = [ag_sharedTimerManager(self) ag_startTimer:60
+                                                  countdown:^BOOL(NSUInteger surplusCount) {
  
      // ———————————————— 倒计时显示 ——————————————————
      __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -35,6 +48,15 @@ typedef BOOL(^AGTimerManagerRepeatBlock)(void);
  }];
  
  */
+
+
+/**
+ 获取 timerManager 实例。
+ 
+ @param token 一个令牌对应一组 Timer；调用 ag_stopAllTimers，会移除该 token 对应的所有 Timer；
+ @return timerManager
+ */
+AGTimerManager * ag_sharedTimerManager(id token);
 
 
 @interface AGTimerManager : NSObject
@@ -74,7 +96,7 @@ typedef BOOL(^AGTimerManagerRepeatBlock)(void);
  @return timer key
  */
 - (NSString *) ag_startTimer:(NSUInteger)count
-                   countdown:(AGTimerManagerCountdownBlock)countdownBlock
+                   countdown:(nullable AGTimerManagerCountdownBlock)countdownBlock
                   completion:(AGTimerManagerCompletionBlock)completionBlock;
 
 
@@ -89,7 +111,7 @@ typedef BOOL(^AGTimerManagerRepeatBlock)(void);
  */
 - (NSString *) ag_startTimer:(NSUInteger)count
                 timeInterval:(NSTimeInterval)ti
-                   countdown:(AGTimerManagerCountdownBlock)countdownBlock
+                   countdown:(nullable AGTimerManagerCountdownBlock)countdownBlock
                   completion:(AGTimerManagerCompletionBlock)completionBlock;
 
 /**
@@ -104,7 +126,7 @@ typedef BOOL(^AGTimerManagerRepeatBlock)(void);
  */
 - (NSString *) ag_startTimer:(NSUInteger)count
                 timeInterval:(NSTimeInterval)ti
-                   countdown:(AGTimerManagerCountdownBlock)countdownBlock
+                   countdown:(nullable AGTimerManagerCountdownBlock)countdownBlock
                   completion:(AGTimerManagerCompletionBlock)completionBlock
                      forMode:(NSRunLoopMode)mode;
 
@@ -117,14 +139,15 @@ typedef BOOL(^AGTimerManagerRepeatBlock)(void);
  */
 - (void) ag_stopTimer:(NSString *)key;
 
-/** 停止所有 timer */
+/** 停止对应 token 的所有 timer；如果 token 为 nil 就清空所有的定时器。 */
 - (void) ag_stopAllTimers;
 
 
+
+/** 禁止调用 */
+- (instancetype) init __attribute__((unavailable("call ag_sharedTimerManager(id token)")));
++ (instancetype) new __attribute__((unavailable("call ag_sharedTimerManager(id token)")));
+
 @end
-
-/** 获取 timer manager */
-AGTimerManager * ag_sharedTimerManager(id token);
-
 
 NS_ASSUME_NONNULL_END

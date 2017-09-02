@@ -16,17 +16,16 @@ static NSString * const kAGTimerManagerRepeatBlock      = @"kAGTimerManagerRepea
 static NSString * const kAGTimerManagerCompletionBlock  = @"kAGTimerManagerCompletionBlock";
 static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer";
 
+// timer's userInfo key
+static NSString * const kAGTimerManagerTimerRepeatBlock = @"kAGTimerManagerTimerRepeatBlock";
+static NSString * const kAGTimerManagerToken   = @"kAGTimerManagerToken";
+
+
+
 @interface AGTimerManager ()
 
-/** 方法调用锁 */
-@property (nonatomic, strong) NSLock *invokeLock;
-
-/** 令牌集合 */
-@property (nonatomic, strong) NSMapTable *tokenMapTable;
-
-/** 当前调用令牌 */
+@property (nonatomic, strong) NSMapTable<id, NSMutableDictionary *> *tokenMapTable;
 @property (nonatomic, strong) id currentToken;
-
 @end
 
 @implementation AGTimerManager
@@ -39,10 +38,6 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] init];
     });
-    
-//    // 调用前 - 上锁
-//    BOOL canLock = [instance.invokeLock tryLock];
-//    NSAssert(canLock, @"您可能在某处单独调用了 ag_sharedTimerManager() 导致死锁了。 !");
     
     return instance;
 }
@@ -61,7 +56,7 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
     // 准备 timer
     NSTimer *timer =
     [self _timerWithTimeInterval:ti repeatBlock:^BOOL(NSTimer *timer,
-                                                    NSMutableDictionary *timerInfo) {
+                                                      NSMutableDictionary *timerInfo) {
         // 倒计时
         NSUInteger ti = [timerInfo[kAGTimerManagerCountdownCount] unsignedIntegerValue];
         ti--;
@@ -91,14 +86,10 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
                                                completionBlock:completionBlock];
     
     NSString *timerKey = [self _keyWithTimer:timer];
-    [self.timerInfo setObject:timerInfo forKey:timerKey];
+    [[self _timerInfoWithToken:self.currentToken] setObject:timerInfo forKey:timerKey];
     
     // 开始 timer
     [self _startTimer:timer forMode:mode];
-    
-    
-//    // 调用完 - 解锁
-//    [self.invokeLock unlock];
     
     return timerKey;
 }
@@ -142,7 +133,7 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
     // 准备 timer
     NSTimer *timer =
     [self _timerWithTimeInterval:ti repeatBlock:^BOOL(NSTimer *timer,
-                                       NSMutableDictionary *timerInfo) {
+                                                      NSMutableDictionary *timerInfo) {
         // 定时任务 block
         AGTimerManagerRepeatBlock repeatBlock = timerInfo[kAGTimerManagerRepeatBlock];
         return repeatBlock ? repeatBlock() : YES;
@@ -155,14 +146,10 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
                                                completionBlock:nil];
     
     NSString *timerKey = [self _keyWithTimer:timer];
-    [self.timerInfo setObject:timerInfo forKey:timerKey];
+    [[self _timerInfoWithToken:self.currentToken] setObject:timerInfo forKey:timerKey];
     
     // 开始 timer
     [self _startTimer:timer forMode:mode];
-    
-    
-//    // 调用完 - 解锁
-//    [self.invokeLock unlock];
     
     return timerKey;
 }
@@ -175,19 +162,20 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
 - (void) ag_stopTimer:(NSString *)key
 {
     if ( key ) {
-        [self.timerInfo removeObjectForKey:key];
+        [[self _timerInfoWithToken:self.currentToken] removeObjectForKey:key];
     }
     
-//    // 调用完 - 解锁
-//    [self.invokeLock unlock];
 }
 
 /** 停止所有 timer */
 - (void) ag_stopAllTimers
 {
-    [self.tokenMapTable removeObjectForKey:self.currentToken];
-//    // 调用完 - 解锁
-//    [self.invokeLock unlock];
+    if ( self.currentToken ) {
+        [self.tokenMapTable removeObjectForKey:self.currentToken];
+    }
+    else {
+        [self.tokenMapTable removeAllObjects];
+    }
 }
 
 #pragma mark - ---------- Private Methods ----------
@@ -214,24 +202,34 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
 - (NSTimer *) _timerWithTimeInterval:(NSTimeInterval)ti
                          repeatBlock:(AGTimerManagerTimerRepeatBlock)block
 {
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:2];
+    userInfo[kAGTimerManagerTimerRepeatBlock] = [block copy];
+    NSMapTable *tokenMapTable = [NSMapTable weakToWeakObjectsMapTable];
+    [tokenMapTable setObject:self.currentToken forKey:kAGTimerManagerToken];
+    userInfo[kAGTimerManagerToken] = tokenMapTable;
+    
     return [[NSTimer alloc] initWithFireDate:[NSDate date]
                                     interval:ti
                                       target:self
                                     selector:@selector(_repeatSelector:)
-                                    userInfo:[block copy]
+                                    userInfo:userInfo
                                      repeats:YES];
 }
 
 #pragma mark 执行block
 - (void) _repeatSelector:(NSTimer *)timer
 {
-    AGTimerManagerTimerRepeatBlock repeatBlock = timer.userInfo;
+    NSDictionary *userInfo = timer.userInfo;
+    AGTimerManagerTimerRepeatBlock repeatBlock = userInfo[kAGTimerManagerTimerRepeatBlock];
+    id token = [userInfo[kAGTimerManagerToken] objectForKey:kAGTimerManagerToken];
+    
     NSString *key = [self _keyWithTimer:timer];
-    NSMutableDictionary *timerInfo = self.timerInfo[key];
+    NSMutableDictionary *timerInfo = [self _timerInfoWithToken:token][key];
     BOOL repeat = repeatBlock ? repeatBlock(timer, timerInfo) : YES;
+    
     if ( ! repeat ) {
         // 移除 timer
-        [self.timerInfo removeObjectForKey:key];
+        [[self _timerInfoWithToken:token] removeObjectForKey:key];
     }
 }
 
@@ -241,51 +239,30 @@ static NSString * const kAGTimerManagerTimer            = @"kAGTimerManagerTimer
     return [NSString stringWithFormat:@"tk_%p", timer];
 }
 
-#pragma mark - ----------- Override Methods ----------
-- (NSString *) debugDescription
+/** 通过 token 获取 timerInfo */
+- (NSMutableDictionary<NSString *,NSMutableDictionary *> *) _timerInfoWithToken:(id)token
 {
-    uint count;
-    objc_property_t *properties = class_copyPropertyList([self class], &count);
-    
-    NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithCapacity:count];
-    for ( int i = 0; i<count; i++ ) {
-        objc_property_t property = properties[i];
-        NSString *name = @(property_getName(property));
-        id value = [self valueForKey:name] ?: @"nil";
-        [dictM setObject:value forKey:name];
-    }
-    
-    free(properties);
-    return [NSString stringWithFormat:@"<%@: %p> -- %@", [self class] , self, dictM];
-}
-
-#pragma mark - ----------- Getter Methods ----------
-- (NSMutableDictionary<NSString *,NSMutableDictionary *> *)timerInfo
-{
-    NSMutableDictionary *timerInfo = [self.tokenMapTable objectForKey:self.currentToken];
-    
+    NSMutableDictionary *timerInfo = [self.tokenMapTable objectForKey:token];
     if ( ! timerInfo ) {
         timerInfo = [NSMutableDictionary dictionaryWithCapacity:10];
-        [self.tokenMapTable setObject:timerInfo forKey:self.currentToken];
+        [self.tokenMapTable setObject:timerInfo forKey:token];
     }
     return timerInfo;
 }
 
+#pragma mark - ----------- Override Methods ----------
+- (NSString *) debugDescription
+{
+    return [NSString stringWithFormat:@"<%@: %p> -- %@", [self class] , self, self.tokenMapTable];
+}
+
+#pragma mark - ----------- Getter Methods ----------
 - (NSMapTable *)tokenMapTable
 {
     if (_tokenMapTable == nil) {
-        _tokenMapTable = [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsWeakMemory
-                                               valueOptions:NSPointerFunctionsStrongMemory];
+        _tokenMapTable = [NSMapTable weakToStrongObjectsMapTable];
     }
     return _tokenMapTable;
-}
-
-- (NSLock *)invokeLock
-{
-    if (_invokeLock == nil) {
-        _invokeLock = [[NSLock alloc] init];
-    }
-    return _invokeLock;
 }
 
 @end
