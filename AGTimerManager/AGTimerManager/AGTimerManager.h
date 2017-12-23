@@ -1,6 +1,6 @@
 //
 //  AGTimerManager.h
-//  
+//
 //
 //  Created by JohnnyB0Y on 2017/5/3.
 //  Copyright © 2017年 JohnnyB0Y. All rights reserved.
@@ -14,7 +14,7 @@ typedef BOOL(^AGTimerManagerCountdownBlock)(NSUInteger surplusCount);
 typedef void(^AGTimerManagerCompletionBlock)(void);
 typedef BOOL(^AGTimerManagerRepeatBlock)(void);
 
-/** 
+/**
  // 使用须知
  1. ag_sharedTimerManager(id token)，一个 token 对应一组 Timer；
  调用 ag_stopAllTimers，会移除该 token 对应的所有 Timer；
@@ -31,20 +31,20 @@ typedef BOOL(^AGTimerManagerRepeatBlock)(void);
  // 使用示例
  __weak typeof(self) weakSelf = self;
  _countdownKey = [ag_sharedTimerManager(self) ag_startTimer:60
-                                                  countdown:^BOOL(NSUInteger surplusCount) {
+ countdown:^BOOL(NSUInteger surplusCount) {
  
-     // ———————————————— 倒计时显示 ——————————————————
-     __strong typeof(weakSelf) strongSelf = weakSelf;
-     [strongSelf.countdownLabel setText:[NSString stringWithFormat:@"%@", @(surplusCount)]];
-     
-     // ———————————————— 继续 Timer ——————————————————
-     return strongSelf ? YES : NO;
-     
+ // ———————————————— 倒计时显示 ——————————————————
+ __strong typeof(weakSelf) strongSelf = weakSelf;
+ [strongSelf.countdownLabel setText:[NSString stringWithFormat:@"%@", @(surplusCount)]];
+ 
+ // ———————————————— 继续 Timer ——————————————————
+ return strongSelf ? YES : NO;
+ 
  } completion:^{
-     
-     // ———————————————— 完成倒计时 ——————————————————
-     __strong typeof(weakSelf) strongSelf = weakSelf;
-     strongSelf.view.backgroundColor = [UIColor orangeColor];
+ 
+ // ———————————————— 完成倒计时 ——————————————————
+ __strong typeof(weakSelf) strongSelf = weakSelf;
+ strongSelf.view.backgroundColor = [UIColor at_mainColor];
  }];
  
  */
@@ -72,6 +72,17 @@ AGTimerManager * ag_sharedTimerManager(id token);
 - (NSString *) ag_startTimerWithTimeInterval:(NSTimeInterval)ti
                                       repeat:(AGTimerManagerRepeatBlock)repeatBlock;
 
+/**
+ 开始重复调用 repeatBlock，直到返回 NO  (NSRunLoopCommonModes)
+ 
+ @param ti 调用间隔
+ @param repeatBlock 执行的block 返回 NO 停止，返回 YES 继续。
+ @param delay 执行前的延迟时间
+ @return timer key
+ */
+- (NSString *) ag_startTimerWithTimeInterval:(NSTimeInterval)ti
+                                      repeat:(AGTimerManagerRepeatBlock)repeatBlock
+                                       delay:(NSTimeInterval)delay;
 
 /**
  开始重复调用 repeatBlock，直到返回 NO  (自定义NSRunLoopMode)
@@ -85,11 +96,24 @@ AGTimerManager * ag_sharedTimerManager(id token);
                                       repeat:(AGTimerManagerRepeatBlock)repeatBlock
                                      forMode:(NSRunLoopMode)mode;
 
+/**
+ 开始重复调用 repeatBlock，直到返回 NO  (自定义NSRunLoopMode)
+ 
+ @param ti 调用间隔
+ @param repeatBlock 执行的block 返回 NO 停止，返回 YES 继续。
+ @param mode 运行循环模式
+ @param delay 执行前的延迟时间
+ @return timer key
+ */
+- (NSString *) ag_startTimerWithTimeInterval:(NSTimeInterval)ti
+                                      repeat:(AGTimerManagerRepeatBlock)repeatBlock
+                                     forMode:(NSRunLoopMode)mode
+                                       delay:(NSTimeInterval)delay;
 
 #pragma mark - 倒计时⏳
 /**
  开始倒计时 (NSRunLoopCommonModes)
-
+ 
  @param count 计数值
  @param countdownBlock 计数回调 block 返回 NO 停止，返回 YES 继续。
  @param completionBlock 计数完成 block
@@ -102,7 +126,7 @@ AGTimerManager * ag_sharedTimerManager(id token);
 
 /**
  开始倒计时 (NSRunLoopCommonModes)
-
+ 
  @param count 计数值
  @param ti 计数间隔
  @param countdownBlock 计数回调 block 返回 NO 停止，返回 YES 继续。
@@ -134,7 +158,7 @@ AGTimerManager * ag_sharedTimerManager(id token);
 #pragma mark - 停止定时器⚠️
 /**
  通过 key 停止定时器
-
+ 
  @param key 停止定时器的 key
  */
 - (void) ag_stopTimer:(NSString *)key;
@@ -151,3 +175,4 @@ AGTimerManager * ag_sharedTimerManager(id token);
 @end
 
 NS_ASSUME_NONNULL_END
+

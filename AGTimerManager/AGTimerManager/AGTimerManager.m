@@ -1,6 +1,6 @@
 //
 //  AGTimerManager.m
-//  
+//
 //
 //  Created by JohnnyB0Y on 2017/5/3.
 //  Copyright © 2017年 JohnnyB0Y. All rights reserved.
@@ -77,7 +77,7 @@ static NSString * const kAGTimerManagerToken   = @"kAGTimerManagerToken";
         
         // 继续倒计时
         return YES;
-    }];
+    } delay:0.];
     
     // 记录 timer info
     NSMutableDictionary *timerInfo = [self _timerInfoWithTimer:timer
@@ -126,7 +126,22 @@ static NSString * const kAGTimerManagerToken   = @"kAGTimerManagerToken";
 
 - (NSString *) ag_startTimerWithTimeInterval:(NSTimeInterval)ti
                                       repeat:(AGTimerManagerRepeatBlock)repeatBlock
+                                       delay:(NSTimeInterval)delay
+{
+    return [self ag_startTimerWithTimeInterval:ti repeat:repeatBlock forMode:NSRunLoopCommonModes delay:delay];
+}
+
+- (NSString *) ag_startTimerWithTimeInterval:(NSTimeInterval)ti
+                                      repeat:(AGTimerManagerRepeatBlock)repeatBlock
                                      forMode:(NSRunLoopMode)mode
+{
+    return [self ag_startTimerWithTimeInterval:ti repeat:repeatBlock forMode:mode delay:0.];
+}
+
+- (NSString *) ag_startTimerWithTimeInterval:(NSTimeInterval)ti
+                                      repeat:(AGTimerManagerRepeatBlock)repeatBlock
+                                     forMode:(NSRunLoopMode)mode
+                                       delay:(NSTimeInterval)delay
 {
     if ( ! repeatBlock || ti <= 0 ) return nil;
     
@@ -137,7 +152,7 @@ static NSString * const kAGTimerManagerToken   = @"kAGTimerManagerToken";
         // 定时任务 block
         AGTimerManagerRepeatBlock repeatBlock = timerInfo[kAGTimerManagerRepeatBlock];
         return repeatBlock ? repeatBlock() : YES;
-    }];
+    } delay:delay];
     
     // 记录 timer info
     NSMutableDictionary *timerInfo = [self _timerInfoWithTimer:timer
@@ -180,14 +195,14 @@ static NSString * const kAGTimerManagerToken   = @"kAGTimerManagerToken";
 
 #pragma mark - ---------- Private Methods ----------
 - (NSMutableDictionary *) _timerInfoWithTimer:(NSTimer *)timer
-                               countdownCount:(NSUInteger)count
+                               countdownCount:(NSTimeInterval)count
                                   repeatBlock:(id)repeatBlock
                               completionBlock:(id)completionBlock
 {
     NSMutableDictionary *dictM = [NSMutableDictionary dictionaryWithCapacity:4];
     dictM[kAGTimerManagerTimer] = timer;
     dictM[kAGTimerManagerRepeatBlock] = repeatBlock;
-    dictM[kAGTimerManagerCountdownCount] = @(count);
+    dictM[kAGTimerManagerCountdownCount] = [NSNumber numberWithFloat:count];
     dictM[kAGTimerManagerCompletionBlock] = completionBlock;
     return dictM;
 }
@@ -201,14 +216,16 @@ static NSString * const kAGTimerManagerToken   = @"kAGTimerManagerToken";
 #pragma mark 获取 timer
 - (NSTimer *) _timerWithTimeInterval:(NSTimeInterval)ti
                          repeatBlock:(AGTimerManagerTimerRepeatBlock)block
+                               delay:(NSTimeInterval)delay
 {
+    NSDate *fireDate = [NSDate dateWithTimeIntervalSinceNow:delay];
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:2];
     userInfo[kAGTimerManagerTimerRepeatBlock] = [block copy];
     NSMapTable *tokenMapTable = [NSMapTable weakToWeakObjectsMapTable];
     [tokenMapTable setObject:self.currentToken forKey:kAGTimerManagerToken];
     userInfo[kAGTimerManagerToken] = tokenMapTable;
     
-    return [[NSTimer alloc] initWithFireDate:[NSDate date]
+    return [[NSTimer alloc] initWithFireDate:fireDate
                                     interval:ti
                                       target:self
                                     selector:@selector(_repeatSelector:)
