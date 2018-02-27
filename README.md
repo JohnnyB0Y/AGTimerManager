@@ -66,7 +66,7 @@ __weak typeof(self) weakSelf = self;
 ```
 ### 结束定时任务
 ```objective-c
-[ag_timerManager(self) ag_stopTimerForKey:_countdownKey];
+[ag_timerManager(self) ag_stopTimerForKey:_timerKey];
 
 ```
 
