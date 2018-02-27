@@ -44,7 +44,7 @@ __weak typeof(self) weakSelf = self;
 ```
 ### 提前结束倒计时
 ```objective-c
-[ag_sharedTimerManager(self) ag_stopTimer:_countdownKey];
+[ag_timerManager(self) ag_stopTimerForKey:_countdownKey];
 
 ```
 
