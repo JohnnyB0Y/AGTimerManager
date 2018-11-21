@@ -1,6 +1,6 @@
 # AGTimerManager
-####倒计时 - 定时器：
-######使用 AGTimerManager 管理一组 Timer，当 AGTimerManager 对象销毁时，自动停止所有 Timer。
+#### 倒计时 - 定时器：
+###### 使用 AGTimerManager 管理一组 Timer，当 AGTimerManager 对象销毁时，自动停止所有 Timer。
 
 ### cocoapods 集成
 ```
