@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "AGTimerManager.h"
+#import "AGTimerManager/AGTimerManagerKit.h"
 
 @interface ViewController ()
 
@@ -16,6 +16,10 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *timerLabel;
 - (IBAction)timerClick:(UISwitch *)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *dateCountDownLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateCountDownLabel2;
+
 
 /** 测试 nil 时，定时器是否停止 */
 @property (nonatomic, strong) AGTimerManager *testNilTM;
@@ -39,7 +43,7 @@
     for (NSInteger i = 0; i<6; i++) {
         
         __block NSString *key;
-        key = [self.testNilTM ag_startCountdownTimer:6 countdown:^BOOL(NSUInteger surplus) {
+        key = [self.testNilTM ag_startCountdownTimer:6 countdown:^BOOL(NSTimeInterval surplus) {
             
             NSLog(@"%@ -- %@", key, @(surplus));
             return YES;
@@ -61,6 +65,45 @@
     
     // 开始界面上的计时器
     [self _startTimer];
+    
+    
+    // 活动倒计时
+    NSDate *date = [NSDate dateWithTimeIntervalSinceNow:13606.];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH:mm:ss"];
+    
+    __weak typeof(self) weakSelf = self;
+    [self.timerManager ag_startCountdownDate:date interval:.5 countdown:^BOOL(NSDate * _Nonnull outputDate) {
+        
+        __strong typeof(weakSelf) self = weakSelf;
+        NSString *showString = [NSString stringWithFormat:@"活动倒计时：%@", [formatter stringFromDate:outputDate]];
+        [self.dateCountDownLabel setText:showString];
+        
+        return YES;
+        
+    } completion:^{
+        
+        __strong typeof(weakSelf) self = weakSelf;
+        [self.dateCountDownLabel setText:@"活动已结束！"];
+        
+    }];
+    
+    // 抢购倒计时
+    [self.timerManager ag_startCountdownDateInterval:68. countdown:^BOOL(NSDate * _Nonnull outputDate) {
+        
+        __strong typeof(weakSelf) self = weakSelf;
+        NSString *showString = [NSString stringWithFormat:@"抢购倒计时：%@", [formatter stringFromDate:outputDate]];
+        [self.dateCountDownLabel2 setText:showString];
+        
+        return YES;
+        
+    } completion:^{
+        
+        __strong typeof(weakSelf) self = weakSelf;
+        [self.dateCountDownLabel2 setText:@"抢购已结束！"];
+        
+    }];
+    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -95,7 +138,7 @@
 {
     __weak typeof(self) weakSelf = self;
 	_countdownKey =
-	[self.timerManager ag_startCountdownTimer:[self _countdownTi] countdown:^BOOL(NSUInteger surplus) {
+	[self.timerManager ag_startCountdownTimer:[self _countdownTi] countdown:^BOOL(NSTimeInterval surplus) {
 		
 		// ———————————————— 倒计时显示 ——————————————————
 		__strong typeof(weakSelf) strongSelf = weakSelf;

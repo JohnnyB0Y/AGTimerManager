@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 
-typedef BOOL(^AGTMCountdownBlock)(NSUInteger surplus);
+typedef BOOL(^AGTMCountdownBlock)(NSTimeInterval surplus);
 typedef void(^AGTMCompletionBlock)(void);
 typedef BOOL(^AGTMRepeatBlock)(void);
 
