@@ -1,0 +1,16 @@
+PODS:
+  - AGCategories (0.1.5)
+
+DEPENDENCIES:
+  - AGCategories
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AGCategories
+
+SPEC CHECKSUMS:
+  AGCategories: 4f648efed4dd4605b974a9fd314b66b17b64bef2
+
+PODFILE CHECKSUM: ca46df3f7c108f853f2f2a320ac30daf8ae5b19b
+
+COCOAPODS: 1.5.3

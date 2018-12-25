@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef BOOL(^AGTMDateCountdownBlock)(NSDate *outputDate);
+typedef BOOL(^AGTMDateCountdownBlock)(NSCalendar *calendar, NSDateComponents *comp);
 
 @interface AGTimerManager (AGDateCountDown)
 

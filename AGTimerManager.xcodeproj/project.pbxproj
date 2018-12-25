@@ -15,9 +15,11 @@
 		3AEA52671F4C2AF200779EB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AEA52651F4C2AF200779EB3 /* LaunchScreen.storyboard */; };
 		3AEA52711F4C2B7B00779EB3 /* AGTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEA52701F4C2B7B00779EB3 /* AGTimerManager.m */; };
 		3AFD680B21D17D8E007317E6 /* AGTimerManager+AGDateCountDown.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFD680A21D17D8E007317E6 /* AGTimerManager+AGDateCountDown.m */; };
+		840BC5E459D5FD48864EE5F2 /* libPods-AGTimerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14CFA4E161CEFBF0052E9358 /* libPods-AGTimerManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14CFA4E161CEFBF0052E9358 /* libPods-AGTimerManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AGTimerManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AEA52541F4C2AF200779EB3 /* AGTimerManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AGTimerManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AEA52581F4C2AF200779EB3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3AEA525A1F4C2AF200779EB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -33,6 +35,8 @@
 		3AFD680921D17D8E007317E6 /* AGTimerManager+AGDateCountDown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AGTimerManager+AGDateCountDown.h"; sourceTree = "<group>"; };
 		3AFD680A21D17D8E007317E6 /* AGTimerManager+AGDateCountDown.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AGTimerManager+AGDateCountDown.m"; sourceTree = "<group>"; };
 		3AFD680C21D19526007317E6 /* AGTimerManagerKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGTimerManagerKit.h; sourceTree = "<group>"; };
+		8914CFE94E4149EBB550F2B8 /* Pods-AGTimerManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AGTimerManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-AGTimerManager/Pods-AGTimerManager.release.xcconfig"; sourceTree = "<group>"; };
+		9766F4E71CC380BF10DA7DAE /* Pods-AGTimerManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AGTimerManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AGTimerManager/Pods-AGTimerManager.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,17 +44,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				840BC5E459D5FD48864EE5F2 /* libPods-AGTimerManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0835CFC4668D5498B3C8AEB5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9766F4E71CC380BF10DA7DAE /* Pods-AGTimerManager.debug.xcconfig */,
+				8914CFE94E4149EBB550F2B8 /* Pods-AGTimerManager.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3AEA524B1F4C2AF200779EB3 = {
 			isa = PBXGroup;
 			children = (
 				3AEA52561F4C2AF200779EB3 /* AGTimerManager */,
 				3AEA52551F4C2AF200779EB3 /* Products */,
+				0835CFC4668D5498B3C8AEB5 /* Pods */,
+				D81395D2FA731B218F511CFC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +115,14 @@
 			path = AGTimerManager;
 			sourceTree = "<group>";
 		};
+		D81395D2FA731B218F511CFC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14CFA4E161CEFBF0052E9358 /* libPods-AGTimerManager.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -106,6 +130,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3AEA526B1F4C2AF200779EB3 /* Build configuration list for PBXNativeTarget "AGTimerManager" */;
 			buildPhases = (
+				D574E799F2B0E96A2CFF824A /* [CP] Check Pods Manifest.lock */,
 				3AEA52501F4C2AF200779EB3 /* Sources */,
 				3AEA52511F4C2AF200779EB3 /* Frameworks */,
 				3AEA52521F4C2AF200779EB3 /* Resources */,
@@ -125,7 +150,7 @@
 		3AEA524C1F4C2AF200779EB3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = JohnnyB0Y;
 				TargetAttributes = {
 					3AEA52531F4C2AF200779EB3 = {
@@ -165,6 +190,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D574E799F2B0E96A2CFF824A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AGTimerManager-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3AEA52501F4C2AF200779EB3 /* Sources */ = {
@@ -215,6 +265,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -222,6 +273,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -269,6 +321,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -276,6 +329,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -305,6 +359,7 @@
 		};
 		3AEA526C1F4C2AF200779EB3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9766F4E71CC380BF10DA7DAE /* Pods-AGTimerManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NYBK4PC9HB;
@@ -317,6 +372,7 @@
 		};
 		3AEA526D1F4C2AF200779EB3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8914CFE94E4149EBB550F2B8 /* Pods-AGTimerManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = NYBK4PC9HB;

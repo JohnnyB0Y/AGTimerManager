@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AGTimerManager/AGTimerManagerKit.h"
+#import <AGCategories/UIColor+AGExtensions.h>
 
 @interface ViewController ()
 
@@ -67,15 +68,17 @@
     [self _startTimer];
     
     
-    // 活动倒计时
+    // ++++++++++++++++++++++ 日期倒计时 ++++++++++++++++++++
+    // 活动倒计时，未来的日期直接使用。
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:13606.];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm:ss"];
     
     __weak typeof(self) weakSelf = self;
-    [self.timerManager ag_startCountdownDate:date interval:.5 countdown:^BOOL(NSDate * _Nonnull outputDate) {
+    [self.timerManager ag_startCountdownDate:date interval:1. countdown:^BOOL(NSCalendar * _Nonnull calendar, NSDateComponents * _Nonnull comp) {
         
         __strong typeof(weakSelf) self = weakSelf;
+        NSDate *outputDate = [calendar dateFromComponents:comp];
         NSString *showString = [NSString stringWithFormat:@"活动倒计时：%@", [formatter stringFromDate:outputDate]];
         [self.dateCountDownLabel setText:showString];
         
@@ -88,10 +91,11 @@
         
     }];
     
-    // 抢购倒计时
-    [self.timerManager ag_startCountdownDateInterval:68. countdown:^BOOL(NSDate * _Nonnull outputDate) {
+    // 抢购倒计时 68秒
+    [self.timerManager ag_startCountdownDateInterval:68. countdown:^BOOL(NSCalendar * _Nonnull calendar, NSDateComponents * _Nonnull comp) {
         
         __strong typeof(weakSelf) self = weakSelf;
+        NSDate *outputDate = [calendar dateFromComponents:comp];
         NSString *showString = [NSString stringWithFormat:@"抢购倒计时：%@", [formatter stringFromDate:outputDate]];
         [self.dateCountDownLabel2 setText:showString];
         

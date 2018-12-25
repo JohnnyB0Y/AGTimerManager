@@ -29,8 +29,7 @@
         
         if ( countdownBlock ) {
             NSDateComponents *comp = [calendar components:unitFlags fromDate:[NSDate date] toDate:date options:0];
-            NSDate *outputDate = [calendar dateFromComponents:comp];
-            countdownBlock(outputDate);
+            countdownBlock(calendar, comp);
         }
         
         return YES;

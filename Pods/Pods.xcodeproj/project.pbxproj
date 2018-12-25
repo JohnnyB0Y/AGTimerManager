@@ -1,0 +1,550 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2B5D0EAF4BF7AD7D1217CC81E70B60D5 /* UIImage+AGTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = C77910430622767FEE2A0A1ECAA28DBD /* UIImage+AGTransform.m */; };
+		3C60B43611C6D9579BDE9602B3D43847 /* UIImage+AGTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = E433759953C308EC46DCB98D4B21B73F /* UIImage+AGTransform.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		4A76C76D69268706D7F68E4EBB37DE9C /* UIImage+AGGenerate.h in Headers */ = {isa = PBXBuildFile; fileRef = FA8B6B4FF9D6AB74EE8ED2A34271889A /* UIImage+AGGenerate.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5624C735D1839C672FDF354A4DB0FAA3 /* UIImage+AGGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14BD8773B6259E7A5C6D16412D91604E /* UIImage+AGGenerate.m */; };
+		5AA5876D58D413F3914CC7E912241CBD /* UIColor+AGExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 25A4036A3F74BC261CE045184D42B43A /* UIColor+AGExtensions.m */; };
+		5F1275AF28CA0DF0BA82BABD6E6CFE40 /* NSBundle+AGSupportCocoapods.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6F1340D32A4929CA8D450839DF9A10 /* NSBundle+AGSupportCocoapods.m */; };
+		67BB3A4283D8201512B5983003240175 /* UIColor+AGExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE1696578F88514CEF1AEF6AB1D5233 /* UIColor+AGExtensions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6F6DDF20AB6DA6DCD50DA35F4394E947 /* AGCategories-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C587354F525ADFB984E7C22E1095FACD /* AGCategories-dummy.m */; };
+		94CEA3E931310050791D38E3DDE160F3 /* NSBundle+AGSupportCocoapods.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E49A7803EE22C972F0F23B472E688BA /* NSBundle+AGSupportCocoapods.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AC063A8F627D35088637FB95EE24AD9D /* Pods-AGTimerManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 874211C9B441ADFBD3EA57BD76FB2862 /* Pods-AGTimerManager-dummy.m */; };
+		AC0D20F1A179598A29E9BA2B30E68B38 /* NSDate+AGGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C6638CB28FB23E5E398B950E578448D /* NSDate+AGGenerate.m */; };
+		CA589BA77D52CB8DEEFFA120600F2717 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
+		D927D1C40C40A8CF67A32C379D6E5A11 /* NSDate+AGGenerate.h in Headers */ = {isa = PBXBuildFile; fileRef = 639DC339EE82FBFB2C647AFDCD4D87DE /* NSDate+AGGenerate.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		DC15F6C3AE0E5F5E17AD9F8572A9F36D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		99480B4527D48FC85FA5BF2BC7699795 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FB89E45808387164A42CB260A8E2187B;
+			remoteInfo = AGCategories;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0C6638CB28FB23E5E398B950E578448D /* NSDate+AGGenerate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+AGGenerate.m"; path = "AGCategories/Categories/NSDate/NSDate+AGGenerate.m"; sourceTree = "<group>"; };
+		0FCB690AE9CDD35F503FBAA59F35A699 /* Pods-AGTimerManager-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AGTimerManager-resources.sh"; sourceTree = "<group>"; };
+		1242BAC7FC6C0AA55B7B6786225592F7 /* libPods-AGTimerManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AGTimerManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14BD8773B6259E7A5C6D16412D91604E /* UIImage+AGGenerate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+AGGenerate.m"; path = "AGCategories/Categories/UIImage/UIImage+AGGenerate.m"; sourceTree = "<group>"; };
+		25A4036A3F74BC261CE045184D42B43A /* UIColor+AGExtensions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AGExtensions.m"; path = "AGCategories/Categories/UIColor/UIColor+AGExtensions.m"; sourceTree = "<group>"; };
+		29BFFED0C8B7BC3FD7F3792248386686 /* Pods-AGTimerManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AGTimerManager.release.xcconfig"; sourceTree = "<group>"; };
+		2C6F1340D32A4929CA8D450839DF9A10 /* NSBundle+AGSupportCocoapods.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+AGSupportCocoapods.m"; path = "AGCategories/Categories/NSBundle/NSBundle+AGSupportCocoapods.m"; sourceTree = "<group>"; };
+		2CB95241B3FE8A68D1DFEE3BB4954780 /* Pods-AGTimerManager-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AGTimerManager-frameworks.sh"; sourceTree = "<group>"; };
+		639DC339EE82FBFB2C647AFDCD4D87DE /* NSDate+AGGenerate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDate+AGGenerate.h"; path = "AGCategories/Categories/NSDate/NSDate+AGGenerate.h"; sourceTree = "<group>"; };
+		7E49A7803EE22C972F0F23B472E688BA /* NSBundle+AGSupportCocoapods.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+AGSupportCocoapods.h"; path = "AGCategories/Categories/NSBundle/NSBundle+AGSupportCocoapods.h"; sourceTree = "<group>"; };
+		7E8CD9428248B43D1A72188B38BAED43 /* Pods-AGTimerManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AGTimerManager.debug.xcconfig"; sourceTree = "<group>"; };
+		874211C9B441ADFBD3EA57BD76FB2862 /* Pods-AGTimerManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AGTimerManager-dummy.m"; sourceTree = "<group>"; };
+		8CE1696578F88514CEF1AEF6AB1D5233 /* UIColor+AGExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+AGExtensions.h"; path = "AGCategories/Categories/UIColor/UIColor+AGExtensions.h"; sourceTree = "<group>"; };
+		908E902E026C5C22904CF9014A5604AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9AA367B25884A6D68A3DF36FCA26A155 /* AGCategories.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AGCategories.xcconfig; sourceTree = "<group>"; };
+		BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		C587354F525ADFB984E7C22E1095FACD /* AGCategories-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AGCategories-dummy.m"; sourceTree = "<group>"; };
+		C77910430622767FEE2A0A1ECAA28DBD /* UIImage+AGTransform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+AGTransform.m"; path = "AGCategories/Categories/UIImage/UIImage+AGTransform.m"; sourceTree = "<group>"; };
+		DA22A7E2405B37450085F10334BA8522 /* Pods-AGTimerManager-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AGTimerManager-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E433759953C308EC46DCB98D4B21B73F /* UIImage+AGTransform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+AGTransform.h"; path = "AGCategories/Categories/UIImage/UIImage+AGTransform.h"; sourceTree = "<group>"; };
+		ECBB84DBAAD3E8B4121F869631BD0988 /* Pods-AGTimerManager-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AGTimerManager-acknowledgements.plist"; sourceTree = "<group>"; };
+		F7C6B67FC43D1C4CDB3A47B591302F31 /* libAGCategories.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAGCategories.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F92AA7066BB9F67E6A96A29C60DE989A /* AGCategories-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AGCategories-prefix.pch"; sourceTree = "<group>"; };
+		FA8B6B4FF9D6AB74EE8ED2A34271889A /* UIImage+AGGenerate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+AGGenerate.h"; path = "AGCategories/Categories/UIImage/UIImage+AGGenerate.h"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8F31E38100E6A6178CA67C96B0B6C8B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA589BA77D52CB8DEEFFA120600F2717 /* Foundation.framework in Frameworks */,
+				DC15F6C3AE0E5F5E17AD9F8572A9F36D /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9BF77FDCE3E8C86DE706236FED24C458 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1005E19ECA0887A7719BDE992F15CC17 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA0346DCB597891BB182E970619A4843 /* Pods-AGTimerManager */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		10DEDCB394BAA0C7FEDEBE330207B074 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				908E902E026C5C22904CF9014A5604AD /* Foundation.framework */,
+				BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10DEDCB394BAA0C7FEDEBE330207B074 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		52E598096BA192E76F1351749230F086 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				79D1C5B1B1EFCB8380522957206B43D6 /* AGCategories */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		79D1C5B1B1EFCB8380522957206B43D6 /* AGCategories */ = {
+			isa = PBXGroup;
+			children = (
+				7E49A7803EE22C972F0F23B472E688BA /* NSBundle+AGSupportCocoapods.h */,
+				2C6F1340D32A4929CA8D450839DF9A10 /* NSBundle+AGSupportCocoapods.m */,
+				639DC339EE82FBFB2C647AFDCD4D87DE /* NSDate+AGGenerate.h */,
+				0C6638CB28FB23E5E398B950E578448D /* NSDate+AGGenerate.m */,
+				8CE1696578F88514CEF1AEF6AB1D5233 /* UIColor+AGExtensions.h */,
+				25A4036A3F74BC261CE045184D42B43A /* UIColor+AGExtensions.m */,
+				FA8B6B4FF9D6AB74EE8ED2A34271889A /* UIImage+AGGenerate.h */,
+				14BD8773B6259E7A5C6D16412D91604E /* UIImage+AGGenerate.m */,
+				E433759953C308EC46DCB98D4B21B73F /* UIImage+AGTransform.h */,
+				C77910430622767FEE2A0A1ECAA28DBD /* UIImage+AGTransform.m */,
+				7FEDC6E089A70F4968D391E0933A3E2C /* Support Files */,
+			);
+			path = AGCategories;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
+				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
+				52E598096BA192E76F1351749230F086 /* Pods */,
+				E9798D4F050C6728A6F89E83CC4E504A /* Products */,
+				1005E19ECA0887A7719BDE992F15CC17 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		7FEDC6E089A70F4968D391E0933A3E2C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9AA367B25884A6D68A3DF36FCA26A155 /* AGCategories.xcconfig */,
+				C587354F525ADFB984E7C22E1095FACD /* AGCategories-dummy.m */,
+				F92AA7066BB9F67E6A96A29C60DE989A /* AGCategories-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/AGCategories";
+			sourceTree = "<group>";
+		};
+		DA0346DCB597891BB182E970619A4843 /* Pods-AGTimerManager */ = {
+			isa = PBXGroup;
+			children = (
+				DA22A7E2405B37450085F10334BA8522 /* Pods-AGTimerManager-acknowledgements.markdown */,
+				ECBB84DBAAD3E8B4121F869631BD0988 /* Pods-AGTimerManager-acknowledgements.plist */,
+				874211C9B441ADFBD3EA57BD76FB2862 /* Pods-AGTimerManager-dummy.m */,
+				2CB95241B3FE8A68D1DFEE3BB4954780 /* Pods-AGTimerManager-frameworks.sh */,
+				0FCB690AE9CDD35F503FBAA59F35A699 /* Pods-AGTimerManager-resources.sh */,
+				7E8CD9428248B43D1A72188B38BAED43 /* Pods-AGTimerManager.debug.xcconfig */,
+				29BFFED0C8B7BC3FD7F3792248386686 /* Pods-AGTimerManager.release.xcconfig */,
+			);
+			name = "Pods-AGTimerManager";
+			path = "Target Support Files/Pods-AGTimerManager";
+			sourceTree = "<group>";
+		};
+		E9798D4F050C6728A6F89E83CC4E504A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F7C6B67FC43D1C4CDB3A47B591302F31 /* libAGCategories.a */,
+				1242BAC7FC6C0AA55B7B6786225592F7 /* libPods-AGTimerManager.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		ABB5DEC07DB9BAD04B026093C0C48738 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94CEA3E931310050791D38E3DDE160F3 /* NSBundle+AGSupportCocoapods.h in Headers */,
+				D927D1C40C40A8CF67A32C379D6E5A11 /* NSDate+AGGenerate.h in Headers */,
+				67BB3A4283D8201512B5983003240175 /* UIColor+AGExtensions.h in Headers */,
+				4A76C76D69268706D7F68E4EBB37DE9C /* UIImage+AGGenerate.h in Headers */,
+				3C60B43611C6D9579BDE9602B3D43847 /* UIImage+AGTransform.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD2F212C3F7883062E09BCDD4D9A2CA3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C4115721C857EB7A515DFA93118A6107 /* Pods-AGTimerManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7030FC258AC7D976076C7A75C0DA0340 /* Build configuration list for PBXNativeTarget "Pods-AGTimerManager" */;
+			buildPhases = (
+				CD2F212C3F7883062E09BCDD4D9A2CA3 /* Headers */,
+				59043EC5904CA5CC22E8911B7CBD0A68 /* Sources */,
+				9BF77FDCE3E8C86DE706236FED24C458 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B128BA560B7818EB4ED55793732254EC /* PBXTargetDependency */,
+			);
+			name = "Pods-AGTimerManager";
+			productName = "Pods-AGTimerManager";
+			productReference = 1242BAC7FC6C0AA55B7B6786225592F7 /* libPods-AGTimerManager.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		FB89E45808387164A42CB260A8E2187B /* AGCategories */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 709D3B8154457D8CC7A3D4C488EDE567 /* Build configuration list for PBXNativeTarget "AGCategories" */;
+			buildPhases = (
+				ABB5DEC07DB9BAD04B026093C0C48738 /* Headers */,
+				618E06519CBECC61295F0B359E49D615 /* Sources */,
+				8F31E38100E6A6178CA67C96B0B6C8B6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AGCategories;
+			productName = AGCategories;
+			productReference = F7C6B67FC43D1C4CDB3A47B591302F31 /* libAGCategories.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 1010;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = E9798D4F050C6728A6F89E83CC4E504A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FB89E45808387164A42CB260A8E2187B /* AGCategories */,
+				C4115721C857EB7A515DFA93118A6107 /* Pods-AGTimerManager */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		59043EC5904CA5CC22E8911B7CBD0A68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC063A8F627D35088637FB95EE24AD9D /* Pods-AGTimerManager-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		618E06519CBECC61295F0B359E49D615 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F6DDF20AB6DA6DCD50DA35F4394E947 /* AGCategories-dummy.m in Sources */,
+				5F1275AF28CA0DF0BA82BABD6E6CFE40 /* NSBundle+AGSupportCocoapods.m in Sources */,
+				AC0D20F1A179598A29E9BA2B30E68B38 /* NSDate+AGGenerate.m in Sources */,
+				5AA5876D58D413F3914CC7E912241CBD /* UIColor+AGExtensions.m in Sources */,
+				5624C735D1839C672FDF354A4DB0FAA3 /* UIImage+AGGenerate.m in Sources */,
+				2B5D0EAF4BF7AD7D1217CC81E70B60D5 /* UIImage+AGTransform.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B128BA560B7818EB4ED55793732254EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AGCategories;
+			target = FB89E45808387164A42CB260A8E2187B /* AGCategories */;
+			targetProxy = 99480B4527D48FC85FA5BF2BC7699795 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		477028DDA1CEDB2801954A33EDAAA166 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AA367B25884A6D68A3DF36FCA26A155 /* AGCategories.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/AGCategories/AGCategories-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = AGCategories;
+				PRODUCT_NAME = AGCategories;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		579DA8A27FF6DE95665110BA35FDB1EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29BFFED0C8B7BC3FD7F3792248386686 /* Pods-AGTimerManager.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A668AD1629C068E7D7EDFBFA31EC3BA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E8CD9428248B43D1A72188B38BAED43 /* Pods-AGTimerManager.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C92782E717C52E3633C9A5F211E7987A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		E270735E4BFF246A4976FCF7BB42CF40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9AA367B25884A6D68A3DF36FCA26A155 /* AGCategories.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/AGCategories/AGCategories-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = AGCategories;
+				PRODUCT_NAME = AGCategories;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EA8C7AF90938697605468604B2A17B9F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C92782E717C52E3633C9A5F211E7987A /* Debug */,
+				EA8C7AF90938697605468604B2A17B9F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7030FC258AC7D976076C7A75C0DA0340 /* Build configuration list for PBXNativeTarget "Pods-AGTimerManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A668AD1629C068E7D7EDFBFA31EC3BA3 /* Debug */,
+				579DA8A27FF6DE95665110BA35FDB1EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		709D3B8154457D8CC7A3D4C488EDE567 /* Build configuration list for PBXNativeTarget "AGCategories" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E270735E4BFF246A4976FCF7BB42CF40 /* Debug */,
+				477028DDA1CEDB2801954A33EDAAA166 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
