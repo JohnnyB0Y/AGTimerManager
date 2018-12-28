@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "AGTimerManager/AGTimerManagerKit.h"
+#import "AGTimerManager/AGTMKit.h"
 #import <AGCategories/UIColor+AGExtensions.h>
 
 @interface ViewController ()
@@ -39,7 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 测试 nil 时，定时器是否停止
+#pragma mark - ++++++++++++++++++++++ 测试 nil 时，定时器是否停止 ++++++++++++++++++++++
     self.testNilTM = [AGTimerManager new];
     for (NSInteger i = 0; i<6; i++) {
         
@@ -67,8 +67,7 @@
     // 开始界面上的计时器
     [self _startTimer];
     
-    
-    // ++++++++++++++++++++++ 日期倒计时 ++++++++++++++++++++
+#pragma mark - ++++++++++++++++++++++ 日期倒计时 ++++++++++++++++++++
     // 活动倒计时，未来的日期直接使用。
     NSDate *date = [NSDate dateWithTimeIntervalSinceNow:13606.];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -138,6 +137,7 @@
     return self.timerLabel.text.integerValue;
 }
 
+#pragma mark - ++++++++++++++++++++++ 时间倒计时 ++++++++++++++++++++++
 - (void) _startCountdownTimer
 {
     __weak typeof(self) weakSelf = self;
@@ -166,6 +166,7 @@
     [self.timerManager ag_stopTimerForKey:_countdownKey];
 }
 
+#pragma mark - ++++++++++++++++++++++ 定时执行重复任务 ++++++++++++++++++++++
 - (void) _startTimer
 {
     __weak typeof(self) weakSelf = self;

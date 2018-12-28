@@ -34,7 +34,7 @@
 		3AEA52701F4C2B7B00779EB3 /* AGTimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTimerManager.m; sourceTree = "<group>"; };
 		3AFD680921D17D8E007317E6 /* AGTimerManager+AGDateCountDown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AGTimerManager+AGDateCountDown.h"; sourceTree = "<group>"; };
 		3AFD680A21D17D8E007317E6 /* AGTimerManager+AGDateCountDown.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AGTimerManager+AGDateCountDown.m"; sourceTree = "<group>"; };
-		3AFD680C21D19526007317E6 /* AGTimerManagerKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGTimerManagerKit.h; sourceTree = "<group>"; };
+		3AFD680C21D19526007317E6 /* AGTMKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AGTMKit.h; sourceTree = "<group>"; };
 		8914CFE94E4149EBB550F2B8 /* Pods-AGTimerManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AGTimerManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-AGTimerManager/Pods-AGTimerManager.release.xcconfig"; sourceTree = "<group>"; };
 		9766F4E71CC380BF10DA7DAE /* Pods-AGTimerManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AGTimerManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AGTimerManager/Pods-AGTimerManager.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,7 +110,7 @@
 				3AEA52701F4C2B7B00779EB3 /* AGTimerManager.m */,
 				3AFD680921D17D8E007317E6 /* AGTimerManager+AGDateCountDown.h */,
 				3AFD680A21D17D8E007317E6 /* AGTimerManager+AGDateCountDown.m */,
-				3AFD680C21D19526007317E6 /* AGTimerManagerKit.h */,
+				3AFD680C21D19526007317E6 /* AGTMKit.h */,
 			);
 			path = AGTimerManager;
 			sourceTree = "<group>";
