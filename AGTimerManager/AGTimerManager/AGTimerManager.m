@@ -26,10 +26,15 @@ static NSString * const kAGTMTimerRunLoopMode   = @"kAGTMTimerRunLoopMode";
 
 
 @interface NSTimer (AGTimerManager)
+
 @property (nonatomic, strong) NSString *timerKey;
+
+@property (nonatomic, strong, readonly) NSMapTable *strongToWeakMT;
+
 @end
 
 static void *kAGTMTimerKeyProperty = &kAGTMTimerKeyProperty;
+static void *kAGTMTimerStrongToWeakMapTableProperty = &kAGTMTimerStrongToWeakMapTableProperty;
 
 @implementation NSTimer (AGTimerManager)
 
@@ -41,6 +46,23 @@ static void *kAGTMTimerKeyProperty = &kAGTMTimerKeyProperty;
 - (void)setTimerKey:(NSString *)timerKey
 {
     objc_setAssociatedObject(self, kAGTMTimerKeyProperty, timerKey, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMapTable *)strongToWeakMT
+{
+    NSMapTable *map = objc_getAssociatedObject(self, kAGTMTimerStrongToWeakMapTableProperty);
+    
+    if ( map == nil ) {
+        map = [NSMapTable strongToWeakObjectsMapTable];
+        [self setStrongToWeakMT:map];
+    }
+    
+    return map;
+}
+
+- (void)setStrongToWeakMT:(NSMapTable *)strongToWeakMT
+{
+    objc_setAssociatedObject(self, kAGTMTimerStrongToWeakMapTableProperty, strongToWeakMT, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
@@ -119,7 +141,9 @@ static void *kAGTMTimerKeyProperty = &kAGTMTimerKeyProperty;
     
     *timerKey = [self _keyWithTimer:timer];
     timer.timerKey = *timerKey;
-    [[self _timersInfoWithToken:token] setObject:timerInfo forKey:timer.timerKey];
+    
+    NSMutableDictionary *timersInfo = [self _timersInfoWithToken:token];
+    [timersInfo setObject:timerInfo forKey:timer.timerKey];
 }
 
 - (void) ag_addTaskForTimer:(id)token
@@ -144,7 +168,7 @@ static void *kAGTMTimerKeyProperty = &kAGTMTimerKeyProperty;
         if ( nil == timer ) {
             // timer stop
             // restart timer
-            [self _restartRepeatTimer:token timerKey:timerKey timerInfo:timerInfo];
+            [self _restartTaskTimer:token timerKey:timerKey timerInfo:timerInfo];
         }
     }
 }
@@ -194,9 +218,11 @@ static void *kAGTMTimerKeyProperty = &kAGTMTimerKeyProperty;
     NSParameterAssert(timerKey);
     
     if ( timerKey && token ) {
-        NSMutableDictionary *timerInfo = [self _timersInfoWithToken:token][timerKey];
+        NSMutableDictionary *timersInfo = [self _timersInfoWithToken:token];
+        NSMutableDictionary *timerInfo = timersInfo[timerKey];
         if ( timerInfo ) {
-            [[self _timersInfoWithToken:token] removeObjectForKey:timerKey];
+            [timersInfo removeObjectForKey:timerKey];
+            
             // completion call
             [self _completionBlockCallWithTasksInfo:timerInfo[kAGTMTasksInfo]];
         }
@@ -209,43 +235,25 @@ static void *kAGTMTimerKeyProperty = &kAGTMTimerKeyProperty;
     if ( token ) {
         
         NSMutableDictionary *timersInfo = [self _timersInfoWithToken:token];
-        [self.tokenMapTable removeObjectForKey:token];
-        
-        [timersInfo enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull timerKey,
-                                                        NSMutableDictionary * _Nonnull timerInfo,
-                                                        BOOL * _Nonnull stop) {
+        if ( timersInfo ) {
+            [self.tokenMapTable removeObjectForKey:token];
             
-            NSMutableDictionary *tasksInfo = timerInfo[kAGTMTasksInfo];
-            if ( tasksInfo ) {
-                // completion call
-                [self _completionBlockCallWithTasksInfo:tasksInfo];
-            }
-            
-        }];
+            [timersInfo enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull timerKey,
+                                                            NSMutableDictionary * _Nonnull timerInfo,
+                                                            BOOL * _Nonnull stop) {
+                
+                NSMutableDictionary *tasksInfo = timerInfo[kAGTMTasksInfo];
+                if ( tasksInfo ) {
+                    // completion call
+                    [self _completionBlockCallWithTasksInfo:tasksInfo];
+                }
+                
+            }];
+        }
     }
 }
 
 #pragma mark ---------- Private Methods ----------
-- (NSMutableDictionary *) _timerInfoWithTimer:(NSTimer *)timer
-                                     blockKey:(NSString *)blockKey
-                                  repeatBlock:(id)repeatBlock
-                              completionBlock:(id)completionBlock
-{
-    NSMutableDictionary *timerInfo = [NSMutableDictionary dictionaryWithCapacity:4];
-    timerInfo[kAGTMTimer] = timer;
-    
-    NSMutableDictionary *tasksInfo = [NSMutableDictionary dictionaryWithCapacity:2];
-    timerInfo[kAGTMTasksInfo] = tasksInfo;
-    
-    NSMutableDictionary *taskInfo = [NSMutableDictionary dictionaryWithCapacity:2];
-    tasksInfo[blockKey] = taskInfo;
-    
-    taskInfo[kAGTMRepeatBlock] = repeatBlock;
-    taskInfo[kAGTMCompletionBlock] = completionBlock;
-    
-    return timerInfo;
-}
-
 - (void) _addTaskForTimer:(id)token
                  timerKey:(NSString *)timerKey
                 taskToken:(NSString *)taskToken
@@ -303,9 +311,9 @@ static void *kAGTMTimerKeyProperty = &kAGTMTimerKeyProperty;
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:mode];
 }
 
-- (void) _restartRepeatTimer:(id)token
-                    timerKey:(NSString *)timerKey
-                   timerInfo:(NSMutableDictionary *)timerInfo
+- (void) _restartTaskTimer:(id)token
+                  timerKey:(NSString *)timerKey
+                 timerInfo:(NSMutableDictionary *)timerInfo
 {
     NSParameterAssert(token);
     NSParameterAssert(timerKey);
@@ -351,29 +359,29 @@ static void *kAGTMTimerKeyProperty = &kAGTMTimerKeyProperty;
                   repeatBlock:(AGTMTimerRepeatBlock)repeatBlock
 {
     NSDate *fireDate = [NSDate dateWithTimeIntervalSinceNow:delay];
-    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:2];
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:1];
     userInfo[kAGTMTimerRepeatBlock] = [repeatBlock copy];
-    NSMapTable *tokenMapTable = [NSMapTable weakToWeakObjectsMapTable];
-    [tokenMapTable setObject:token forKey:kAGTMToken];
-    userInfo[kAGTMToken] = tokenMapTable;
     
-    return [[NSTimer alloc] initWithFireDate:fireDate
-                                    interval:ti
-                                      target:self
-                                    selector:@selector(_repeatSelector:)
-                                    userInfo:userInfo
-                                     repeats:YES];
+    NSTimer *timer = [[NSTimer alloc] initWithFireDate:fireDate
+                                              interval:ti
+                                                target:self
+                                              selector:@selector(_repeatSelector:)
+                                              userInfo:userInfo
+                                               repeats:YES];
+    
+    [timer.strongToWeakMT setObject:token forKey:kAGTMToken];
+    
+    return timer;
 }
 
 #pragma mark timer repeat action
 - (void) _repeatSelector:(NSTimer *)timer
 {
-    NSDictionary *userInfo = timer.userInfo;
-    id token = [userInfo[kAGTMToken] objectForKey:kAGTMToken];
+    id token = [timer.strongToWeakMT objectForKey:kAGTMToken];
     NSMutableDictionary *timerInfo = [self _timersInfoWithToken:token][timer.timerKey];
     
     if ( timerInfo ) {
-        AGTMTimerRepeatBlock repeatBlock = userInfo[kAGTMTimerRepeatBlock];
+        AGTMTimerRepeatBlock repeatBlock = timer.userInfo[kAGTMTimerRepeatBlock];
         BOOL repeat = repeatBlock ? repeatBlock(timer, timerInfo) : YES;
         if ( ! repeat ) {
             // remove timer
@@ -398,12 +406,32 @@ static void *kAGTMTimerKeyProperty = &kAGTMTimerKeyProperty;
 {
     if ( token == nil ) return nil;
     
-    NSMutableDictionary *timerInfo = [self.tokenMapTable objectForKey:token];
-    if ( ! timerInfo ) {
-        timerInfo = [NSMutableDictionary dictionaryWithCapacity:3];
-        [self.tokenMapTable setObject:timerInfo forKey:token];
+    NSMutableDictionary *timersInfo = [self.tokenMapTable objectForKey:token];
+    if ( ! timersInfo ) {
+        timersInfo = [NSMutableDictionary dictionaryWithCapacity:3];
+        [self.tokenMapTable setObject:timersInfo forKey:token];
     }
-    return timerInfo;
+    return timersInfo;
+}
+
+#pragma mark ----------- Override Methods ----------
+- (NSString *) debugDescription
+{
+    return [self description];
+}
+
+- (NSString *)description
+{
+    NSEnumerator *enumerator = self.tokenMapTable.keyEnumerator;
+    NSMutableString *strM = [NSMutableString string];
+    id token;
+    NSMutableDictionary *timersInfo;
+    while ( (token = enumerator.nextObject) ) {
+        timersInfo = [self.tokenMapTable objectForKey:token];
+        [strM appendFormat:@"{\n <%@: %p> - %@ \n},", [token class], token, timersInfo];
+    }
+    
+    return [NSString stringWithFormat:@"<%@: %p> -- %@", [self class] , self, strM];
 }
 
 @end
@@ -467,8 +495,8 @@ static void *kAGTMTimerKeyProperty = &kAGTMTimerKeyProperty;
 - (NSString *)description
 {
 	__AGTimerManager *tm = [__AGTimerManager sharedInstance];
-    NSMutableDictionary *timerInfo = [tm.tokenMapTable objectForKey:self];
-	return [NSString stringWithFormat:@"<%@: %p> -- %@", [tm class] , tm, timerInfo];
+    NSMutableDictionary *timersInfo = [tm.tokenMapTable objectForKey:self];
+    return [NSString stringWithFormat:@"\n<%@: %p> -- {\n    <%@: %p> - %@ \n}", [tm class], tm, [self class], self, timersInfo];
 }
 
 @end
