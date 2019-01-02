@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "AGTimerManager" # 项目名称
-  s.version      = "0.4.3"        # 版本号 与 你仓库的 标签号 对应
+  s.version      = "0.5.0"        # 版本号 与 你仓库的 标签号 对应
   s.license      = "MIT"          # 开源证书
   s.summary      = "倒计时 - 定时器" # 项目简介
 

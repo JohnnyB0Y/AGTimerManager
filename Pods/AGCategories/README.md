@@ -25,3 +25,19 @@
 - RGB、RGBA 生成 UIColor对象；
 - “OXFFFFFF”或“#FFFFFF” 生成 UIColor对象；
 - 随机色。
+
+#### NSString
+- 字符长度、范围判断；
+- 数字、英文、中文、Emoji表情，字符判断与长度计算；
+- 手机号、邮箱、QQ号判断。
+
+### cocoapods 集成
+```
+platform :ios, '8.0'
+target 'AGCategoriesDemo' do
+
+pod 'AGCategories'
+
+end
+```
+

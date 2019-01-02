@@ -10,6 +10,5 @@
 #define AGTMKit_h
 
 #import "AGTimerManager.h"
-#import "AGTimerManager+AGDateCountDown.h"
 
 #endif /* AGTMKit_h */

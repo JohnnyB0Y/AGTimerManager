@@ -92,7 +92,7 @@
     
     // 抢购倒计时 68秒
     [self.timerManager ag_startCountdownDateInterval:68. countdown:^BOOL(NSCalendar * _Nonnull calendar, NSDateComponents * _Nonnull comp) {
-        
+        NSLog(@"xxxxx");
         __strong typeof(weakSelf) self = weakSelf;
         NSDate *outputDate = [calendar dateFromComponents:comp];
         NSString *showString = [NSString stringWithFormat:@"抢购倒计时：%@", [formatter stringFromDate:outputDate]];
