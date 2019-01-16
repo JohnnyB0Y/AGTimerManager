@@ -7,6 +7,7 @@
 //
 
 #import "UITableViewHeaderFooterView+AGViewModel.h"
+#import "UIScreen+AGViewModel.h"
 
 @implementation UITableViewHeaderFooterView (AGViewModel)
 
@@ -19,8 +20,8 @@
 + (void) ag_registerHeaderFooterViewBy:(UITableView *)tableView
 {
     // 有特殊需求，请在子类重写。
-    if ( [self ag_canAwakeFromNib] ) {
-        UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:[self ag_currentBundle]];
+    if ( [self ag_canAwakeNibInBundle:[self ag_resourceBundle]] ) {
+        UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:[self ag_resourceBundle]];
         [tableView registerNib:nib forHeaderFooterViewReuseIdentifier:[self ag_reuseIdentifier]];
     }
     else {
@@ -35,10 +36,12 @@
 }
 
 #pragma mark - ----------- AGVMIncludable -----------
-- (CGSize) ag_viewModel:(AGViewModel *)vm sizeForBindingView:(CGSize)bvS
+- (CGSize) ag_viewModel:(AGViewModel *)vm sizeForBindingView:(UIScreen *)screen
 {
     // 有特殊需求，请在子类重写。
-    if ( ! vm[kAGVMViewH] ) {
+    CGFloat height = [vm[kAGVMViewH] floatValue];
+    CGSize bvS = CGSizeMake(screen.width, height);
+    if ( height <= 0 ) {
         bvS.height = 34.;
     }
     return bvS;

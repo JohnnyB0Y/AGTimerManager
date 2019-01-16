@@ -7,21 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AGVMProtocol.h"
 @class AGVMPackager, AGViewModel, AGVMSection, AGVMManager;
 
 #ifndef AGVMFunction_h
 #define AGVMFunction_h
-
-#pragma mark - Define
-/** TODO 宏 */
-#define STRINGIFY(S) #S
-#define DEFER_STRINGIFY(S) STRINGIFY(S)
-#define PRAGMA_MESSAGE(MSG) _Pragma(STRINGIFY(message(MSG)))
-#define FORMATTED_MESSAGE(MSG) "[TODO~" DEFER_STRINGIFY(__COUNTER__) "] " MSG " [LINE:" DEFER_STRINGIFY(__LINE__) "]"
-#define AGTODO(MSG) PRAGMA_MESSAGE(FORMATTED_MESSAGE(MSG))
-
-/** 过期提醒 */
-#define AG_DEPRECATED_IOS(message) NS_DEPRECATED_IOS(2_0, 2_0, (message))
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -42,7 +32,7 @@ AGVMPackager * ag_sharedVMPackager(void);
 NSMutableDictionary * ag_newNSMutableDictionary(NSInteger capacity);
 /** Quickly create mutableArray */
 NSMutableArray * ag_newNSMutableArray(NSInteger capacity);
-/** Quickly create 可变数组函数, 包含 Null 对象 */
+/** Quickly create mutableArray, include NSNull obj */
 NSMutableArray * ag_newNSMutableArrayWithNull(NSInteger capacity);
 
 

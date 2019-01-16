@@ -6,9 +6,26 @@
 //  Copyright © 2017年 JohnnyB0Y. All rights reserved.
 //  viewModel const keys
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #ifndef AGVMKeys_h
 #define AGVMKeys_h
+
+
+#pragma mark - Define
+/** TODO 宏 */
+#define STRINGIFY(S) #S
+#define DEFER_STRINGIFY(S) STRINGIFY(S)
+#define PRAGMA_MESSAGE(MSG) _Pragma(STRINGIFY(message(MSG)))
+#define FORMATTED_MESSAGE(MSG) "[TODO~" DEFER_STRINGIFY(__COUNTER__) "] " MSG " [LINE:" DEFER_STRINGIFY(__LINE__) "]"
+#define AGTODO(MSG) PRAGMA_MESSAGE(FORMATTED_MESSAGE(MSG))
+
+/** min < idx < max; return BOOL. */
+#define AGIsIndexInRange(min, idx, max) ((min) < (idx)) && ((idx) < (max))
+
+#define AGAssertIndexRange(min, idx, max) NSAssert(AGIsIndexInRange((min), (idx), (max)), @"Index out of range.")
+
+#define AGAssertParameter(parameter) NSParameterAssert((parameter))
+
 
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //
@@ -18,122 +35,140 @@
 
 #pragma mark - 携带数据相关
 /** 携带的对象 👉id👈  */
-static NSString * const kAGVMObject = @"kAGVMObject";
+FOUNDATION_EXTERN NSString * const kAGVMObject;
 
 /** 携带的数组 👉NSArray👈  */
-static NSString * const kAGVMArray = @"kAGVMArray";
+FOUNDATION_EXTERN NSString * const kAGVMArray;
 
 /** 携带的字典 👉NSDictionary👈  */
-static NSString * const kAGVMDictionary = @"kAGVMDictionary";
+FOUNDATION_EXTERN NSString * const kAGVMDictionary;
 
 /** 携带的AGViewModel 👉AGViewModel👈  */
-static NSString * const kAGViewModel = @"kAGViewModel";
+FOUNDATION_EXTERN NSString * const kAGViewModel;
 
 /** 携带的AGVMSection 👉AGVMSection👈  */
-static NSString * const kAGVMSection = @"kAGVMSection";
+FOUNDATION_EXTERN NSString * const kAGVMSection;
 
 /** 携带的AGVMManager 👉AGVMManager👈  */
-static NSString * const kAGVMManager = @"kAGVMManager";
+FOUNDATION_EXTERN NSString * const kAGVMManager;
 
 /** 携带的公共VM 👉AGViewModel👈 */
-static NSString * const kAGVMCommonVM = @"kAGVMCommonVM";
+FOUNDATION_EXTERN NSString * const kAGVMCommonVM;
 /** 携带的头部VM 👉AGViewModel👈 */
-static NSString * const kAGVMHeaderVM = @"kAGVMHeaderVM";
+FOUNDATION_EXTERN NSString * const kAGVMHeaderVM;
 /** 携带的尾部VM 👉AGViewModel👈 */
-static NSString * const kAGVMFooterVM = @"kAGVMFooterVM";
+FOUNDATION_EXTERN NSString * const kAGVMFooterVM;
 
 #pragma mark - 类型、状态描述相关
 /** View Model 的类型 👉NSString👈 */
-static NSString * const kAGVMType = @"kAGVMType";
+FOUNDATION_EXTERN NSString * const kAGVMType;
+
+/** 位置信息 👉NSNumber👈 */
+FOUNDATION_EXTERN NSString * const kAGVMIndex;
+
+/** 容量 👉NSNumber👈 */
+FOUNDATION_EXTERN NSString * const kAGVMCapacity;
 
 /** 是否选中？ 👉NSNumber👈 */
-static NSString * const kAGVMSelected = @"kAGVMSelected";
+FOUNDATION_EXTERN NSString * const kAGVMSelected;
 
 /** 是否禁用？ 👉NSNumber👈 */
-static NSString * const kAGVMDisabled = @"kAGVMDisabled";
+FOUNDATION_EXTERN NSString * const kAGVMDisabled;
 
 /** 是否删除？ 👉NSNumber👈 */
-static NSString * const kAGVMDeleted = @"kAGVMDeleted";
+FOUNDATION_EXTERN NSString * const kAGVMDeleted;
 
 /** 是否刷新？ 👉NSNumber👈 */
-static NSString * const kAGVMReloaded = @"kAGVMReloaded";
+FOUNDATION_EXTERN NSString * const kAGVMReloaded;
 
 /** 是否添加？ 👉NSNumber👈 */
-static NSString * const kAGVMAdded = @"kAGVMAdded";
+FOUNDATION_EXTERN NSString * const kAGVMAdded;
 
 #pragma mark - 跳转的控制器相关
 /** 目标跳转控制器 - 👉Class👈 */
-static NSString * const kAGVMTargetVCClass = @"kAGVMTargetVCClass";
+FOUNDATION_EXTERN NSString * const kAGVMTargetVCClass;
 
 /** 目标跳转控制器 - 标题 👉NSString👈 */
-static NSString * const kAGVMTargetVCTitle = @"kAGVMTargetVCTitle";
+FOUNDATION_EXTERN NSString * const kAGVMTargetVCTitle;
 
 /** 目标跳转控制器 - 类型 👉NSString👈 */
-static NSString * const kAGVMTargetVCType = @"kAGVMTargetVCType";
+FOUNDATION_EXTERN NSString * const kAGVMTargetVCType;
 
 /** 目标跳转控制器 - 执行的代码块 👉Block👈 */
-static NSString * const kAGVMTargetVCBlock = @"kAGVMTargetVCBlock";
+FOUNDATION_EXTERN NSString * const kAGVMTargetVCBlock;
 
 
 #pragma mark - 显示的视图相关
 /** view 类对象 👉Class👈 */
-static NSString * const kAGVMViewClass = @"kAGVMViewClass";
+FOUNDATION_EXTERN NSString * const kAGVMViewClass;
+
+/** view 对象 👉UIView👈 */
+FOUNDATION_EXTERN NSString * const kAGVMView;
+
+/** hidden 隐藏 👉NSNumber👈 */
+FOUNDATION_EXTERN NSString * const kAGVMViewHidden;
 
 /** view 类名字符串 👉NSString👈 */
-static NSString * const kAGVMViewClassName = @"kAGVMViewClassName";
+FOUNDATION_EXTERN NSString * const kAGVMViewClassName;
 
 #pragma mark 标记
 /** view 标记 👉NSNumber👈 */
-static NSString * const kAGVMViewTag = @"kAGVMViewTag";
+FOUNDATION_EXTERN NSString * const kAGVMViewTag;
 
 #pragma mark 尺寸
 /** 视图高度 👉NSNumber👈 */
-static NSString * const kAGVMViewH = @"kAGVMViewH";
+FOUNDATION_EXTERN NSString * const kAGVMViewH;
 
 /** 视图宽度 👉NSNumber👈 */
-static NSString * const kAGVMViewW = @"kAGVMViewW";
+FOUNDATION_EXTERN NSString * const kAGVMViewW;
 
 /** 宽高比 👉NSNumber👈 */
-static NSString * const kAGVMViewAspectRatio = @"kAGVMViewAspectRatio";
+FOUNDATION_EXTERN NSString * const kAGVMViewAspectRatio;
 
 /** 视图内边距 UIEdgeInsets 👉NSString👈 */
-static NSString * const kAGVMViewEdgeInsets = @"kAGVMViewEdgeInsets";
+FOUNDATION_EXTERN NSString * const kAGVMViewEdgeInsets;
 
 /** 视图外边距 UIEdgeInsets 👉NSString👈 */
-static NSString * const kAGVMViewEdgeMargin = @"kAGVMViewEdgeMargin";
+FOUNDATION_EXTERN NSString * const kAGVMViewEdgeMargin;
 
 
 #pragma mark 颜色
 /** view 背景色 👉UIColor👈 */
-static NSString * const kAGVMViewBGColor = @"kAGVMViewBGColor";
+FOUNDATION_EXTERN NSString * const kAGVMViewBGColor;
 /** view 显示类型 👉NSNumber👈 */
-static NSString * const kAGVMViewDisplayType = @"kAGVMViewDisplayType";
+FOUNDATION_EXTERN NSString * const kAGVMViewDisplayType;
 
 
 #pragma mark 元素
 /** 标题内容 👉NSString👈 */
-static NSString * const kAGVMTitleText = @"kAGVMTitleText";
-static NSString * const kAGVMTitlePlaceholder = @"kAGVMTitlePlaceholder";
+FOUNDATION_EXTERN NSString * const kAGVMTitleText;
+FOUNDATION_EXTERN NSString * const kAGVMTitlePlaceholder;
 /** 标题颜色 👉UIColor👈 */
-static NSString * const kAGVMTitleColor = @"kAGVMTitleColor";
+FOUNDATION_EXTERN NSString * const kAGVMTitleColor;
+/** 标题字体大小 👉UIFont👈 */
+FOUNDATION_EXTERN NSString * const kAGVMTitleFont;
 
 /** 子标题内容 👉NSString👈 */
-static NSString * const kAGVMSubTitleText = @"kAGVMSubTitleText";
-static NSString * const kAGVMSubTitlePlaceholder = @"kAGVMSubTitlePlaceholder";
+FOUNDATION_EXTERN NSString * const kAGVMSubTitleText;
+FOUNDATION_EXTERN NSString * const kAGVMSubTitlePlaceholder;
 /** 子标题颜色 👉UIColor👈 */
-static NSString * const kAGVMSubTitleColor = @"kAGVMSubTitleColor";
+FOUNDATION_EXTERN NSString * const kAGVMSubTitleColor;
+/** 子标题字体大小 👉UIFont👈 */
+FOUNDATION_EXTERN NSString * const kAGVMSubTitleFont;
 
 /** 详情内容 👉NSString👈 */
-static NSString * const kAGVMDetailText = @"kAGVMDetailText";
-static NSString * const kAGVMDetailPlaceholder = @"kAGVMDetailPlaceholder";
+FOUNDATION_EXTERN NSString * const kAGVMDetailText;
+FOUNDATION_EXTERN NSString * const kAGVMDetailPlaceholder;
 /** 详情颜色 👉UIColor👈 */
-static NSString * const kAGVMDetailColor = @"kAGVMDetailColor";
+FOUNDATION_EXTERN NSString * const kAGVMDetailColor;
+/** 详情字体大小 👉UIFont👈 */
+FOUNDATION_EXTERN NSString * const kAGVMDetailFont;
 
 /** 图片 👉UIImage👈 */
-static NSString * const kAGVMImage = @"kAGVMImage";
+FOUNDATION_EXTERN NSString * const kAGVMImage;
 
 /** 网络图片 👉NSString👈 */
-static NSString * const kAGVMImageURLText = @"kAGVMImageURLText";
-static NSString * const kAGVMImageURLPlaceholder = @"kAGVMImageURLPlaceholder";
+FOUNDATION_EXTERN NSString * const kAGVMImageURLText;
+FOUNDATION_EXTERN NSString * const kAGVMImageURLPlaceholder;
 
 #endif /* AGVMKeys_h */

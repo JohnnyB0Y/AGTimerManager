@@ -1,6 +1,6 @@
 //
 //  UIView+AGViewModel.m
-//  AGViewModelDemo
+//  
 //
 //  Created by JohnnyB0Y on 2018/2/12.
 //  Copyright © 2018年 JohnnyB0Y. All rights reserved.
@@ -14,37 +14,38 @@ static void *kAGViewModelProperty = &kAGViewModelProperty;
 @implementation UIView (AGViewModel)
 
 #pragma mark - ---------- Public Methods ----------
-+ (BOOL)ag_canAwakeFromNib
++ (NSString *)ag_reuseIdentifier
 {
-    NSBundle *bundle = [self ag_currentBundle];
+    return NSStringFromClass(self);
+}
+
++ (BOOL)ag_canAwakeNibInBundle:(NSBundle *)bundle
+{
+    if ( nil == bundle ) {
+        bundle = [self ag_resourceBundle];
+    }
     NSString *className = NSStringFromClass([self class]);
     NSString *nibPath = [bundle pathForResource:className ofType:@"nib"];
+    if ( nil == nibPath ) {
+        nibPath = [bundle pathForResource:className ofType:@"xib"];
+    }
     return nibPath != nil;
 }
 
-+ (instancetype)ag_createFromNib
++ (instancetype)ag_newFromNibInBundle:(NSBundle *)bundle
 {
-    // 有特殊需求，请在子类重写。
-    if ( [self ag_canAwakeFromNib] ) {
-        NSBundle *bundle = [self ag_currentBundle];
-        UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:bundle];
-        return [[nib instantiateWithOwner:self options:nil] firstObject];
+    if ( nil == bundle ) {
+        bundle = [self ag_resourceBundle];
     }
-    return nil;
+    UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:bundle];
+    return [[nib instantiateWithOwner:self options:nil] firstObject];
 }
 
-+ (NSBundle *) ag_currentBundle
++ (NSBundle *)ag_resourceBundle
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSURL *url = [bundle URLForResource:@"MyLibrary" withExtension:@"bundle"];
-    if ( url == nil ) {
-        url = [bundle URLForResource:@"ResourceFramework" withExtension:@"bundle"];
-    }
-    if ( url ) {
-        bundle = [NSBundle bundleWithURL:url];
-    }
-    return bundle;
+    return [NSBundle mainBundle];
 }
+
 
 #pragma mark - ----------- Getter Setter Methods ----------
 - (void)setViewModel:(AGViewModel *)viewModel
@@ -55,6 +56,92 @@ static void *kAGViewModelProperty = &kAGViewModelProperty;
 - (AGViewModel *)viewModel
 {
     return objc_getAssociatedObject(self, kAGViewModelProperty);
+}
+
+- (CGFloat)width
+{
+    return self.frame.size.width;
+}
+
+- (void)setWidth:(CGFloat)width
+{
+    CGRect newFrame = CGRectMake(self.x, self.y, width, self.height);
+    [self setFrame:newFrame];
+}
+
+- (CGFloat)height
+{
+    return self.frame.size.height;
+}
+
+- (void)setHeight:(CGFloat)height
+{
+    CGRect newFrame = CGRectMake(self.x, self.y, self.width, height);
+    [self setFrame:newFrame];
+}
+
+- (CGSize)size
+{
+    return self.frame.size;
+}
+
+- (void)setSize:(CGSize)size
+{
+    CGRect newFrame = CGRectMake(self.x, self.y, size.width, size.height);
+    [self setFrame:newFrame];
+}
+
+- (CGFloat)x
+{
+    return self.frame.origin.x;
+}
+
+- (void)setX:(CGFloat)x
+{
+    CGRect newFrame = CGRectMake(x, self.y, self.width, self.height);
+    [self setFrame:newFrame];
+}
+
+- (CGFloat)y
+{
+    return self.frame.origin.y;
+}
+
+- (void)setY:(CGFloat)y
+{
+    CGRect newFrame = CGRectMake(self.x, y, self.width, self.height);
+    [self setFrame:newFrame];
+}
+
+- (CGPoint)origin
+{
+    return self.frame.origin;
+}
+
+- (void)setOrigin:(CGPoint)origin
+{
+    CGRect newFrame = CGRectMake(origin.x, origin.y, self.width, self.height);
+    [self setFrame:newFrame];
+}
+
+- (CGFloat)centerX
+{
+    return self.center.x;
+}
+
+- (void)setCenterX:(CGFloat)centerX
+{
+    [self setCenter:CGPointMake(centerX, self.centerY)];
+}
+
+- (CGFloat)centerY
+{
+    return self.center.y;
+}
+
+- (void)setCenterY:(CGFloat)centerY
+{
+    [self setCenter:CGPointMake(self.centerX, centerY)];
 }
 
 @end

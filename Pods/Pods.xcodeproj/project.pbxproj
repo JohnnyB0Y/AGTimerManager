@@ -7,51 +7,57 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0026A261F287B5DA17B50C737225C257 /* UIImage+AGGenerate.h in Headers */ = {isa = PBXBuildFile; fileRef = 03A44EA6389C2C92B7304C1C9B7078A7 /* UIImage+AGGenerate.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0026A261F287B5DA17B50C737225C257 /* UIImage+AGGenerate.h in Headers */ = {isa = PBXBuildFile; fileRef = 98253F712C57AD61E245C9A292468572 /* UIImage+AGGenerate.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		005F13E51550B40D51ABAFEDAB1C9F97 /* UIView+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D115CBA8CC6E9A8325F72396DDC0E34 /* UIView+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		00829AB3AEBCAC1E97FDA67A61A2C101 /* AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 43CAC88DA84AB0FE8B6A77F87B4A642A /* AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		025B99D624D58918D29992A50B603A8A /* UIView+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1662059C28461E26286FC012572B3F5 /* UIView+AGViewModel.m */; };
+		0387B4A3F6AF0D3AD0A01874F18E58E0 /* AGVMNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = D34679E43A790B1DD0BA517A72D77131 /* AGVMNotifier.m */; };
 		069129C663E02056E7B131FFBADAD1E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
-		0B653ECD22BA3C905CF1604B7225793B /* AGVMManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D842D2F9F765BA33996D436509627956 /* AGVMManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		12898A83DCB278F123633C863A02F53C /* UITableViewHeaderFooterView+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0BEDFBA1E77D8EC8D9484F814EAAE /* UITableViewHeaderFooterView+AGViewModel.m */; };
-		1530A1A17D7B22F68D836C02810216FB /* AGVMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 007AD78864AE2070B2BA13E67BC04E4D /* AGVMManager.m */; };
-		1611FF5D6BE433F961DDADAF7E51F264 /* UICollectionViewCell+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AFE1430A47039B67D815CD16AE935C /* UICollectionViewCell+AGViewModel.m */; };
-		1AD8A863077139268595481B8DEA35F7 /* AGCategories-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2463BF50AF193A1EA5C0DA7FD22678 /* AGCategories-dummy.m */; };
-		20F0DA0E2B9E7327B917C09513788371 /* AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = FF1D2C7993DD8486F24AF38C7B34507C /* AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		2C1AED864910A22D6938D8CB86EFBE41 /* UIImage+AGGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = A41F0B4E1993B04B104C34210E466E2D /* UIImage+AGGenerate.m */; };
-		2C265BAD5DE4604926FE9E1C2F984992 /* NSString+AGCalculate.h in Headers */ = {isa = PBXBuildFile; fileRef = FA578541E9BE911D96F538C84D9F45ED /* NSString+AGCalculate.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		324FA06E0956CDA1F2DF74DAB646D63B /* NSString+AGCalculate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34DAFCF47B8FF73582AA05D227E7388E /* NSString+AGCalculate.m */; };
-		340673D71253D788B0F86D806F090E3C /* UIView+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EF59F17E213EC223194340C8C81BD0E1 /* UIView+AGViewModel.m */; };
-		406833B916A3A2F82F9ED49A1F6DB565 /* AGVMKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FC1A8B53191C57D49FF45642197C0 /* AGVMKit.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		41B2696A666280ADECCCEC14FFAFFEB0 /* UITableViewHeaderFooterView+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 93288C2CD6DED8EEE9A99DA176C08563 /* UITableViewHeaderFooterView+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		51F27229AE6657D15B3BF1F3CA6AAE8C /* UIColor+AGExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = D6B3FC247FD9252551EE4CF4D902F340 /* UIColor+AGExtensions.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		55E5A0BD38E9A6948D6D84B553A3E70B /* UICollectionReusableView+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 7DE0D8B54CF506B7770E54267B2B9610 /* UICollectionReusableView+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1437795126A63F69EA3A4C3A26FA6BD5 /* AGVMKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = DE828E4DA505A15940F4FDA33FAA293A /* AGVMKeys.m */; };
+		162CA7CFD32306B4848CFCF48E731530 /* AGVMSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C84E1CC7C316C613FE7926F341E0618 /* AGVMSection.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		16BA4DE479D53E1822A8D0DFEE12C806 /* NSString+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = DD17E54F040072114D43D172BC88FADD /* NSString+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		196B1978FDC6CE3FF330FFEF233A83D3 /* UIViewController+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 16457FB8326E5E0766FD44ECCD080E01 /* UIViewController+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1A33D63DD60BBEE1EE4BDD129AEB51EB /* AGVMKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A4097F48E3DB6B2CCC5E2EB0C94604D0 /* AGVMKit.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		1AD8A863077139268595481B8DEA35F7 /* AGCategories-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 861CA9890E72CC26B8C86FC6EEE62CEE /* AGCategories-dummy.m */; };
+		2C1AED864910A22D6938D8CB86EFBE41 /* UIImage+AGGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83265A55CF31CE53A97E4BD0E7C81351 /* UIImage+AGGenerate.m */; };
+		30F5F29D184BC16C5D50D0E3A5EAD9EF /* NSString+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 20B427675639E2D8DD7936643D455C21 /* NSString+AGViewModel.m */; };
+		325EA5CDF1C5B724CC0079DF6BB08BD3 /* UITableViewHeaderFooterView+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FFF805199F1F390CFE48B104B4F6E43 /* UITableViewHeaderFooterView+AGViewModel.m */; };
+		4C16480DBA88A79A3675BE4D9EECB9B4 /* AGVMFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 77C7FDB7CFC7A5820120C26E133D55CC /* AGVMFunction.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		51F27229AE6657D15B3BF1F3CA6AAE8C /* UIColor+AGExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = FAFC9C09046120CBC2CA08AF63CF6A10 /* UIColor+AGExtensions.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5321CCA7982CD724555C65A828B90971 /* UIScreen+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 218A1878868B8F87EC4A81488C4E2FF5 /* UIScreen+AGViewModel.m */; };
+		5456CF86E1FF1F2155C2629E6E954651 /* AGVMProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 328DA6B9E2B0BA8E836A05CDBF82BC29 /* AGVMProtocol.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5D6135CC55ED0C95DFF09F275CE307AC /* AGVMKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C775B5FFA9B8167AECDA3E453FD4A38 /* AGVMKeys.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		621B166DAD905ABE1B0957B814554E44 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */; };
+		66C424695383F50391F8838F82A1B1F6 /* UICollectionViewCell+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A977E5E4951DE9BA95E2FCBD3F7ABE /* UICollectionViewCell+AGViewModel.m */; };
+		6CDB2373F5FDCD2E68B93C8AC7AFB690 /* UITableViewCell+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = EAF386BA439696AF8F21AD27BD1AF937 /* UITableViewCell+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		6DBDD99E17D4340B15918DBF26D4058F /* Pods-AGTimerManager-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 874211C9B441ADFBD3EA57BD76FB2862 /* Pods-AGTimerManager-dummy.m */; };
-		6EB6DCF07EC59195AADA295B9ACC94E6 /* AGVMNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = FE8261BDC9FDE0200B0BFF646F8955F8 /* AGVMNotifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		732912D0DE0D307C32364ACDBF130673 /* AGViewModel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9328CE3ACEBC02F05CA62A3D5A2E902B /* AGViewModel-dummy.m */; };
-		77418D68A89E5BEC709CE0BC2A83C096 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
-		77D6DA87568C07A50AB0F51DF96F5FEB /* AGVMSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 64134DFB7B4F2C86D4B9449B04CDABD0 /* AGVMSection.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		78D8DA903812CAD6ACC9940720518758 /* UIImage+AGTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = C03C6EE5313611C452206A7DE2183601 /* UIImage+AGTransform.m */; };
-		7B183A027F7FB4C93804B236C6E019F9 /* UIView+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A61A24D1A2759B94CC80BF02B3E50E3 /* UIView+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		80527C83E8F3E77D4DDBAC3A31AEDDE3 /* AGVMKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 9596FF0DAB4BE499256633A5AC9E164D /* AGVMKeys.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		733EBDC4C1709AD796AF133A664C09C7 /* AGVMSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A6B1A6B3B5E8353FB111DCC5794D0C1 /* AGVMSection.m */; };
+		78D8DA903812CAD6ACC9940720518758 /* UIImage+AGTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF8F32DECCEE2599D0FB593FC521578 /* UIImage+AGTransform.m */; };
+		792291FE9732F64546D081F05E05165D /* UIScreen+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EA29773A5C83D6E7CA9C77984F0FBAA /* UIScreen+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7B82C36CE376E24E71A9B1858A8BC0E8 /* AGVMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18989A6E8BAB8BC673FF54326F0CFCBC /* AGVMPackager.m */; };
+		7FC95834BC8052CC779AAD21692A98EC /* AGVMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 066670D3A74C5CD3FAC75750EB07E13D /* AGVMManager.m */; };
 		86F9668424388A0C737E2D028AC6D2F3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */; };
-		87F7265482B44D4642103E78C0A8FD80 /* NSDate+AGGenerate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F182716C23C9C4B73A39B3E084A91CA /* NSDate+AGGenerate.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9A6C7E9E6414321828EB46D53F5C9F06 /* AGVMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = F1B078179E4795686E86C656128DE2D9 /* AGVMPackager.m */; };
-		9BCE9AD46FE7F2F7ED87B85166618027 /* UIImage+AGTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 767C931C97432A48EEC4E236293459CF /* UIImage+AGTransform.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A2AB2F2234D5B4EDBAE59D32ADD088D2 /* NSBundle+AGSupportCocoapods.m in Sources */ = {isa = PBXBuildFile; fileRef = A8BA6F2B5BBDB147073CE4D13158B44F /* NSBundle+AGSupportCocoapods.m */; };
-		AABF47CC2D4E1CF97B3ACAD700B411AF /* NSString+AGJudge.h in Headers */ = {isa = PBXBuildFile; fileRef = 2508CB74D06B3F9B6740137CDB5DB997 /* NSString+AGJudge.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		ADD7059A6C75CBCB46F457BC34D9DA4B /* AGVMPackager.h in Headers */ = {isa = PBXBuildFile; fileRef = A3EF0A76419D04C19FD9013720FAAD2E /* AGVMPackager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B01523104B28BCBB5EA84F3573F58BDE /* AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 251D4F789D3444974387DB9206C23E12 /* AGViewModel.m */; };
-		B3DE276E9BBA4331178328866BD93419 /* UIColor+AGExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FBC98070F726CC022433B6AC87E197 /* UIColor+AGExtensions.m */; };
-		BE0F25319F1A75F941C0457A46029DD0 /* UITableViewCell+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5223D15A03D302091E0BBE8E85481468 /* UITableViewCell+AGViewModel.m */; };
-		CB59644454940BD67101E1024CF05480 /* UITableViewCell+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 680CD09688261040098736B65E0BC4FF /* UITableViewCell+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		CCBD3201936968538B100DD9535E4AC6 /* AGVMNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C71BB5E28D35FFBFB45EE2FA326A338 /* AGVMNotifier.m */; };
-		D084BC1200176F156EF3D55AE414FD6B /* UICollectionViewCell+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3137E2D35CAC92C40B227135FBD506F4 /* UICollectionViewCell+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D298ABD616BFD46F0FB0A6F5CC6E4AC5 /* AGVMSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC95844A4836403690630556A28D801 /* AGVMSection.m */; };
-		D658B9789999508F8EA48D1E3AD1293F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */; };
-		D8FE95441D29E2C61FF5D6887C866E61 /* NSBundle+AGSupportCocoapods.h in Headers */ = {isa = PBXBuildFile; fileRef = 998BCB43D036A532EC2F46539B42A42C /* NSBundle+AGSupportCocoapods.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		DD4FB537046B4ECB4A3164B28C1D7DFF /* NSString+AGJudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A00F34019ECCDC450DBB198313CF94E /* NSString+AGJudge.m */; };
-		EB97C5D391EE4E292C841E65A5E6C685 /* AGVMProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 52DE5602A887EC29296625120270CC28 /* AGVMProtocol.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F6C131D3047A3CD381724C8F7D363E7B /* UICollectionReusableView+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A5EB88BEDBAF1983FC3BC2C5DF98D67 /* UICollectionReusableView+AGViewModel.m */; };
-		F7CCDFDB40A551CA1EF19CC712E151A9 /* AGVMFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B7F4040F443D5EBD6F8832C694094C4 /* AGVMFunction.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		FB9565CAEFF0060227D3069671F6378B /* NSDate+AGGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D30DB4DF186C2778A34E45C915A2017 /* NSDate+AGGenerate.m */; };
+		87905F309F9247F096FB48061CD7AA9D /* UITableViewHeaderFooterView+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CB43B3F6CC64C0901806453344A225F /* UITableViewHeaderFooterView+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		87F7265482B44D4642103E78C0A8FD80 /* NSDate+AGGenerate.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B5CC62381CA80FC7F637F4C739C3C92 /* NSDate+AGGenerate.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		96196D2AB146802F167FD257F637F034 /* AGVMFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = F7C5F5E6BBBD60ABAF3364CAAFB0C907 /* AGVMFunction.m */; };
+		9AD3E8BDD72B46413DCFD5C9C9DED236 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908E902E026C5C22904CF9014A5604AD /* Foundation.framework */; };
+		9BCE9AD46FE7F2F7ED87B85166618027 /* UIImage+AGTransform.h in Headers */ = {isa = PBXBuildFile; fileRef = 02A0CE5CA6BCCB92CFB76FA132DA0DCD /* UIImage+AGTransform.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9EF67692E5AA3EB286DDD6823821A93C /* AGVMPackager.h in Headers */ = {isa = PBXBuildFile; fileRef = 94098BDDBDCCFD2A1576350943C82577 /* AGVMPackager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A2AB2F2234D5B4EDBAE59D32ADD088D2 /* NSBundle+AGSupportCocoapods.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358CA4681EB73F6D5F046D60A771574 /* NSBundle+AGSupportCocoapods.m */; };
+		AABF47CC2D4E1CF97B3ACAD700B411AF /* NSString+AGJudge.h in Headers */ = {isa = PBXBuildFile; fileRef = 4ADCD221ADD9245AE9C9A8F49CFFD908 /* NSString+AGJudge.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AB13C05FBC93FE3B3B1114F41F3D1998 /* AGVMManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6363D5AE26B63780D258CDD1B7833E01 /* AGVMManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B3DE276E9BBA4331178328866BD93419 /* UIColor+AGExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = DE39A44288D242588C675D72575DAACC /* UIColor+AGExtensions.m */; };
+		B86935D8A612A1F2A3B7768621DB65DA /* AGViewModel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 237D1F67C07C5A0FA5D431AF0122E484 /* AGViewModel-dummy.m */; };
+		BAD8585C293D9F564937A94005656248 /* AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 85ED2D41C3448BA6F8E21F8C3E8065C4 /* AGViewModel.m */; };
+		D8FE95441D29E2C61FF5D6887C866E61 /* NSBundle+AGSupportCocoapods.h in Headers */ = {isa = PBXBuildFile; fileRef = FC89D8C2669B4FB2A9C03732D2068FFC /* NSBundle+AGSupportCocoapods.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		DD4FB537046B4ECB4A3164B28C1D7DFF /* NSString+AGJudge.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F077A7AA39EB6909118205961471F07 /* NSString+AGJudge.m */; };
+		E2B10078F76239751AE2093F1504D022 /* UICollectionReusableView+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 95502D75B91FCBD5E4D5BFA69462BFD8 /* UICollectionReusableView+AGViewModel.m */; };
+		E442292D8C3F321C9AB0269CCFC06EDF /* UICollectionReusableView+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = C1DC4EBB580D1677BE828857F9B86B3F /* UICollectionReusableView+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		EC38FC07DB8976B6CF0C7A6D6C04632C /* UITableViewCell+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FC78CB6C40DF9F8CA5B76B6878633CF /* UITableViewCell+AGViewModel.m */; };
+		FB6815B29E0E0B4EE1DEA51DAC76ADAA /* AGVMNotifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B235018D7A36A46D875AAD4AE0CEC3C /* AGVMNotifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		FB9565CAEFF0060227D3069671F6378B /* NSDate+AGGenerate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D49855769FC3654747655104ECE2809 /* NSDate+AGGenerate.m */; };
+		FD76C6F7C42F3D9DE505EF78536F0EBE /* UIViewController+AGViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FCF3C977ACA836D2BFF2F89A3FC477 /* UIViewController+AGViewModel.m */; };
+		FF599FAEC0F423A998AB53126D072843 /* UICollectionViewCell+AGViewModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 16A195867695EA3C109B133C833434C8 /* UICollectionViewCell+AGViewModel.h */; settings = {ATTRIBUTES = (Project, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,69 +72,75 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E22C4CF94CBFFE896431D47B52B00084;
+			remoteGlobalIDString = F6CE74A7890338F0789F4592869E03F1;
 			remoteInfo = AGViewModel;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		007AD78864AE2070B2BA13E67BC04E4D /* AGVMManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGVMManager.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMManager.m; sourceTree = "<group>"; };
-		013205B8B61582119FF57D4780162012 /* AGCategories.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AGCategories.xcconfig; sourceTree = "<group>"; };
-		03A44EA6389C2C92B7304C1C9B7078A7 /* UIImage+AGGenerate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+AGGenerate.h"; path = "AGCategories/Categories/UIImage/UIImage+AGGenerate.h"; sourceTree = "<group>"; };
+		02A0CE5CA6BCCB92CFB76FA132DA0DCD /* UIImage+AGTransform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+AGTransform.h"; path = "AGCategories/Categories/UIImage/UIImage+AGTransform.h"; sourceTree = "<group>"; };
+		066670D3A74C5CD3FAC75750EB07E13D /* AGVMManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGVMManager.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMManager.m; sourceTree = "<group>"; };
+		0CB43B3F6CC64C0901806453344A225F /* UITableViewHeaderFooterView+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableViewHeaderFooterView+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UITableViewHeaderFooterView+AGViewModel.h"; sourceTree = "<group>"; };
+		0FC78CB6C40DF9F8CA5B76B6878633CF /* UITableViewCell+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableViewCell+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UITableViewCell+AGViewModel.m"; sourceTree = "<group>"; };
 		0FCB690AE9CDD35F503FBAA59F35A699 /* Pods-AGTimerManager-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AGTimerManager-resources.sh"; sourceTree = "<group>"; };
-		1A61A24D1A2759B94CC80BF02B3E50E3 /* UIView+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UIView+AGViewModel.h"; sourceTree = "<group>"; };
-		2508CB74D06B3F9B6740137CDB5DB997 /* NSString+AGJudge.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+AGJudge.h"; path = "AGCategories/Categories/NSString/NSString+AGJudge.h"; sourceTree = "<group>"; };
-		251D4F789D3444974387DB9206C23E12 /* AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGViewModel.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGViewModel.m; sourceTree = "<group>"; };
+		11FCF3C977ACA836D2BFF2F89A3FC477 /* UIViewController+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UIViewController+AGViewModel.m"; sourceTree = "<group>"; };
+		16457FB8326E5E0766FD44ECCD080E01 /* UIViewController+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UIViewController+AGViewModel.h"; sourceTree = "<group>"; };
+		16A195867695EA3C109B133C833434C8 /* UICollectionViewCell+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UICollectionViewCell+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UICollectionViewCell+AGViewModel.h"; sourceTree = "<group>"; };
+		18989A6E8BAB8BC673FF54326F0CFCBC /* AGVMPackager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGVMPackager.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMPackager.m; sourceTree = "<group>"; };
+		1EA29773A5C83D6E7CA9C77984F0FBAA /* UIScreen+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIScreen+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UIScreen+AGViewModel.h"; sourceTree = "<group>"; };
+		20B427675639E2D8DD7936643D455C21 /* NSString+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/NSString+AGViewModel.m"; sourceTree = "<group>"; };
+		218A1878868B8F87EC4A81488C4E2FF5 /* UIScreen+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIScreen+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UIScreen+AGViewModel.m"; sourceTree = "<group>"; };
+		237D1F67C07C5A0FA5D431AF0122E484 /* AGViewModel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AGViewModel-dummy.m"; sourceTree = "<group>"; };
 		29BFFED0C8B7BC3FD7F3792248386686 /* Pods-AGTimerManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AGTimerManager.release.xcconfig"; sourceTree = "<group>"; };
 		2C2DFA943B6B60475C440F13A5CC1864 /* libPods-AGTimerManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AGTimerManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CB95241B3FE8A68D1DFEE3BB4954780 /* Pods-AGTimerManager-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AGTimerManager-frameworks.sh"; sourceTree = "<group>"; };
-		2F182716C23C9C4B73A39B3E084A91CA /* NSDate+AGGenerate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDate+AGGenerate.h"; path = "AGCategories/Categories/NSDate/NSDate+AGGenerate.h"; sourceTree = "<group>"; };
-		3137E2D35CAC92C40B227135FBD506F4 /* UICollectionViewCell+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UICollectionViewCell+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UICollectionViewCell+AGViewModel.h"; sourceTree = "<group>"; };
-		34DAFCF47B8FF73582AA05D227E7388E /* NSString+AGCalculate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+AGCalculate.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/NSString+AGCalculate.m"; sourceTree = "<group>"; };
+		2FFF805199F1F390CFE48B104B4F6E43 /* UITableViewHeaderFooterView+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableViewHeaderFooterView+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UITableViewHeaderFooterView+AGViewModel.m"; sourceTree = "<group>"; };
+		328DA6B9E2B0BA8E836A05CDBF82BC29 /* AGVMProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMProtocol.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMProtocol.h; sourceTree = "<group>"; };
+		3C775B5FFA9B8167AECDA3E453FD4A38 /* AGVMKeys.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMKeys.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMKeys.h; sourceTree = "<group>"; };
 		3C90994CB08A0CFFB69CFE4F427D1042 /* libAGViewModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAGViewModel.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CB0BEDFBA1E77D8EC8D9484F814EAAE /* UITableViewHeaderFooterView+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableViewHeaderFooterView+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UITableViewHeaderFooterView+AGViewModel.m"; sourceTree = "<group>"; };
-		5223D15A03D302091E0BBE8E85481468 /* UITableViewCell+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableViewCell+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UITableViewCell+AGViewModel.m"; sourceTree = "<group>"; };
-		52DE5602A887EC29296625120270CC28 /* AGVMProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMProtocol.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMProtocol.h; sourceTree = "<group>"; };
-		5C71BB5E28D35FFBFB45EE2FA326A338 /* AGVMNotifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGVMNotifier.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMNotifier.m; sourceTree = "<group>"; };
-		64134DFB7B4F2C86D4B9449B04CDABD0 /* AGVMSection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMSection.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMSection.h; sourceTree = "<group>"; };
-		680CD09688261040098736B65E0BC4FF /* UITableViewCell+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableViewCell+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UITableViewCell+AGViewModel.h"; sourceTree = "<group>"; };
-		767C931C97432A48EEC4E236293459CF /* UIImage+AGTransform.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+AGTransform.h"; path = "AGCategories/Categories/UIImage/UIImage+AGTransform.h"; sourceTree = "<group>"; };
-		7B7F4040F443D5EBD6F8832C694094C4 /* AGVMFunction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMFunction.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMFunction.h; sourceTree = "<group>"; };
-		7D30DB4DF186C2778A34E45C915A2017 /* NSDate+AGGenerate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+AGGenerate.m"; path = "AGCategories/Categories/NSDate/NSDate+AGGenerate.m"; sourceTree = "<group>"; };
-		7DE0D8B54CF506B7770E54267B2B9610 /* UICollectionReusableView+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UICollectionReusableView+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UICollectionReusableView+AGViewModel.h"; sourceTree = "<group>"; };
+		43CAC88DA84AB0FE8B6A77F87B4A642A /* AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGViewModel.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGViewModel.h; sourceTree = "<group>"; };
+		4ADCD221ADD9245AE9C9A8F49CFFD908 /* NSString+AGJudge.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+AGJudge.h"; path = "AGCategories/Categories/NSString/NSString+AGJudge.h"; sourceTree = "<group>"; };
+		5B5CC62381CA80FC7F637F4C739C3C92 /* NSDate+AGGenerate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSDate+AGGenerate.h"; path = "AGCategories/Categories/NSDate/NSDate+AGGenerate.h"; sourceTree = "<group>"; };
+		5C84E1CC7C316C613FE7926F341E0618 /* AGVMSection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMSection.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMSection.h; sourceTree = "<group>"; };
+		5F077A7AA39EB6909118205961471F07 /* NSString+AGJudge.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+AGJudge.m"; path = "AGCategories/Categories/NSString/NSString+AGJudge.m"; sourceTree = "<group>"; };
+		6358CA4681EB73F6D5F046D60A771574 /* NSBundle+AGSupportCocoapods.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+AGSupportCocoapods.m"; path = "AGCategories/Categories/NSBundle/NSBundle+AGSupportCocoapods.m"; sourceTree = "<group>"; };
+		6363D5AE26B63780D258CDD1B7833E01 /* AGVMManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMManager.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMManager.h; sourceTree = "<group>"; };
+		6A6B1A6B3B5E8353FB111DCC5794D0C1 /* AGVMSection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGVMSection.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMSection.m; sourceTree = "<group>"; };
+		6D49855769FC3654747655104ECE2809 /* NSDate+AGGenerate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSDate+AGGenerate.m"; path = "AGCategories/Categories/NSDate/NSDate+AGGenerate.m"; sourceTree = "<group>"; };
+		77C7FDB7CFC7A5820120C26E133D55CC /* AGVMFunction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMFunction.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMFunction.h; sourceTree = "<group>"; };
+		7D115CBA8CC6E9A8325F72396DDC0E34 /* UIView+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UIView+AGViewModel.h"; sourceTree = "<group>"; };
 		7E8CD9428248B43D1A72188B38BAED43 /* Pods-AGTimerManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AGTimerManager.debug.xcconfig"; sourceTree = "<group>"; };
+		83265A55CF31CE53A97E4BD0E7C81351 /* UIImage+AGGenerate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+AGGenerate.m"; path = "AGCategories/Categories/UIImage/UIImage+AGGenerate.m"; sourceTree = "<group>"; };
+		83A977E5E4951DE9BA95E2FCBD3F7ABE /* UICollectionViewCell+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UICollectionViewCell+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UICollectionViewCell+AGViewModel.m"; sourceTree = "<group>"; };
+		847A19778C1FC6099245EB61A17DA539 /* AGViewModel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AGViewModel.xcconfig; sourceTree = "<group>"; };
+		85ED2D41C3448BA6F8E21F8C3E8065C4 /* AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGViewModel.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGViewModel.m; sourceTree = "<group>"; };
+		861CA9890E72CC26B8C86FC6EEE62CEE /* AGCategories-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AGCategories-dummy.m"; sourceTree = "<group>"; };
 		874211C9B441ADFBD3EA57BD76FB2862 /* Pods-AGTimerManager-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AGTimerManager-dummy.m"; sourceTree = "<group>"; };
-		8C2463BF50AF193A1EA5C0DA7FD22678 /* AGCategories-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AGCategories-dummy.m"; sourceTree = "<group>"; };
-		8EC95844A4836403690630556A28D801 /* AGVMSection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGVMSection.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMSection.m; sourceTree = "<group>"; };
+		8B235018D7A36A46D875AAD4AE0CEC3C /* AGVMNotifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMNotifier.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMNotifier.h; sourceTree = "<group>"; };
 		908E902E026C5C22904CF9014A5604AD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		93288C2CD6DED8EEE9A99DA176C08563 /* UITableViewHeaderFooterView+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableViewHeaderFooterView+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UITableViewHeaderFooterView+AGViewModel.h"; sourceTree = "<group>"; };
-		9328CE3ACEBC02F05CA62A3D5A2E902B /* AGViewModel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AGViewModel-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		94FBC98070F726CC022433B6AC87E197 /* UIColor+AGExtensions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AGExtensions.m"; path = "AGCategories/Categories/UIColor/UIColor+AGExtensions.m"; sourceTree = "<group>"; };
-		9596FF0DAB4BE499256633A5AC9E164D /* AGVMKeys.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMKeys.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMKeys.h; sourceTree = "<group>"; };
-		998BCB43D036A532EC2F46539B42A42C /* NSBundle+AGSupportCocoapods.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+AGSupportCocoapods.h"; path = "AGCategories/Categories/NSBundle/NSBundle+AGSupportCocoapods.h"; sourceTree = "<group>"; };
-		9A00F34019ECCDC450DBB198313CF94E /* NSString+AGJudge.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+AGJudge.m"; path = "AGCategories/Categories/NSString/NSString+AGJudge.m"; sourceTree = "<group>"; };
-		9A5EB88BEDBAF1983FC3BC2C5DF98D67 /* UICollectionReusableView+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UICollectionReusableView+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UICollectionReusableView+AGViewModel.m"; sourceTree = "<group>"; };
-		A3EF0A76419D04C19FD9013720FAAD2E /* AGVMPackager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMPackager.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMPackager.h; sourceTree = "<group>"; };
-		A41F0B4E1993B04B104C34210E466E2D /* UIImage+AGGenerate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+AGGenerate.m"; path = "AGCategories/Categories/UIImage/UIImage+AGGenerate.m"; sourceTree = "<group>"; };
-		A8BA6F2B5BBDB147073CE4D13158B44F /* NSBundle+AGSupportCocoapods.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSBundle+AGSupportCocoapods.m"; path = "AGCategories/Categories/NSBundle/NSBundle+AGSupportCocoapods.m"; sourceTree = "<group>"; };
-		B0BE83E1F7B14402CDC53D6211A5C9FF /* AGCategories-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AGCategories-prefix.pch"; sourceTree = "<group>"; };
+		94098BDDBDCCFD2A1576350943C82577 /* AGVMPackager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMPackager.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMPackager.h; sourceTree = "<group>"; };
+		95502D75B91FCBD5E4D5BFA69462BFD8 /* UICollectionReusableView+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UICollectionReusableView+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UICollectionReusableView+AGViewModel.m"; sourceTree = "<group>"; };
+		98253F712C57AD61E245C9A292468572 /* UIImage+AGGenerate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+AGGenerate.h"; path = "AGCategories/Categories/UIImage/UIImage+AGGenerate.h"; sourceTree = "<group>"; };
+		9AB246200FF8DE08E667F65E0AE5B424 /* AGCategories-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AGCategories-prefix.pch"; sourceTree = "<group>"; };
+		A04417F5B9ABE9B7538A501D9D18472E /* AGCategories.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AGCategories.xcconfig; sourceTree = "<group>"; };
+		A4097F48E3DB6B2CCC5E2EB0C94604D0 /* AGVMKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMKit.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMKit.h; sourceTree = "<group>"; };
+		AA435B9D41EA434970741A87C632F042 /* AGViewModel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AGViewModel-prefix.pch"; sourceTree = "<group>"; };
 		BC2C02191C153C1554B35DEE8B2D09D4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		BE8623AAC5BA9C8727C9D8BE5AD509ED /* AGViewModel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AGViewModel-prefix.pch"; sourceTree = "<group>"; };
-		BF900BD947FDDAD880521D6B360C0383 /* AGViewModel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AGViewModel.xcconfig; sourceTree = "<group>"; };
-		C03C6EE5313611C452206A7DE2183601 /* UIImage+AGTransform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+AGTransform.m"; path = "AGCategories/Categories/UIImage/UIImage+AGTransform.m"; sourceTree = "<group>"; };
-		D1AFE1430A47039B67D815CD16AE935C /* UICollectionViewCell+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UICollectionViewCell+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UICollectionViewCell+AGViewModel.m"; sourceTree = "<group>"; };
-		D6B3FC247FD9252551EE4CF4D902F340 /* UIColor+AGExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+AGExtensions.h"; path = "AGCategories/Categories/UIColor/UIColor+AGExtensions.h"; sourceTree = "<group>"; };
-		D842D2F9F765BA33996D436509627956 /* AGVMManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMManager.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMManager.h; sourceTree = "<group>"; };
-		D88FC1A8B53191C57D49FF45642197C0 /* AGVMKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMKit.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMKit.h; sourceTree = "<group>"; };
+		C1DC4EBB580D1677BE828857F9B86B3F /* UICollectionReusableView+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UICollectionReusableView+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UICollectionReusableView+AGViewModel.h"; sourceTree = "<group>"; };
+		D34679E43A790B1DD0BA517A72D77131 /* AGVMNotifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGVMNotifier.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMNotifier.m; sourceTree = "<group>"; };
 		DA22A7E2405B37450085F10334BA8522 /* Pods-AGTimerManager-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AGTimerManager-acknowledgements.markdown"; sourceTree = "<group>"; };
+		DD17E54F040072114D43D172BC88FADD /* NSString+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/NSString+AGViewModel.h"; sourceTree = "<group>"; };
+		DE39A44288D242588C675D72575DAACC /* UIColor+AGExtensions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIColor+AGExtensions.m"; path = "AGCategories/Categories/UIColor/UIColor+AGExtensions.m"; sourceTree = "<group>"; };
+		DE828E4DA505A15940F4FDA33FAA293A /* AGVMKeys.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGVMKeys.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMKeys.m; sourceTree = "<group>"; };
+		E1662059C28461E26286FC012572B3F5 /* UIView+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UIView+AGViewModel.m"; sourceTree = "<group>"; };
 		E39558725CA20C4FA2B0DD513CE82FA3 /* libAGCategories.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAGCategories.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAF386BA439696AF8F21AD27BD1AF937 /* UITableViewCell+AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITableViewCell+AGViewModel.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UITableViewCell+AGViewModel.h"; sourceTree = "<group>"; };
 		ECBB84DBAAD3E8B4121F869631BD0988 /* Pods-AGTimerManager-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AGTimerManager-acknowledgements.plist"; sourceTree = "<group>"; };
-		EF59F17E213EC223194340C8C81BD0E1 /* UIView+AGViewModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+AGViewModel.m"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/UIView+AGViewModel.m"; sourceTree = "<group>"; };
-		F1B078179E4795686E86C656128DE2D9 /* AGVMPackager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGVMPackager.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMPackager.m; sourceTree = "<group>"; };
-		FA578541E9BE911D96F538C84D9F45ED /* NSString+AGCalculate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+AGCalculate.h"; path = "AGViewModelDemo/__AppGlobalTool/AGViewModel/Category/NSString+AGCalculate.h"; sourceTree = "<group>"; };
-		FE8261BDC9FDE0200B0BFF646F8955F8 /* AGVMNotifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGVMNotifier.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMNotifier.h; sourceTree = "<group>"; };
-		FF1D2C7993DD8486F24AF38C7B34507C /* AGViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AGViewModel.h; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGViewModel.h; sourceTree = "<group>"; };
+		EDF8F32DECCEE2599D0FB593FC521578 /* UIImage+AGTransform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+AGTransform.m"; path = "AGCategories/Categories/UIImage/UIImage+AGTransform.m"; sourceTree = "<group>"; };
+		F7C5F5E6BBBD60ABAF3364CAAFB0C907 /* AGVMFunction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AGVMFunction.m; path = AGViewModelDemo/__AppGlobalTool/AGViewModel/AGVMFunction.m; sourceTree = "<group>"; };
+		FAFC9C09046120CBC2CA08AF63CF6A10 /* UIColor+AGExtensions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIColor+AGExtensions.h"; path = "AGCategories/Categories/UIColor/UIColor+AGExtensions.h"; sourceTree = "<group>"; };
+		FC89D8C2669B4FB2A9C03732D2068FFC /* NSBundle+AGSupportCocoapods.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSBundle+AGSupportCocoapods.h"; path = "AGCategories/Categories/NSBundle/NSBundle+AGSupportCocoapods.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +153,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		80F04E5D2DD6E260C8B243173CF2F6A7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AD3E8BDD72B46413DCFD5C9C9DED236 /* Foundation.framework in Frameworks */,
+				621B166DAD905ABE1B0957B814554E44 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		855FD9309D574CC23C4E1E77296F3052 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -148,38 +169,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		98A3C1E8F0CF60222EB1DF851D6FF20A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				77418D68A89E5BEC709CE0BC2A83C096 /* Foundation.framework in Frameworks */,
-				D658B9789999508F8EA48D1E3AD1293F /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		009694725F02A0A3ACE847C6FD1ABCE7 /* AGCategories */ = {
-			isa = PBXGroup;
-			children = (
-				998BCB43D036A532EC2F46539B42A42C /* NSBundle+AGSupportCocoapods.h */,
-				A8BA6F2B5BBDB147073CE4D13158B44F /* NSBundle+AGSupportCocoapods.m */,
-				2F182716C23C9C4B73A39B3E084A91CA /* NSDate+AGGenerate.h */,
-				7D30DB4DF186C2778A34E45C915A2017 /* NSDate+AGGenerate.m */,
-				2508CB74D06B3F9B6740137CDB5DB997 /* NSString+AGJudge.h */,
-				9A00F34019ECCDC450DBB198313CF94E /* NSString+AGJudge.m */,
-				D6B3FC247FD9252551EE4CF4D902F340 /* UIColor+AGExtensions.h */,
-				94FBC98070F726CC022433B6AC87E197 /* UIColor+AGExtensions.m */,
-				03A44EA6389C2C92B7304C1C9B7078A7 /* UIImage+AGGenerate.h */,
-				A41F0B4E1993B04B104C34210E466E2D /* UIImage+AGGenerate.m */,
-				767C931C97432A48EEC4E236293459CF /* UIImage+AGTransform.h */,
-				C03C6EE5313611C452206A7DE2183601 /* UIImage+AGTransform.m */,
-				D3075AB3ECBA71C2A149764892A7C88E /* Support Files */,
-			);
-			path = AGCategories;
-			sourceTree = "<group>";
-		};
 		1005E19ECA0887A7719BDE992F15CC17 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +189,17 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		3B838BAAB9256519E9D7C8828CB25853 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A04417F5B9ABE9B7538A501D9D18472E /* AGCategories.xcconfig */,
+				861CA9890E72CC26B8C86FC6EEE62CEE /* AGCategories-dummy.m */,
+				9AB246200FF8DE08E667F65E0AE5B424 /* AGCategories-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/AGCategories";
+			sourceTree = "<group>";
+		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,13 +208,44 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		55383D55A90E3A82C40C36C9CE0307B2 /* Pods */ = {
+		5A7CA3AE4203C3D1EE2FC26D1457C10E /* AGViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				009694725F02A0A3ACE847C6FD1ABCE7 /* AGCategories */,
-				E64C81D0C667CD32C1E3694E18ED3A83 /* AGViewModel */,
+				43CAC88DA84AB0FE8B6A77F87B4A642A /* AGViewModel.h */,
+				85ED2D41C3448BA6F8E21F8C3E8065C4 /* AGViewModel.m */,
+				77C7FDB7CFC7A5820120C26E133D55CC /* AGVMFunction.h */,
+				F7C5F5E6BBBD60ABAF3364CAAFB0C907 /* AGVMFunction.m */,
+				3C775B5FFA9B8167AECDA3E453FD4A38 /* AGVMKeys.h */,
+				DE828E4DA505A15940F4FDA33FAA293A /* AGVMKeys.m */,
+				A4097F48E3DB6B2CCC5E2EB0C94604D0 /* AGVMKit.h */,
+				6363D5AE26B63780D258CDD1B7833E01 /* AGVMManager.h */,
+				066670D3A74C5CD3FAC75750EB07E13D /* AGVMManager.m */,
+				8B235018D7A36A46D875AAD4AE0CEC3C /* AGVMNotifier.h */,
+				D34679E43A790B1DD0BA517A72D77131 /* AGVMNotifier.m */,
+				94098BDDBDCCFD2A1576350943C82577 /* AGVMPackager.h */,
+				18989A6E8BAB8BC673FF54326F0CFCBC /* AGVMPackager.m */,
+				328DA6B9E2B0BA8E836A05CDBF82BC29 /* AGVMProtocol.h */,
+				5C84E1CC7C316C613FE7926F341E0618 /* AGVMSection.h */,
+				6A6B1A6B3B5E8353FB111DCC5794D0C1 /* AGVMSection.m */,
+				DD17E54F040072114D43D172BC88FADD /* NSString+AGViewModel.h */,
+				20B427675639E2D8DD7936643D455C21 /* NSString+AGViewModel.m */,
+				C1DC4EBB580D1677BE828857F9B86B3F /* UICollectionReusableView+AGViewModel.h */,
+				95502D75B91FCBD5E4D5BFA69462BFD8 /* UICollectionReusableView+AGViewModel.m */,
+				16A195867695EA3C109B133C833434C8 /* UICollectionViewCell+AGViewModel.h */,
+				83A977E5E4951DE9BA95E2FCBD3F7ABE /* UICollectionViewCell+AGViewModel.m */,
+				1EA29773A5C83D6E7CA9C77984F0FBAA /* UIScreen+AGViewModel.h */,
+				218A1878868B8F87EC4A81488C4E2FF5 /* UIScreen+AGViewModel.m */,
+				EAF386BA439696AF8F21AD27BD1AF937 /* UITableViewCell+AGViewModel.h */,
+				0FC78CB6C40DF9F8CA5B76B6878633CF /* UITableViewCell+AGViewModel.m */,
+				0CB43B3F6CC64C0901806453344A225F /* UITableViewHeaderFooterView+AGViewModel.h */,
+				2FFF805199F1F390CFE48B104B4F6E43 /* UITableViewHeaderFooterView+AGViewModel.m */,
+				7D115CBA8CC6E9A8325F72396DDC0E34 /* UIView+AGViewModel.h */,
+				E1662059C28461E26286FC012572B3F5 /* UIView+AGViewModel.m */,
+				16457FB8326E5E0766FD44ECCD080E01 /* UIViewController+AGViewModel.h */,
+				11FCF3C977ACA836D2BFF2F89A3FC477 /* UIViewController+AGViewModel.m */,
+				8A01BC025584365CD554499233CAA2DE /* Support Files */,
 			);
-			name = Pods;
+			path = AGViewModel;
 			sourceTree = "<group>";
 		};
 		664C3A30644081EEF704C97D100E022A /* Products */ = {
@@ -229,32 +263,30 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				55383D55A90E3A82C40C36C9CE0307B2 /* Pods */,
+				D1D461EEA54B0F3D3753216300D8394A /* Pods */,
 				664C3A30644081EEF704C97D100E022A /* Products */,
 				1005E19ECA0887A7719BDE992F15CC17 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		C33F4BB446C8EDBE80144E9EA297CA58 /* Support Files */ = {
+		8A01BC025584365CD554499233CAA2DE /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				BF900BD947FDDAD880521D6B360C0383 /* AGViewModel.xcconfig */,
-				9328CE3ACEBC02F05CA62A3D5A2E902B /* AGViewModel-dummy.m */,
-				BE8623AAC5BA9C8727C9D8BE5AD509ED /* AGViewModel-prefix.pch */,
+				847A19778C1FC6099245EB61A17DA539 /* AGViewModel.xcconfig */,
+				237D1F67C07C5A0FA5D431AF0122E484 /* AGViewModel-dummy.m */,
+				AA435B9D41EA434970741A87C632F042 /* AGViewModel-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/AGViewModel";
 			sourceTree = "<group>";
 		};
-		D3075AB3ECBA71C2A149764892A7C88E /* Support Files */ = {
+		D1D461EEA54B0F3D3753216300D8394A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				013205B8B61582119FF57D4780162012 /* AGCategories.xcconfig */,
-				8C2463BF50AF193A1EA5C0DA7FD22678 /* AGCategories-dummy.m */,
-				B0BE83E1F7B14402CDC53D6211A5C9FF /* AGCategories-prefix.pch */,
+				F2F3A7AEDB17299897A29CC09FA73865 /* AGCategories */,
+				5A7CA3AE4203C3D1EE2FC26D1457C10E /* AGViewModel */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/AGCategories";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		DA0346DCB597891BB182E970619A4843 /* Pods-AGTimerManager */ = {
@@ -272,38 +304,24 @@
 			path = "Target Support Files/Pods-AGTimerManager";
 			sourceTree = "<group>";
 		};
-		E64C81D0C667CD32C1E3694E18ED3A83 /* AGViewModel */ = {
+		F2F3A7AEDB17299897A29CC09FA73865 /* AGCategories */ = {
 			isa = PBXGroup;
 			children = (
-				FF1D2C7993DD8486F24AF38C7B34507C /* AGViewModel.h */,
-				251D4F789D3444974387DB9206C23E12 /* AGViewModel.m */,
-				7B7F4040F443D5EBD6F8832C694094C4 /* AGVMFunction.h */,
-				9596FF0DAB4BE499256633A5AC9E164D /* AGVMKeys.h */,
-				D88FC1A8B53191C57D49FF45642197C0 /* AGVMKit.h */,
-				D842D2F9F765BA33996D436509627956 /* AGVMManager.h */,
-				007AD78864AE2070B2BA13E67BC04E4D /* AGVMManager.m */,
-				FE8261BDC9FDE0200B0BFF646F8955F8 /* AGVMNotifier.h */,
-				5C71BB5E28D35FFBFB45EE2FA326A338 /* AGVMNotifier.m */,
-				A3EF0A76419D04C19FD9013720FAAD2E /* AGVMPackager.h */,
-				F1B078179E4795686E86C656128DE2D9 /* AGVMPackager.m */,
-				52DE5602A887EC29296625120270CC28 /* AGVMProtocol.h */,
-				64134DFB7B4F2C86D4B9449B04CDABD0 /* AGVMSection.h */,
-				8EC95844A4836403690630556A28D801 /* AGVMSection.m */,
-				FA578541E9BE911D96F538C84D9F45ED /* NSString+AGCalculate.h */,
-				34DAFCF47B8FF73582AA05D227E7388E /* NSString+AGCalculate.m */,
-				7DE0D8B54CF506B7770E54267B2B9610 /* UICollectionReusableView+AGViewModel.h */,
-				9A5EB88BEDBAF1983FC3BC2C5DF98D67 /* UICollectionReusableView+AGViewModel.m */,
-				3137E2D35CAC92C40B227135FBD506F4 /* UICollectionViewCell+AGViewModel.h */,
-				D1AFE1430A47039B67D815CD16AE935C /* UICollectionViewCell+AGViewModel.m */,
-				680CD09688261040098736B65E0BC4FF /* UITableViewCell+AGViewModel.h */,
-				5223D15A03D302091E0BBE8E85481468 /* UITableViewCell+AGViewModel.m */,
-				93288C2CD6DED8EEE9A99DA176C08563 /* UITableViewHeaderFooterView+AGViewModel.h */,
-				3CB0BEDFBA1E77D8EC8D9484F814EAAE /* UITableViewHeaderFooterView+AGViewModel.m */,
-				1A61A24D1A2759B94CC80BF02B3E50E3 /* UIView+AGViewModel.h */,
-				EF59F17E213EC223194340C8C81BD0E1 /* UIView+AGViewModel.m */,
-				C33F4BB446C8EDBE80144E9EA297CA58 /* Support Files */,
+				FC89D8C2669B4FB2A9C03732D2068FFC /* NSBundle+AGSupportCocoapods.h */,
+				6358CA4681EB73F6D5F046D60A771574 /* NSBundle+AGSupportCocoapods.m */,
+				5B5CC62381CA80FC7F637F4C739C3C92 /* NSDate+AGGenerate.h */,
+				6D49855769FC3654747655104ECE2809 /* NSDate+AGGenerate.m */,
+				4ADCD221ADD9245AE9C9A8F49CFFD908 /* NSString+AGJudge.h */,
+				5F077A7AA39EB6909118205961471F07 /* NSString+AGJudge.m */,
+				FAFC9C09046120CBC2CA08AF63CF6A10 /* UIColor+AGExtensions.h */,
+				DE39A44288D242588C675D72575DAACC /* UIColor+AGExtensions.m */,
+				98253F712C57AD61E245C9A292468572 /* UIImage+AGGenerate.h */,
+				83265A55CF31CE53A97E4BD0E7C81351 /* UIImage+AGGenerate.m */,
+				02A0CE5CA6BCCB92CFB76FA132DA0DCD /* UIImage+AGTransform.h */,
+				EDF8F32DECCEE2599D0FB593FC521578 /* UIImage+AGTransform.m */,
+				3B838BAAB9256519E9D7C8828CB25853 /* Support Files */,
 			);
-			path = AGViewModel;
+			path = AGCategories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,25 +334,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		610CF6B69E78DFA9FC334DBB6935A346 /* Headers */ = {
+		830D566C553FA791067BEF9CBEF51580 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20F0DA0E2B9E7327B917C09513788371 /* AGViewModel.h in Headers */,
-				F7CCDFDB40A551CA1EF19CC712E151A9 /* AGVMFunction.h in Headers */,
-				80527C83E8F3E77D4DDBAC3A31AEDDE3 /* AGVMKeys.h in Headers */,
-				406833B916A3A2F82F9ED49A1F6DB565 /* AGVMKit.h in Headers */,
-				0B653ECD22BA3C905CF1604B7225793B /* AGVMManager.h in Headers */,
-				6EB6DCF07EC59195AADA295B9ACC94E6 /* AGVMNotifier.h in Headers */,
-				ADD7059A6C75CBCB46F457BC34D9DA4B /* AGVMPackager.h in Headers */,
-				EB97C5D391EE4E292C841E65A5E6C685 /* AGVMProtocol.h in Headers */,
-				77D6DA87568C07A50AB0F51DF96F5FEB /* AGVMSection.h in Headers */,
-				2C265BAD5DE4604926FE9E1C2F984992 /* NSString+AGCalculate.h in Headers */,
-				55E5A0BD38E9A6948D6D84B553A3E70B /* UICollectionReusableView+AGViewModel.h in Headers */,
-				D084BC1200176F156EF3D55AE414FD6B /* UICollectionViewCell+AGViewModel.h in Headers */,
-				CB59644454940BD67101E1024CF05480 /* UITableViewCell+AGViewModel.h in Headers */,
-				41B2696A666280ADECCCEC14FFAFFEB0 /* UITableViewHeaderFooterView+AGViewModel.h in Headers */,
-				7B183A027F7FB4C93804B236C6E019F9 /* UIView+AGViewModel.h in Headers */,
+				00829AB3AEBCAC1E97FDA67A61A2C101 /* AGViewModel.h in Headers */,
+				4C16480DBA88A79A3675BE4D9EECB9B4 /* AGVMFunction.h in Headers */,
+				5D6135CC55ED0C95DFF09F275CE307AC /* AGVMKeys.h in Headers */,
+				1A33D63DD60BBEE1EE4BDD129AEB51EB /* AGVMKit.h in Headers */,
+				AB13C05FBC93FE3B3B1114F41F3D1998 /* AGVMManager.h in Headers */,
+				FB6815B29E0E0B4EE1DEA51DAC76ADAA /* AGVMNotifier.h in Headers */,
+				9EF67692E5AA3EB286DDD6823821A93C /* AGVMPackager.h in Headers */,
+				5456CF86E1FF1F2155C2629E6E954651 /* AGVMProtocol.h in Headers */,
+				162CA7CFD32306B4848CFCF48E731530 /* AGVMSection.h in Headers */,
+				16BA4DE479D53E1822A8D0DFEE12C806 /* NSString+AGViewModel.h in Headers */,
+				E442292D8C3F321C9AB0269CCFC06EDF /* UICollectionReusableView+AGViewModel.h in Headers */,
+				FF599FAEC0F423A998AB53126D072843 /* UICollectionViewCell+AGViewModel.h in Headers */,
+				792291FE9732F64546D081F05E05165D /* UIScreen+AGViewModel.h in Headers */,
+				6CDB2373F5FDCD2E68B93C8AC7AFB690 /* UITableViewCell+AGViewModel.h in Headers */,
+				87905F309F9247F096FB48061CD7AA9D /* UITableViewHeaderFooterView+AGViewModel.h in Headers */,
+				005F13E51550B40D51ABAFEDAB1C9F97 /* UIView+AGViewModel.h in Headers */,
+				196B1978FDC6CE3FF330FFEF233A83D3 /* UIViewController+AGViewModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,13 +410,13 @@
 			productReference = 2C2DFA943B6B60475C440F13A5CC1864 /* libPods-AGTimerManager.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		E22C4CF94CBFFE896431D47B52B00084 /* AGViewModel */ = {
+		F6CE74A7890338F0789F4592869E03F1 /* AGViewModel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B40F323F9C91EA5F65857391195C75CB /* Build configuration list for PBXNativeTarget "AGViewModel" */;
+			buildConfigurationList = DE5EE46E4A3734C5625C522DE7D5CF9B /* Build configuration list for PBXNativeTarget "AGViewModel" */;
 			buildPhases = (
-				610CF6B69E78DFA9FC334DBB6935A346 /* Headers */,
-				E5354DCBD3AA00344A8634357BB01297 /* Sources */,
-				98A3C1E8F0CF60222EB1DF851D6FF20A /* Frameworks */,
+				830D566C553FA791067BEF9CBEF51580 /* Headers */,
+				0A562B140A763BE72614AF41ED849F23 /* Sources */,
+				80F04E5D2DD6E260C8B243173CF2F6A7 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -429,7 +449,7 @@
 			projectRoot = "";
 			targets = (
 				268D8D821A6F897DEE285D9550E8F72D /* AGCategories */,
-				E22C4CF94CBFFE896431D47B52B00084 /* AGViewModel */,
+				F6CE74A7890338F0789F4592869E03F1 /* AGViewModel */,
 				97CD3F6A3FF7DA7703080F17C54D7EB1 /* Pods-AGTimerManager */,
 			);
 		};
@@ -450,30 +470,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0A562B140A763BE72614AF41ED849F23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B86935D8A612A1F2A3B7768621DB65DA /* AGViewModel-dummy.m in Sources */,
+				BAD8585C293D9F564937A94005656248 /* AGViewModel.m in Sources */,
+				96196D2AB146802F167FD257F637F034 /* AGVMFunction.m in Sources */,
+				1437795126A63F69EA3A4C3A26FA6BD5 /* AGVMKeys.m in Sources */,
+				7FC95834BC8052CC779AAD21692A98EC /* AGVMManager.m in Sources */,
+				0387B4A3F6AF0D3AD0A01874F18E58E0 /* AGVMNotifier.m in Sources */,
+				7B82C36CE376E24E71A9B1858A8BC0E8 /* AGVMPackager.m in Sources */,
+				733EBDC4C1709AD796AF133A664C09C7 /* AGVMSection.m in Sources */,
+				30F5F29D184BC16C5D50D0E3A5EAD9EF /* NSString+AGViewModel.m in Sources */,
+				E2B10078F76239751AE2093F1504D022 /* UICollectionReusableView+AGViewModel.m in Sources */,
+				66C424695383F50391F8838F82A1B1F6 /* UICollectionViewCell+AGViewModel.m in Sources */,
+				5321CCA7982CD724555C65A828B90971 /* UIScreen+AGViewModel.m in Sources */,
+				EC38FC07DB8976B6CF0C7A6D6C04632C /* UITableViewCell+AGViewModel.m in Sources */,
+				325EA5CDF1C5B724CC0079DF6BB08BD3 /* UITableViewHeaderFooterView+AGViewModel.m in Sources */,
+				025B99D624D58918D29992A50B603A8A /* UIView+AGViewModel.m in Sources */,
+				FD76C6F7C42F3D9DE505EF78536F0EBE /* UIViewController+AGViewModel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2ECDE374D89600AB091DC8CC0EA1F796 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6DBDD99E17D4340B15918DBF26D4058F /* Pods-AGTimerManager-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E5354DCBD3AA00344A8634357BB01297 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				732912D0DE0D307C32364ACDBF130673 /* AGViewModel-dummy.m in Sources */,
-				B01523104B28BCBB5EA84F3573F58BDE /* AGViewModel.m in Sources */,
-				1530A1A17D7B22F68D836C02810216FB /* AGVMManager.m in Sources */,
-				CCBD3201936968538B100DD9535E4AC6 /* AGVMNotifier.m in Sources */,
-				9A6C7E9E6414321828EB46D53F5C9F06 /* AGVMPackager.m in Sources */,
-				D298ABD616BFD46F0FB0A6F5CC6E4AC5 /* AGVMSection.m in Sources */,
-				324FA06E0956CDA1F2DF74DAB646D63B /* NSString+AGCalculate.m in Sources */,
-				F6C131D3047A3CD381724C8F7D363E7B /* UICollectionReusableView+AGViewModel.m in Sources */,
-				1611FF5D6BE433F961DDADAF7E51F264 /* UICollectionViewCell+AGViewModel.m in Sources */,
-				BE0F25319F1A75F941C0457A46029DD0 /* UITableViewCell+AGViewModel.m in Sources */,
-				12898A83DCB278F123633C863A02F53C /* UITableViewHeaderFooterView+AGViewModel.m in Sources */,
-				340673D71253D788B0F86D806F090E3C /* UIView+AGViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,7 +507,7 @@
 		2A019013934CB1314FD500F8F6FF5F8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AGViewModel;
-			target = E22C4CF94CBFFE896431D47B52B00084 /* AGViewModel */;
+			target = F6CE74A7890338F0789F4592869E03F1 /* AGViewModel */;
 			targetProxy = FC1C6C96D865B5CCB8FB1A514DB723D9 /* PBXContainerItemProxy */;
 		};
 		7724D3F2EAD44C4F5851755FE265B36F /* PBXTargetDependency */ = {
@@ -519,7 +543,7 @@
 		};
 		1CD28138C32BB4D89150F12FAEDF045A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 013205B8B61582119FF57D4780162012 /* AGCategories.xcconfig */;
+			baseConfigurationReference = A04417F5B9ABE9B7538A501D9D18472E /* AGCategories.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -540,32 +564,9 @@
 			};
 			name = Debug;
 		};
-		60CC9AC68CDAB1302F65EAAACFB39A7B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF900BD947FDDAD880521D6B360C0383 /* AGViewModel.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/AGViewModel/AGViewModel-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = AGViewModel;
-				PRODUCT_NAME = AGViewModel;
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
 		60D3F7F1CEA03067F1A8C005BB77D721 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 013205B8B61582119FF57D4780162012 /* AGCategories.xcconfig */;
+			baseConfigurationReference = A04417F5B9ABE9B7538A501D9D18472E /* AGCategories.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -586,6 +587,29 @@
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		8F0C1DCFF9A5A41D99F14FBFFC82D65D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 847A19778C1FC6099245EB61A17DA539 /* AGViewModel.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/AGViewModel/AGViewModel-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = AGViewModel;
+				PRODUCT_NAME = AGViewModel;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
 		};
 		C92782E717C52E3633C9A5F211E7987A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -733,9 +757,9 @@
 			};
 			name = Release;
 		};
-		FEB84D117BDA9ED0A88211AF9158F94B /* Release */ = {
+		EFDB17C0E36ECD2DB8E48A399B06E354 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF900BD947FDDAD880521D6B360C0383 /* AGViewModel.xcconfig */;
+			baseConfigurationReference = 847A19778C1FC6099245EB61A17DA539 /* AGViewModel.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -778,11 +802,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B40F323F9C91EA5F65857391195C75CB /* Build configuration list for PBXNativeTarget "AGViewModel" */ = {
+		DE5EE46E4A3734C5625C522DE7D5CF9B /* Build configuration list for PBXNativeTarget "AGViewModel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				60CC9AC68CDAB1302F65EAAACFB39A7B /* Debug */,
-				FEB84D117BDA9ED0A88211AF9158F94B /* Release */,
+				8F0C1DCFF9A5A41D99F14FBFFC82D65D /* Debug */,
+				EFDB17C0E36ECD2DB8E48A399B06E354 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

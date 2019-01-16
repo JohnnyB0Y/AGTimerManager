@@ -7,6 +7,7 @@
 //
 
 #import "UICollectionReusableView+AGViewModel.h"
+#import "UIScreen+AGViewModel.h"
 
 @implementation UICollectionReusableView (AGViewModel)
 
@@ -19,8 +20,8 @@
 + (void)ag_registerFooterViewBy:(UICollectionView *)collectionView
 {
     // 有特殊需求，请在子类重写。
-    if ( [self ag_canAwakeFromNib] ) {
-        UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:[self ag_currentBundle]];
+    if ( [self ag_canAwakeNibInBundle:[self ag_resourceBundle]] ) {
+        UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:[self ag_resourceBundle]];
         [collectionView registerNib:nib
          forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                 withReuseIdentifier:[self ag_reuseIdentifier]];
@@ -44,8 +45,8 @@
 + (void)ag_registerHeaderViewBy:(UICollectionView *)collectionView
 {
     // 有特殊需求，请在子类重写。
-    if ( [self ag_canAwakeFromNib] ) {
-        UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:nil];
+    if ( [self ag_canAwakeNibInBundle:[self ag_resourceBundle]] ) {
+        UINib *nib = [UINib nibWithNibName:NSStringFromClass([self class]) bundle:[self ag_resourceBundle]];
         [collectionView registerNib:nib
          forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                 withReuseIdentifier:[self ag_reuseIdentifier]];
@@ -66,10 +67,12 @@
 }
 
 #pragma mark - ----------- AGVMIncludable -----------
-- (CGSize) ag_viewModel:(AGViewModel *)vm sizeForBindingView:(CGSize)bvS
+- (CGSize) ag_viewModel:(AGViewModel *)vm sizeForBindingView:(UIScreen *)screen
 {
     // 有特殊需求，请在子类重写。
-    if ( ! vm[kAGVMViewH] ) {
+    CGFloat height = [vm[kAGVMViewH] floatValue];
+    CGSize bvS = CGSizeMake(screen.width, height);
+    if ( height <= 0 ) {
         bvS.height = 34.;
     }
     return bvS;
