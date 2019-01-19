@@ -445,7 +445,20 @@
     [self.sectionArrM enumerateObjectsUsingBlock:block];
 }
 
-- (void) ag_enumerateSectionItemsUsingBlock:(void (NS_NOESCAPE ^)(AGViewModel * _Nonnull, NSIndexPath * _Nonnull, BOOL * _Nonnull))block
+- (void) ag_enumerateSectionsIfInRange:(NSRange)range usingBlock:(void(NS_NOESCAPE^)(AGVMSection *vms, NSUInteger idx, BOOL *stop))block
+{
+    AGAssertParameter(block);
+    if ( ! block ) return;
+    if ( range.location >= self.count ) return;
+    
+    if ( range.length > self.count - range.location ) {
+        range.length = self.count - range.location;
+    }
+    NSArray *subArr = [_sectionArrM subarrayWithRange:range];
+    [subArr enumerateObjectsUsingBlock:block];
+}
+
+- (void) ag_enumerateSectionsItemUsingBlock:(void (NS_NOESCAPE ^)(AGViewModel * _Nonnull, NSIndexPath * _Nonnull, BOOL * _Nonnull))block
 {
     AGAssertParameter(block);
     if ( ! block ) return;
@@ -463,7 +476,7 @@
 }
 
 /** 遍历所有 section 的 header、footer vm */
-- (void) ag_enumerateSectionHeaderFooterVMsUsingBlock:(void (NS_NOESCAPE ^)(AGViewModel * _Nonnull, NSIndexPath * _Nonnull, BOOL * _Nonnull))block
+- (void) ag_enumerateSectionsHeaderFooterUsingBlock:(void (NS_NOESCAPE ^)(AGViewModel * _Nonnull, NSIndexPath * _Nonnull, BOOL * _Nonnull))block
 {
     AGAssertParameter(block);
     if ( ! block ) return;
