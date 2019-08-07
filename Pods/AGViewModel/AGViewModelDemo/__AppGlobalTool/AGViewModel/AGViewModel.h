@@ -6,7 +6,6 @@
 //  Copyright © 2017年 JohnnyB0Y. All rights reserved.
 //  视图-模型 绑定
 
-#import <UIKit/UIKit.h>
 #import "AGVMKeys.h"
 #import "AGVMProtocol.h"
 
@@ -16,19 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AGViewModel : NSObject
 <NSCopying, NSMutableCopying, NSSecureCoding, AGVMJSONTransformable>
 
-@property (nonatomic, weak,   readonly, nullable) UIView<AGVMIncludable> *bindingView;
-@property (nonatomic, strong, readonly) NSMutableDictionary *bindingModel;
+@property (nonatomic, weak,   readonly, nullable) UIView<AGVMResponsive> *bindingView;
+@property (nonatomic, strong, readonly) NSMutableDictionary *bindingModel; ///< 不要直接@我，谢谢！
 
 @property (nonatomic, weak, nullable) id<AGVMDelegate> delegate;
 @property (nonatomic, copy, nullable) NSIndexPath *indexPath;
-
-#pragma mark 设置绑定视图
-/** 自定义更新绑定视图 */
-- (void) ag_setBindingView:(UIView<AGVMIncludable> *)bindingView
-           configDataBlock:(nullable AGVMConfigDataBlock)configDataBlock;
-
-/** 默认更新绑定视图（ 其实就是调用 bindingView 的 @selector(setViewModel:) 方法 ）*/
-- (void) ag_setBindingView:(nullable UIView<AGVMIncludable> *)bindingView;
 
 
 #pragma mark 绑定视图可以计算自己的Size，并提供给外界使用。
@@ -36,10 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGSize) ag_sizeOfBindingView;
 
 /** 直接传进去计算并返回视图Size，如果有“需要缓存的视图Size”的标记，重新计算并缓存。*/
-- (CGSize) ag_sizeForBindingView:(UIView<AGVMIncludable> *)bv;
+- (CGSize) ag_sizeForBindingView:(UIView<AGVMResponsive> *)bv;
 
 /** 计算并缓存绑定视图的Size */
-- (CGSize) ag_cachedSizeByBindingView:(UIView<AGVMIncludable> *)bv;
+- (CGSize) ag_cachedSizeByBindingView:(UIView<AGVMResponsive> *)bv;
 
 /** 对“需要缓存的视图Size”进行标记；当调用获取视图Size的方法时，从视图中取。*/
 - (void) ag_setNeedsCachedBindingViewSize;
@@ -48,16 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) ag_cachedBindingViewSizeIfNeeded;
 
 
-#pragma mark 设置绑定代理
-/** 设置代理 */
-- (void) ag_setDelegate:(nullable id<AGVMDelegate>)delegate
-           forIndexPath:(nullable NSIndexPath *)indexPath;
-
 #pragma mark 通知 delegate 根据信息或类型做某事（ 让 view 传递信息给 controller ）
-- (void) ag_callDelegateToDoForInfo:(nullable NSDictionary *)info;
-- (void) ag_callDelegateToDoForViewModel:(nullable AGViewModel *)info;
-- (void) ag_callDelegateToDoForAction:(nullable SEL)action;
-- (void) ag_callDelegateToDoForAction:(nullable SEL)action info:(nullable AGViewModel *)info;
+- (void) ag_makeDelegateHandleAction:(nullable SEL)action;
+- (void) ag_makeDelegateHandleAction:(nullable SEL)action info:(nullable AGViewModel *)info;
 
 
 #pragma mark 更新数据、刷新视图
@@ -157,16 +141,68 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 #pragma mark - 弱引用存取
-@interface AGViewModel (AGWeakly)
+@interface AGViewModel (AGVMWeakly)
+// 不想强引用对象的时候，可以使用。
+
 
 /** 添加弱引用的对象 */
-- (void)ag_setWeakRefObject:(nullable id)obj forKey:(NSString *)key;
+- (void) ag_setWeaklyObject:(nullable id)obj forKey:(NSString *)key;
 
 /** 获取弱引用的对象 */
-- (nullable id) ag_weakRefObjectForKey:(NSString *)key;
+- (nullable id) ag_weaklyObjectForKey:(NSString *)key;
 
 /** 移除弱引用的对象 */
-- (void) ag_removeWeakRefObjectForKey:(NSString *)key;
+- (void) ag_removeWeaklyObjectForKey:(NSString *)key;
+
+@end
+
+#pragma mark - 命令编程
+@interface AGViewModel (AGVMCommandExecutable)
+// 当需要根据几个变化属性，拿到结果时，可以使用命令编程。
+
+
+- (void) ag_setCommand:(AGVMCommand *)command forKey:(NSString *)key; ///< 添加命令
+- (void) ag_setCommandBlock:(AGVMCommandExecutableBlock)block forKey:(NSString *)key; ///< 添加命令Block
+- (void) ag_removeCommandForKey:(NSString *)key; ///< 移除命令
+
+
+- (nullable id) ag_executeCommandForKey:(NSString *)key; ///< 获取命令执行结果，直接执行
+- (void) ag_setNeedsExecuteCommandForKey:(NSString *)key; ///< 标记命令待执行
+- (nullable id) ag_executeCommandIfNeededForKey:(NSString *)key; ///< 获取命令执行结果，有标记才执行命令，否则直接从字典中取
+
+
+@end
+
+#pragma mark - 链式方法
+@interface AGViewModel (AGVMMethodChaining)
+
+// bindig model
+@property (nonatomic, copy, readonly) AGVMSetObjectForKeyBlock setObjectForKey;
+@property (nonatomic, copy, readonly) AGVMRemoveObjectForKeyBlock removeObjectForKey;
+
+@property (nonatomic, copy, readonly) AGViewModel *(^mergeDictionary)(NSDictionary *dict);
+@property (nonatomic, copy, readonly) AGViewModel *(^mergeDictionaryForKeys)(NSDictionary *dict, NSArray<NSString *> *keys);
+
+@property (nonatomic, copy, readonly) AGViewModel *(^mergeViewModel)(AGViewModel *vm);
+@property (nonatomic, copy, readonly) AGViewModel *(^mergeViewModelForKeys)(AGViewModel *vm, NSArray<NSString *> *keys);
+
+// property
+@property (nonatomic, copy, readonly) AGViewModel *(^setBindingView)(UIView<AGVMResponsive> * _Nullable bindingView);
+@property (nonatomic, copy, readonly) AGViewModel *(^setBindingViewConfigDataBlock)(AGVMConfigDataBlock);
+@property (nonatomic, copy, readonly) AGViewModel *(^setIndexPath)(NSIndexPath * _Nullable indexPath);
+@property (nonatomic, copy, readonly) AGViewModel *(^setDelegate)(id<AGVMDelegate> _Nullable delegate);
+
+// command
+@property (nonatomic, copy, readonly) AGViewModel *(^setCommandForKey)(AGVMCommand *command, NSString *key);
+@property (nonatomic, copy, readonly) AGViewModel *(^removeCommandForKey)(NSString *key);
+
+// weakly
+@property (nonatomic, copy, readonly) AGVMSetObjectForKeyBlock setWeaklyForKey;
+@property (nonatomic, copy, readonly) AGVMRemoveObjectForKeyBlock removeWeaklyForKey;
+
+// archived
+@property (nonatomic, copy, readonly) AGViewModel *(^addArchivedKey)(NSString *key);
+@property (nonatomic, copy, readonly) AGViewModel *(^removeArchivedKey)(NSString *key);
 
 @end
 

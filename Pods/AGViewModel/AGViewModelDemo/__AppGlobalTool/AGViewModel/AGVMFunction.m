@@ -44,7 +44,7 @@ NSMutableArray * ag_newNSMutableArray(NSInteger capacity)
     return [[NSMutableArray alloc] initWithCapacity:capacity];
 }
 
-NSMutableArray * ag_newNSMutableArrayWithNull(NSInteger capacity)
+NSMutableArray * ag_newNSMutableArrayWithNSNull(NSInteger capacity)
 {
     NSMutableArray *arrM = ag_newNSMutableArray(capacity);
     for (NSInteger i = 0; i < capacity; i++) {
@@ -57,6 +57,35 @@ NSMutableArray * ag_newNSMutableArrayWithNull(NSInteger capacity)
 AGVMTargetVCBlock ag_viewModelCopyTargetVCBlock(AGVMTargetVCBlock block)
 {
     return [block copy];
+}
+
+
+/** 获取 vmm 中 item 的 indexPath */
+NSIndexPath * ag_indexPathForTableView(AGVMManager *vmm, AGViewModel *item)
+{
+    __block NSIndexPath *indexPath;
+    [vmm.sectionArrM enumerateObjectsUsingBlock:^(AGVMSection * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSInteger currentIdx = [obj.itemArrM indexOfObjectIdenticalTo:item];
+        if ( currentIdx < obj.itemArrM.count && idx >= 0 ) {
+            *stop = YES;
+            indexPath = [NSIndexPath indexPathForRow:currentIdx inSection:idx];
+        }
+    }];
+    return indexPath;
+}
+
+/** 获取 vmm 中 item 的 indexPath */
+NSIndexPath * ag_indexPathForCollectionView(AGVMManager *vmm, AGViewModel *item)
+{
+    __block NSIndexPath *indexPath;
+    [vmm.sectionArrM enumerateObjectsUsingBlock:^(AGVMSection * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSInteger currentIdx = [obj.itemArrM indexOfObjectIdenticalTo:item];
+        if ( currentIdx < obj.itemArrM.count && idx >= 0 ) {
+            *stop = YES;
+            indexPath = [NSIndexPath indexPathForItem:currentIdx inSection:idx];
+        }
+    }];
+    return indexPath;
 }
 
 
@@ -121,6 +150,17 @@ NSString * ag_newNSStringWithObj(id obj)
         return [NSString stringWithString:newStr];
     }
     
+    return nil;
+}
+
+NSURL * ag_safeURL(id obj)
+{
+    if ( [obj isKindOfClass:[NSURL class]] ) {
+        return obj;
+    }
+    if ( [obj isKindOfClass:[NSString class]] ) {
+        return [NSURL URLWithString:obj];
+    }
     return nil;
 }
 
@@ -327,7 +367,7 @@ NSString * ag_newJSONStringByWashString(NSString *json)
 }
 
 /** 全局 vm packager */
-AGVMPackager * ag_sharedVMPackager(void)
+AGVMSharedPackager * ag_sharedVMPackager(void)
 {
-    return [AGVMPackager sharedInstance];
+    return [AGVMSharedPackager sharedInstance];
 }

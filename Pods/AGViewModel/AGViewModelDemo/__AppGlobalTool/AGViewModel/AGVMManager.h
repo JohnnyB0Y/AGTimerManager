@@ -15,16 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AGVMManager : NSObject
 <NSCopying, NSMutableCopying, NSSecureCoding, AGVMJSONTransformable>
 
-/** common vm */
-@property (nonatomic, strong, nullable) AGViewModel *cvm;
-
 @property (nonatomic, strong, readonly) NSMutableArray<AGVMSection *> *sectionArrM;
 @property (nonatomic, assign, readonly) NSInteger count;
 
-/** first section */
-@property (nonatomic, weak, readonly, nullable) AGVMSection *fs;
-/** last section */
-@property (nonatomic, weak, readonly, nullable) AGVMSection *ls;
+@property (nonatomic, strong, nullable) AGViewModel *cvm; ///< common viewModel
+@property (nonatomic, weak, readonly, nullable) AGVMSection *fs; ///< first section
+@property (nonatomic, weak, readonly, nullable) AGVMSection *ls; ///< last section
 
 #pragma mark - Quickly create vmm
 /**
@@ -46,6 +42,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (AGVMSection *) ag_packageSection:(NS_NOESCAPE AGVMPackageSectionBlock)block
 						   capacity:(NSInteger)capacity;
+
+/**
+ 拼装 section 数据
+ 
+ @param block 传递 section 的 block
+ @return section对象
+ */
+- (AGVMSection *) ag_packageSection:(NS_NOESCAPE AGVMPackageSectionBlock)block;
 
 /**
  通过 packager 拼装 section 数据
@@ -128,6 +132,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) ag_removeLastSection;
 - (void) ag_removeAllSections;
 - (void) ag_removeSectionAtIndex:(NSInteger)index;
+- (void) ag_removeSectionsUsingBlock:(BOOL(NS_NOESCAPE^)(AGVMSection *vm, NSUInteger idx, BOOL *stop))block;
+- (void) ag_removeSectionItemsUsingBlock:(BOOL(NS_NOESCAPE^)(AGViewModel *vm, NSUInteger idx, BOOL *stop))block;
+- (void) ag_removeSectionItemsWithOptions:(NSEnumerationOptions)opts usingBlock:(BOOL(NS_NOESCAPE^)(AGViewModel *vm, NSUInteger idx, BOOL *stop))block;
 
 #pragma mark 合并
 /** 合并 commonVM、sectionArrM */

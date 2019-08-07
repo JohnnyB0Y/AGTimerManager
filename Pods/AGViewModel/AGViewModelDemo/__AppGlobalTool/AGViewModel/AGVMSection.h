@@ -8,28 +8,24 @@
 
 #import "AGVMProtocol.h"
 #import "AGViewModel.h"
-#import "AGVMPackager.h"
+#import "AGVMSharedPackager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AGVMSection : NSObject
 <NSCopying, NSMutableCopying, NSSecureCoding, AGVMJSONTransformable>
 
-/** common vm */
-@property (nonatomic, strong, nullable) AGViewModel *cvm;
-
 @property (nonatomic, strong, nullable) AGViewModel *headerVM;
 @property (nonatomic, strong, nullable) AGViewModel *footerVM;
 
-/** 会合并到 itemArr中的每个vm 中 */
+/** 将合并到 itemArr中的每个vm 中 */
 @property (nonatomic, strong, nullable) AGViewModel *itemMergeVM;
 @property (nonatomic, strong, readonly) NSMutableArray<AGViewModel *> *itemArrM;
 @property (nonatomic, assign, readonly) NSInteger count;
 
-/** first item vm */
-@property (nonatomic, weak, readonly, nullable) AGViewModel *fvm;
-/** last item vm */
-@property (nonatomic, weak, readonly, nullable) AGViewModel *lvm;
+@property (nonatomic, strong, nullable) AGViewModel *cvm; ///< common viewModel
+@property (nonatomic, weak, readonly, nullable) AGViewModel *fvm; ///< first item viewModel
+@property (nonatomic, weak, readonly, nullable) AGViewModel *lvm; ///< last item viewModel
 
 /**
  Quickly create vms
@@ -234,6 +230,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) ag_removeItemAtIndex:(NSInteger)index;
 - (void) ag_removeItemsFromSection:(AGVMSection *)vms; //
 - (void) ag_removeItemsFromArray:(NSArray<AGViewModel *> *)vmArr; //
+- (void) ag_removeItemsUsingBlock:(BOOL(NS_NOESCAPE^)(AGViewModel *vm, NSUInteger idx, BOOL *stop))block;
+- (void) ag_removeItemsWithOptions:(NSEnumerationOptions)opts usingBlock:(BOOL(NS_NOESCAPE^)(AGViewModel *vm, NSUInteger idx, BOOL *stop))block;
 
 #pragma mark 更新
 - (void) setObject:(AGViewModel *)vm atIndexedSubscript:(NSInteger)idx;

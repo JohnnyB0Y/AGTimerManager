@@ -9,11 +9,15 @@
 #import "AGViewModel.h"
 #import "AGVMFunction.h"
 #import "AGVMNotifier.h"
+#import "AGVMCommand.h"
+
 
 @interface AGViewModel ()
 
 @property (nonatomic, strong) AGVMNotifier *notifier;
-@property (nonatomic, strong) NSMutableDictionary<NSString *, id> *archivedDictM;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, id> *archivedDictM; ///< 归档字典
+@property (nonatomic, strong) NSMutableDictionary<NSString *, AGVMCommand *> *commandDictM; ///< 命令字典
+@property (nonatomic, strong) NSMapTable *weaklyMT; ///< 弱引用 map
 
 @end
 
@@ -22,15 +26,15 @@
     AGVMConfigDataBlock _configDataBlock;
     
     struct AGResponeMethods {
-        unsigned int ag_callDelegateToDoForInfo         : 1;
-        unsigned int ag_callDelegateToDoForViewModel    : 1;
         unsigned int ag_callDelegateToDoForAction       : 1;
         unsigned int ag_callDelegateToDoForActionInfo   : 1;
     } _responeMethod;
     
-    BOOL _cachedBindingViewSizeTag;
+    struct AGIfNeededTags {
+        unsigned int ag_cachedBindingViewSize           : 1;
+        unsigned int ag_refreshUI                       : 1;
+    } _ifNeededTags;
     
-    BOOL _refreshUITag;
 }
 
 #pragma mark - ----------- Life Cycle ----------
@@ -54,7 +58,7 @@
     self = [super init];
     if (self) {
         _bindingModel = bindingModel;
-        _cachedBindingViewSizeTag = YES;
+        _ifNeededTags.ag_cachedBindingViewSize = YES;
     }
     return self;
 }
@@ -62,36 +66,17 @@
 - (void)dealloc
 {
     _configDataBlock = nil;
+    _notifier = nil;
+    _archivedDictM = nil;
+    _commandDictM = nil;
+    _weaklyMT = nil;
 }
 
 #pragma mark - ---------- Public Methods ----------
-#pragma mark 设置绑定视图
-- (void) ag_setBindingView:(UIView<AGVMIncludable> *)bindingView
-{
-    // 这里为了性能考虑，不再判断 respondsToSelector:@selector(setViewModel:)
-    _bindingView = bindingView;
-}
-
-- (void) ag_setBindingView:(UIView<AGVMIncludable> *)bindingView
-           configDataBlock:(AGVMConfigDataBlock)configDataBlock
-{
-    _bindingView        = bindingView;
-    _configDataBlock    = [configDataBlock copy];
-}
-
-#pragma mark 设置绑定代理
-/** 设置代理 */
-- (void) ag_setDelegate:(id<AGVMDelegate>)delegate
-           forIndexPath:(NSIndexPath *)indexPath
-{
-    self.delegate = delegate;
-    self.indexPath = indexPath;
-}
-
 #pragma mark 绑定视图可以计算自己的Size，并提供给外界使用。
 - (CGSize) ag_sizeOfBindingView
 {
-    if ( _cachedBindingViewSizeTag ) {
+    if ( _ifNeededTags.ag_cachedBindingViewSize ) {
         return [self ag_cachedSizeByBindingView:_bindingView];
     }
     
@@ -100,26 +85,26 @@
     return CGSizeMake(width, height);
 }
 
-- (CGSize) ag_sizeForBindingView:(UIView<AGVMIncludable> *)bv
+- (CGSize) ag_sizeForBindingView:(UIView<AGVMResponsive> *)bv
 {
-    if ( _cachedBindingViewSizeTag ) {
+    if ( _ifNeededTags.ag_cachedBindingViewSize ) {
         return [self ag_cachedSizeByBindingView:bv];
     }
     
     CGFloat height = [self[kAGVMViewH] floatValue];
     CGFloat width = [self[kAGVMViewW] floatValue];
     CGSize bvSize = CGSizeMake(width, height);
-    if ( [bv respondsToSelector:@selector(ag_viewModel:sizeForBindingView:)] ) {
-        return [bv ag_viewModel:self sizeForBindingView:[UIScreen mainScreen]];
+    if ( [bv respondsToSelector:@selector(ag_viewModel:sizeForLayout:)] ) {
+        return [bv ag_viewModel:self sizeForLayout:[UIScreen mainScreen]];
     }
     else {
-        NSAssert(NO, @"绑定视图未实现 AGVMIncludable 协议方法：ag_viewModel:sizeForBindingView:");
+        NSAssert(NO, @"绑定视图未实现 AGVMResponsive 协议方法：ag_viewModel:sizeForBindingView:");
     }
     return bvSize;
 }
 
 /** 计算并缓存绑定视图的Size */
-- (CGSize) ag_cachedSizeByBindingView:(UIView<AGVMIncludable> *)bv
+- (CGSize) ag_cachedSizeByBindingView:(UIView<AGVMResponsive> *)bv
 {
     // old bv size
     CGFloat height = [self[kAGVMViewH] floatValue];
@@ -131,9 +116,9 @@
         return bvSize;
     }
     
-    if ( [bv respondsToSelector:@selector(ag_viewModel:sizeForBindingView:)] ) {
+    if ( [bv respondsToSelector:@selector(ag_viewModel:sizeForLayout:)] ) {
         // new bv size
-        bvSize = [bv ag_viewModel:self sizeForBindingView:[UIScreen mainScreen]];
+        bvSize = [bv ag_viewModel:self sizeForLayout:[UIScreen mainScreen]];
         // cache size
         if ( height != bvSize.height ) {
             self[kAGVMViewH] = @(bvSize. height);
@@ -143,22 +128,22 @@
             self[kAGVMViewW] = @(bvSize. width);
         }
         // cached
-        _cachedBindingViewSizeTag = NO;
+        _ifNeededTags.ag_cachedBindingViewSize = NO;
     }
     else {
-        NSAssert(NO, @"绑定视图未实现 AGVMIncludable 协议方法：ag_viewModel:sizeForBindingView:");
+        NSAssert(NO, @"绑定视图未实现 AGVMResponsive 协议方法：ag_viewModel:sizeForBindingView:");
     }
     return bvSize;
 }
 
 - (void) ag_setNeedsCachedBindingViewSize
 {
-    _cachedBindingViewSizeTag = YES;
+    _ifNeededTags.ag_cachedBindingViewSize = YES;
 }
 
 - (void) ag_cachedBindingViewSizeIfNeeded
 {
-    if ( _cachedBindingViewSizeTag ) {
+    if ( _ifNeededTags.ag_cachedBindingViewSize ) {
         [self ag_cachedSizeByBindingView:_bindingView];
     }
 }
@@ -186,14 +171,14 @@
 /** 更新数据，并对“需要刷新UI”进行标记；当调用ag_refreshUIIfNeeded时，刷新UI界面。*/
 - (void) ag_setNeedsRefreshUIModelInBlock:(NS_NOESCAPE AGVMUpdateModelBlock)block
 {
-    if ( block ) block( _bindingModel );
+    if ( block ) block( self );
     [self ag_setNeedsRefreshUI];
 }
 
 /** 对“需要刷新UI”进行标记；当调用ag_refreshUIIfNeeded时，刷新UI界面。*/
 - (void) ag_setNeedsRefreshUI
 {
-    _refreshUITag = YES;
+    _ifNeededTags.ag_refreshUI = YES;
 }
 
 /** 刷新UI界面。*/
@@ -204,19 +189,19 @@
     }
     
     if ( _configDataBlock ) {
-        _configDataBlock( self, _bindingView, _bindingModel );
+        _configDataBlock( self, _bindingView );
     }
     else {
         [_bindingView setViewModel:self];
     }
     
-    _refreshUITag = NO;
+    _ifNeededTags.ag_refreshUI = NO;
 }
 
 /** 如果有“需要刷新UI”的标记，马上刷新界面。 */
 - (void) ag_refreshUIIfNeeded
 {
-    if ( _refreshUITag ) {
+    if ( _ifNeededTags.ag_refreshUI ) {
         [self ag_refreshUI];
     }
 }
@@ -230,17 +215,14 @@
 
 - (void) ag_mergeModelFromDictionary:(NSDictionary *)dict
 {
-    dict.count > 0 ? [_bindingModel addEntriesFromDictionary:dict] : nil;
+    if ( dict.count <= 0 ) return;
+    [_bindingModel addEntriesFromDictionary:dict];
 }
 
 - (void) ag_mergeModelFromDictionary:(NSDictionary *)dict forKeys:(NSArray<NSString *> *)keys
 {
-    if ( dict.count <= 0 ) {
-        return;
-    }
-    
+    if ( dict.count <= 0 ) return;
     [keys enumerateObjectsUsingBlock:^(NSString * _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSAssert([key isKindOfClass:[NSString class]], @"Key is not kind of NSString!");
         self[key] = dict[key];
     }];
 }
@@ -251,46 +233,24 @@
 }
 
 #pragma mark Other method.
-- (void)ag_callDelegateToDoForInfo:(NSDictionary *)info
-{
-    if ( _responeMethod.ag_callDelegateToDoForInfo ) {
-        [_delegate ag_viewModel:self callDelegateToDoForInfo:info];
-    }
-    else {
-        SEL sel = @selector(ag_viewModel:callDelegateToDoForInfo:);
-        NSLog(@"Delegate not implementation %@!", NSStringFromSelector(sel));
-    }
-}
-
-- (void)ag_callDelegateToDoForViewModel:(AGViewModel *)info
-{
-    if ( _responeMethod.ag_callDelegateToDoForViewModel ) {
-        [_delegate ag_viewModel:self callDelegateToDoForViewModel:info];
-    }
-    else {
-        SEL sel = @selector(ag_viewModel:callDelegateToDoForViewModel:);
-        NSLog(@"Delegate not implementation %@!", NSStringFromSelector(sel));
-    }
-}
-
-- (void)ag_callDelegateToDoForAction:(SEL)action
+- (void)ag_makeDelegateHandleAction:(SEL)action
 {
     if ( _responeMethod.ag_callDelegateToDoForAction ) {
-        [_delegate ag_viewModel:self callDelegateToDoForAction:action];
+        [_delegate ag_viewModel:self handleAction:action];
     }
     else {
-        SEL sel = @selector(ag_viewModel:callDelegateToDoForAction:);
+        SEL sel = @selector(ag_viewModel:handleAction:);
         NSLog(@"Delegate not implementation %@!", NSStringFromSelector(sel));
     }
 }
 
-- (void)ag_callDelegateToDoForAction:(SEL)action info:(AGViewModel *)info
+- (void)ag_makeDelegateHandleAction:(SEL)action info:(AGViewModel *)info
 {
     if ( _responeMethod.ag_callDelegateToDoForActionInfo ) {
-        [_delegate ag_viewModel:self callDelegateToDoForAction:action info:info];
+        [_delegate ag_viewModel:self handleAction:action info:info];
     }
     else {
-        SEL sel = @selector(ag_viewModel:callDelegateToDoForAction:info:);
+        SEL sel = @selector(ag_viewModel:handleAction:info:);
         NSLog(@"Delegate not implementation %@!", NSStringFromSelector(sel));
     }
 }
@@ -301,8 +261,8 @@
     AGViewModel *vm = [[self.class allocWithZone:zone] initWithModel:[_bindingModel mutableCopy]];
     vm->_bindingView = _bindingView;
     vm->_configDataBlock = [_configDataBlock copy];
-    [vm ag_setDelegate:_delegate forIndexPath:_indexPath];
-    vm->_archivedDictM = [self->_archivedDictM mutableCopy];
+    vm->_delegate = _delegate;
+    vm->_indexPath = _indexPath;
     return vm;
 }
 
@@ -311,8 +271,11 @@
     AGViewModel *vm = [[self.class allocWithZone:zone] initWithModel:[_bindingModel mutableCopy]];
     vm->_bindingView = _bindingView;
     vm->_configDataBlock = [_configDataBlock copy];
-    [vm ag_setDelegate:_delegate forIndexPath:_indexPath];
-    vm->_archivedDictM = [self->_archivedDictM mutableCopy];
+    vm->_delegate = _delegate;
+    vm->_indexPath = _indexPath;
+    vm->_archivedDictM = [_archivedDictM mutableCopy];
+    vm->_weaklyMT = [_weaklyMT mutableCopy];
+    vm->_commandDictM = [_commandDictM mutableCopy];
     return vm;
 }
 
@@ -450,17 +413,11 @@
     if ( _delegate != delegate ) {
         _delegate = delegate;
         
-        _responeMethod.ag_callDelegateToDoForInfo
-        = [_delegate respondsToSelector:@selector(ag_viewModel:callDelegateToDoForInfo:)];
-        
-        _responeMethod.ag_callDelegateToDoForViewModel
-        = [_delegate respondsToSelector:@selector(ag_viewModel:callDelegateToDoForViewModel:)];
-        
         _responeMethod.ag_callDelegateToDoForAction
-        = [_delegate respondsToSelector:@selector(ag_viewModel:callDelegateToDoForAction:)];
+        = [_delegate respondsToSelector:@selector(ag_viewModel:handleAction:)];
         
         _responeMethod.ag_callDelegateToDoForActionInfo
-        = [_delegate respondsToSelector:@selector(ag_viewModel:callDelegateToDoForAction:info:)];
+        = [_delegate respondsToSelector:@selector(ag_viewModel:handleAction:info:)];
     }
 }
 
@@ -474,7 +431,7 @@
 #pragma mark - ----------- Getter Methods ----------
 - (AGVMNotifier *)notifier
 {
-    if (_notifier == nil) {
+    if ( nil == _notifier ) {
         _notifier = [[AGVMNotifier alloc] initWithViewModel:self];
     }
     return _notifier;
@@ -482,10 +439,26 @@
 
 - (NSMutableDictionary<NSString *,id> *)archivedDictM
 {
-    if (_archivedDictM == nil) {
-        _archivedDictM = ag_newNSMutableDictionary(6);
+    if ( nil == _archivedDictM ) {
+        _archivedDictM = [NSMutableDictionary dictionaryWithCapacity:6];
     }
     return _archivedDictM;
+}
+
+- (NSMutableDictionary<NSString *, AGVMCommand *> *)commandDictM
+{
+    if ( nil == _commandDictM ) {
+        _commandDictM = [NSMutableDictionary dictionaryWithCapacity:6];
+    }
+    return _commandDictM;
+}
+
+- (NSMapTable *)weaklyMT
+{
+    if ( nil == _weaklyMT ) {
+        _weaklyMT = [NSMapTable strongToWeakObjectsMapTable];
+    }
+    return _weaklyMT;
 }
 
 @end
@@ -558,23 +531,23 @@
 - (void) ag_removeObserver:(NSObject *)observer
 					forKey:(NSString *)key
 {
-	[self.notifier ag_removeObserver:observer forKey:key];
+	[_notifier ag_removeObserver:observer forKey:key];
 }
 
 - (void) ag_removeObserver:(NSObject *)observer
 				   forKeys:(NSArray<NSString *> *)keys
 {
-	[self.notifier ag_removeObserver:observer forKeys:keys];
+	[_notifier ag_removeObserver:observer forKeys:keys];
 }
 
 - (void) ag_removeObserver:(NSObject *)observer
 {
-	[self.notifier ag_removeObserver:observer];
+	[_notifier ag_removeObserver:observer];
 }
 
 - (void) ag_removeAllObservers
 {
-	[self.notifier ag_removeAllObservers];
+	[_notifier ag_removeAllObservers];
 }
 
 @end
@@ -803,35 +776,231 @@
 @end
 
 
-static NSString * const kAGViewModelStrongToWeakMapTable = @"kAGViewModelStrongToWeakMapTable";
-@implementation AGViewModel (AGWeakly)
+@implementation AGViewModel (AGVMWeakly)
 
-- (void)ag_setWeakRefObject:(id)obj forKey:(NSString *)key
+- (void)ag_setWeaklyObject:(id)obj forKey:(NSString *)key
 {
     AGAssertParameter(key);
-    [[self _strongToWeakMapTable] setObject:obj forKey:key];
+    [self.weaklyMT setObject:obj forKey:key];
 }
 
-- (void)ag_removeWeakRefObjectForKey:(NSString *)key
+- (void)ag_removeWeaklyObjectForKey:(NSString *)key
 {
     AGAssertParameter(key);
-    [[self _strongToWeakMapTable] removeObjectForKey:key];
+    [_weaklyMT removeObjectForKey:key];
 }
 
-- (id)ag_weakRefObjectForKey:(NSString *)key
+- (id)ag_weaklyObjectForKey:(NSString *)key
 {
     AGAssertParameter(key);
-    return [[self _strongToWeakMapTable] objectForKey:key];
+    return [_weaklyMT objectForKey:key];
 }
 
-- (NSMapTable *) _strongToWeakMapTable
+@end
+
+
+@implementation AGViewModel (AGVMCommandExecutable)
+
+- (void)ag_setCommandBlock:(AGVMCommandExecutableBlock)block forKey:(NSString *)key
 {
-    NSMapTable *mt = _bindingModel[kAGViewModelStrongToWeakMapTable];
-    if ( nil == mt ) {
-        mt = [NSMapTable strongToWeakObjectsMapTable];
-        [_bindingModel setObject:mt forKey:kAGViewModelStrongToWeakMapTable];
+    AGAssertParameter(key);
+    AGAssertParameter(block);
+    
+    if ( key && block ) {
+        AGVMCommand *cmd = [AGVMCommand newWithExecuteBlock:block undoBlock:nil];
+        [self.commandDictM setObject:cmd forKey:key];
     }
-    return mt;
+}
+
+- (void)ag_setCommand:(AGVMCommand *)command forKey:(NSString *)key
+{
+    AGAssertParameter(key);
+    AGAssertParameter(command);
+    
+    [self.commandDictM setObject:command forKey:key];
+}
+
+- (void)ag_removeCommandForKey:(NSString *)key
+{
+    AGAssertParameter(key);
+    [_commandDictM removeObjectForKey:key];
+}
+
+- (id)ag_executeCommandForKey:(NSString *)key
+{
+    AGAssertParameter(key);
+    
+    AGVMCommand *cmd = [_commandDictM objectForKey:key];
+    if ( cmd ) {
+        cmd.executable = YES;
+        id object = [cmd ag_execute:self];
+        cmd.executable = NO;
+        if ( object ) { // 每次执行都存一次结果
+            [_bindingModel setObject:object forKey:key];
+        }
+        else {
+            [_bindingModel removeObjectForKey:key];
+        }
+        return object;
+    }
+    return [_bindingModel objectForKey:key]; // 执行到这里，说明 Block 不存在了，直接返回保存的数据。
+}
+
+- (void)ag_setNeedsExecuteCommandForKey:(NSString *)key
+{
+    AGAssertParameter(key);
+    [_commandDictM objectForKey:key].executable = YES;
+}
+
+- (id)ag_executeCommandIfNeededForKey:(NSString *)key
+{
+    AGAssertParameter(key);
+    
+    AGVMCommand *cmd = [_commandDictM objectForKey:key];
+    if ( cmd.isExecutable ) {
+        id object = [cmd ag_execute:self];
+        cmd.executable = NO;
+        if ( object ) { // 每次执行都存一次结果
+            [_bindingModel setObject:object forKey:key];
+        }
+        else {
+            [_bindingModel removeObjectForKey:key];
+        }
+        return object;
+    }
+    return [_bindingModel objectForKey:key]; // 直接取值
+}
+
+@end
+
+@implementation AGViewModel (AGVMMethodChaining)
+
+- (AGVMSetObjectForKeyBlock)setObjectForKey
+{
+    return ^AGViewModel * _Nonnull(id  _Nullable object, NSString * _Nonnull forKey) {
+        [self setObject:object forKeyedSubscript:forKey];
+        return self;
+    };
+}
+
+- (AGVMRemoveObjectForKeyBlock)removeObjectForKey
+{
+    return ^AGViewModel * _Nonnull(NSString * _Nonnull key) {
+        [self ag_removeObjectForKey:key];
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(NSDictionary * _Nonnull))mergeDictionary
+{
+    return ^AGViewModel * _Nonnull(NSDictionary * _Nonnull dict) {
+        [self ag_mergeModelFromDictionary:dict];
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(NSDictionary * _Nonnull, NSArray<NSString *> * _Nonnull))mergeDictionaryForKeys
+{
+    return ^AGViewModel * _Nonnull(NSDictionary * _Nonnull dict, NSArray<NSString *> * _Nonnull keys) {
+        [self ag_mergeModelFromDictionary:dict forKeys:keys];
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(AGViewModel * _Nonnull))mergeViewModel
+{
+    return ^AGViewModel * _Nonnull(AGViewModel * _Nonnull vm) {
+        [self ag_mergeModelFromViewModel:vm];
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(AGViewModel * _Nonnull, NSArray<NSString *> * _Nonnull))mergeViewModelForKeys
+{
+    return ^AGViewModel * _Nonnull(AGViewModel * _Nonnull vm, NSArray<NSString *> * _Nonnull keys) {
+        [self ag_mergeModelFromViewModel:vm forKeys:keys];
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(NSIndexPath * _Nullable))setIndexPath
+{
+    return ^AGViewModel * _Nonnull(NSIndexPath * _Nullable indexPath) {
+        self.indexPath = indexPath;
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(id<AGVMDelegate> _Nullable))setDelegate
+{
+    return ^AGViewModel * _Nonnull(id<AGVMDelegate> _Nullable delegate) {
+        self.delegate = delegate;
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(UIView<AGVMResponsive> * _Nullable))setBindingView
+{
+    return ^AGViewModel * _Nonnull(UIView<AGVMResponsive> * _Nullable view) {
+        self->_bindingView = view;
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(AGVMConfigDataBlock _Nonnull))setBindingViewConfigDataBlock
+{
+    return ^AGViewModel * _Nonnull(AGVMConfigDataBlock _Nonnull configDataBlock) {
+        self->_configDataBlock = [configDataBlock copy];
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(AGVMCommand * _Nonnull, NSString * _Nonnull))setCommandForKey
+{
+    return ^AGViewModel * _Nonnull(AGVMCommand * _Nonnull command, NSString * _Nonnull key) {
+        [self ag_setCommand:command forKey:key];
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(NSString * _Nonnull))removeCommandForKey
+{
+    return ^AGViewModel * _Nonnull(NSString * _Nonnull key) {
+        [self ag_removeCommandForKey:key];
+        return self;
+    };
+}
+
+- (AGVMSetObjectForKeyBlock)setWeaklyForKey
+{
+    return ^AGViewModel * _Nonnull(id  _Nullable object, NSString * _Nonnull key) {
+        [self ag_setWeaklyObject:object forKey:key];
+        return self;
+    };
+}
+
+- (AGVMRemoveObjectForKeyBlock)removeWeaklyForKey
+{
+    return ^AGViewModel * _Nonnull(NSString * _Nonnull key) {
+        [self ag_removeWeaklyObjectForKey:key];
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(NSString * _Nonnull))addArchivedKey
+{
+    return ^AGViewModel * _Nonnull(NSString * _Nonnull key) {
+        [self ag_addArchivedObjectKey:key];
+        return self;
+    };
+}
+
+- (AGViewModel * _Nonnull (^)(NSString * _Nonnull))removeArchivedKey
+{
+    return ^AGViewModel * _Nonnull(NSString * _Nonnull key) {
+        [self ag_removeArchivedObjectKey:key];
+        return self;
+    };
 }
 
 @end

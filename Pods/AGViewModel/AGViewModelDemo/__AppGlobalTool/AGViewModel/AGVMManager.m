@@ -64,7 +64,6 @@
 /** 拼装 section 数据 capacity */
 - (AGVMSection *) ag_packageSection:(NS_NOESCAPE AGVMPackageSectionBlock)block capacity:(NSInteger)capacity
 {
-    AGAssertParameter(block);
     AGAssertIndexRange(0, capacity, NSIntegerMax);
     AGVMSection *vms = ag_newAGVMSection(capacity);
     if ( block ) block(vms);
@@ -72,10 +71,13 @@
     return vms;
 }
 
+- (AGVMSection *)ag_packageSection:(NS_NOESCAPE AGVMPackageSectionBlock)block
+{
+    return [self ag_packageSection:block capacity:15];
+}
+
 - (AGVMSection *)ag_packageSectionItems:(NSArray *)items packager:(id<AGVMPackagable>)packager forObject:(id)obj
 {
-    AGAssertParameter(items);
-    AGAssertParameter(packager);
 	return [self ag_packageSection:^(AGVMSection * _Nonnull vms) {
 		[vms ag_packageItems:items packager:packager forObject:obj];
 	} capacity:items.count];
@@ -84,8 +86,6 @@
 - (AGVMManager *) ag_packageSections:(NSArray *)sections
 							 inBlock:(NS_NOESCAPE AGVMPackageSectionsBlock)block
 {
-    AGAssertParameter(sections);
-    AGAssertParameter(block);
 	return [self ag_packageSections:sections inBlock:block capacity:15];
 }
 
@@ -93,8 +93,6 @@
 							 inBlock:(NS_NOESCAPE AGVMPackageSectionsBlock)block
 							capacity:(NSInteger)capacity
 {
-    AGAssertParameter(sections);
-    AGAssertParameter(block);
     AGAssertIndexRange(0, capacity, NSIntegerMax);
 	[sections enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 		[self ag_packageSection:^(AGVMSection * _Nonnull vms) {
@@ -249,13 +247,11 @@
 #pragma mark 添加
 - (void) ag_addSection:(AGVMSection *)section
 {
-    AGAssertParameter(section);
     section ? [self.sectionArrM addObject:section] : nil;
 }
 
 - (void) ag_addSectionsFromArray:(NSArray<AGVMSection *> *)sections
 {
-    AGAssertParameter(sections);
     sections.count > 0 ? [self.sectionArrM addObjectsFromArray:sections] : nil;
 }
 
@@ -274,7 +270,6 @@
 - (void) ag_insertSectionsFromArray:(NSArray<AGVMSection *> *)vmsArr
                             atIndex:(NSInteger)index
 {
-    AGAssertParameter(vmsArr);
     AGAssertIndexRange(-1, index, self.count+1);
     if ( vmsArr && AGIsIndexInRange(-1, index, self.count+1) ) {
         NSIndexSet *indexSet =
@@ -286,7 +281,6 @@
 - (void) ag_insertSection:(AGVMSection *)section
                   atIndex:(NSInteger)index
 {
-    AGAssertParameter(section);
     AGAssertIndexRange(-1, index, self.count+1);
     if ( section && AGIsIndexInRange(-1, index, self.count+1) ) {
         [self.sectionArrM insertObject:section atIndex:index];
@@ -304,11 +298,10 @@
                          atIndex:(NSInteger)index
                         capacity:(NSInteger)capacity
 {
-    AGAssertParameter(package);
     if ( package ) {
         AGVMSection *vms = ag_newAGVMSection(capacity);
         package(vms);
-        return [self ag_insertSection:vms atIndex:index];
+        [self ag_insertSection:vms atIndex:index];
     }
 }
 
@@ -329,6 +322,42 @@
     if ( AGIsIndexInRange(-1, index, self.count) ) {
         [self.sectionArrM removeObjectAtIndex:index];
     }
+}
+
+- (void)ag_removeSectionsUsingBlock:(BOOL (NS_NOESCAPE ^)(AGVMSection * _Nonnull, NSUInteger, BOOL * _Nonnull))block
+{
+    if ( self.sectionArrM.count <= 0 ) return;
+    if ( nil == block ) return;
+    
+    NSMutableIndexSet *idxSetM = [NSMutableIndexSet indexSet];
+    [self.sectionArrM enumerateObjectsUsingBlock:^(AGVMSection * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ( block(obj, idx, stop) ) {
+            [idxSetM addIndex:idx];
+        }
+    }];
+    
+    [self.sectionArrM removeObjectsAtIndexes:idxSetM];
+}
+
+- (void)ag_removeSectionItemsUsingBlock:(BOOL (NS_NOESCAPE ^)(AGViewModel * _Nonnull, NSUInteger, BOOL * _Nonnull))block
+{
+    if ( self.sectionArrM.count <= 0 ) return;
+    if ( nil == block ) return;
+    
+    [self.sectionArrM enumerateObjectsUsingBlock:^(AGVMSection * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj ag_removeItemsUsingBlock:block];
+    }];
+}
+
+- (void)ag_removeSectionItemsWithOptions:(NSEnumerationOptions)opts usingBlock:(nonnull BOOL (NS_NOESCAPE ^)(AGViewModel * _Nonnull, NSUInteger, BOOL * _Nonnull))block
+{
+    if ( self.sectionArrM.count <= 0 ) return;
+    if ( nil == block ) return;
+    
+    [self.sectionArrM enumerateObjectsWithOptions:opts usingBlock:^(AGVMSection * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSIndexSet *idxSet = [obj.itemArrM indexesOfObjectsWithOptions:opts passingTest:block];
+        [obj.itemArrM removeObjectsAtIndexes:idxSet];
+    }];
 }
 
 #pragma mark 合并
@@ -400,7 +429,6 @@
 
 - (void)setObject:(AGVMSection *)vms atIndexedSubscript:(NSInteger)idx
 {
-    AGAssertParameter(vms);
     AGAssertIndexRange(-1, idx, self.count);
     if ( vms && AGIsIndexInRange(-1, idx, self.count) ) {
         [self.sectionArrM setObject:vms atIndexedSubscript:idx];
@@ -439,15 +467,12 @@
 #pragma mark 遍历
 - (void) ag_enumerateSectionsUsingBlock:(void (NS_NOESCAPE ^)(AGVMSection * _Nonnull, NSUInteger, BOOL * _Nonnull))block
 {
-    AGAssertParameter(block);
     if ( ! block ) return;
-    
     [self.sectionArrM enumerateObjectsUsingBlock:block];
 }
 
 - (void) ag_enumerateSectionsIfInRange:(NSRange)range usingBlock:(void(NS_NOESCAPE^)(AGVMSection *vms, NSUInteger idx, BOOL *stop))block
 {
-    AGAssertParameter(block);
     if ( ! block ) return;
     if ( range.location >= self.count ) return;
     
@@ -460,7 +485,6 @@
 
 - (void) ag_enumerateSectionsItemUsingBlock:(void (NS_NOESCAPE ^)(AGViewModel * _Nonnull, NSIndexPath * _Nonnull, BOOL * _Nonnull))block
 {
-    AGAssertParameter(block);
     if ( ! block ) return;
     
     __block BOOL _stop = NO;
@@ -478,7 +502,6 @@
 /** 遍历所有 section 的 header、footer vm */
 - (void) ag_enumerateSectionsHeaderFooterUsingBlock:(void (NS_NOESCAPE ^)(AGViewModel * _Nonnull, NSIndexPath * _Nonnull, BOOL * _Nonnull))block
 {
-    AGAssertParameter(block);
     if ( ! block ) return;
     
     __block BOOL _stop = NO;

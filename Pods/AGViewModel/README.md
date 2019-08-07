@@ -5,7 +5,7 @@
 platform :ios, '7.0'
 target 'AGViewModel' do
 
-pod 'AGViewModel'
+pod 'AGViewModel', '~> 0.6.25'
 
 end
 ```
@@ -14,7 +14,7 @@ end
 在实践 casa 的去Model化后，为了解决网络数据获取后如何处理、如何更新、如何监听模型数据变化等一系列细节问题，而设计了AGViewModel。
 其主要作用就是管理视图与数据之间的关系，简化工作，尽量少做重复事情。
 
-#### 持有一个字典数据模型，并弱引用视图。==> View <·· AGViewModel -> Model
+#### 持有一个字典数据模型，并弱引用视图【 View <·· AGViewModel -> Model 】
 - 用户通过AGViewModel 对字典模型进行数据增删改查。
 - 数据改变后，用户可以通过AGViewModel 通知视图更新自己的Size 或刷新UI界面。
 - 具体怎样计算Size 和怎样显示UI 由视图自己决定。（当需要这么做的时候，AGViewModel会把数据提供给视图）
@@ -71,7 +71,7 @@ end
 }
 
 // 计算返回自己的 Size
-- (CGSize) ag_viewModel:(AGViewModel *)vm sizeForBindingView:(UIScreen *)screen
+- (CGSize) ag_viewModel:(AGViewModel *)vm sizeForLayout:(UIScreen *)screen
 {
   // size
   
@@ -79,6 +79,25 @@ end
 ```
 
 ### 还能能做什么？
+#### 把视图的各种用户操作传递给代理处理（一般都是Controller）
+- 传递事件
+- 参考Demo 中点击书本封面
+
+```objective-c
+@protocol AGVMDelegate <NSObject>
+
+/**
+ 通过 viewModel 的 @selector(ag_makeDelegateHandleAction:)        方法通知 delegate 做事。
+ 通过 viewModel 的 @selector(ag_makeDelegateHandleAction:info:)   方法通知 delegate 做事。
+ */
+
+@optional
+- (void) ag_viewModel:(AGViewModel *)vm handleAction:(nullable SEL)action;
+- (void) ag_viewModel:(AGViewModel *)vm handleAction:(nullable SEL)action info:(nullable AGViewModel *)info;
+
+@end
+```
+
 #### 作为本级控制器与下级控制器之间的桥梁
 - 传递数据
 - 参考Demo 中删除书本
@@ -113,6 +132,44 @@ NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.tableViewManager
     
 ```
 
+#### AGVMWeakly 弱引用存取
+- 不想强引用对象的时候，可以使用。
+
+```objective-c
+/** 添加弱引用的对象 */
+- (void)ag_setWeaklyObject:(nullable id)obj forKey:(NSString *)key;
+
+/** 获取弱引用的对象 */
+- (nullable id) ag_weaklyObjectForKey:(NSString *)key;
+
+/** 移除弱引用的对象 */
+- (void) ag_removeWeaklyObjectForKey:(NSString *)key;
+    
+```
+
+#### AGVMCommandExecutable 命令编程
+- 当需要根据几个变化属性，拿到结果时，可以使用命令编程。
+
+```objective-c
+/** 添加命令 */
+- (void)ag_setCommand:(AGVMCommand *)command forKey:(NSString *)key;
+/** 添加命令Block */
+- (void)ag_setCommandBlock:(AGVMCommandExecutableBlock)block forKey:(NSString *)key;
+/** 移除命令 */
+- (void) ag_removeCommandForKey:(NSString *)key;
+
+/** 获取命令执行结果，直接执行 */
+- (nullable id) ag_executeCommandForKey:(NSString *)key;
+/** 标记命令待执行 */
+- (void) ag_setNeedsExecuteCommandForKey:(NSString *)key;
+/** 获取命令执行结果，有标记才执行命令，否则直接从字典中取 */
+- (nullable id) ag_executeCommandIfNeededForKey:(NSString *)key;
+    
+```
+
+#### AGVMMethodChaining 链式方法
+- 支持一些方便的链式方法调用
+
 #### 对id类型数据判断处理
 - 对API返回数据的边界判断和处理
 - 参考 AGVMSafeAccessible 协议
@@ -135,7 +192,47 @@ NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.tableViewManager
 @end
 ```
 
-##### 视图复用的一些协议已经在分类中实现（有特殊需求 Override）
+#### 视图复用的一些协议已经在分类中实现（有特殊需求 Override）
+``` objective-c
+@interface UITableView (AGViewModel)
+
+#pragma mark - table view cell
+- (void) ag_registerCellForClass:(Class<AGViewReusable>)cls;
+- (void) ag_registerNibCellForClass:(Class<AGViewReusable>)cls;
+- (__kindof UITableViewCell *) ag_dequeueCellWithClass:(Class<AGViewReusable>)cls for:(nullable NSIndexPath *)indexPath;
+
+
+#pragma mark - table view header footer view
+- (void) ag_registerHeaderFooterViewForClass:(Class<AGViewReusable>)cls;
+- (void) ag_registerNibHeaderFooterViewForClass:(Class<AGViewReusable>)cls;
+- (__kindof UITableViewHeaderFooterView *) ag_dequeueHeaderFooterViewWithClass:(Class<AGViewReusable>)cls;
+
+@end
+
+
+@interface UICollectionView (AGViewModel)
+
+#pragma mark collection view cell
+- (void) ag_registerCellForClass:(Class<AGViewReusable>)cls;
+- (void) ag_registerNibCellForClass:(Class<AGViewReusable>)cls;
+- (__kindof UICollectionViewCell *) ag_dequeueCellWithClass:(Class<AGViewReusable>)cls for:(NSIndexPath *)indexPath;
+
+
+#pragma mark collection view footer view
+- (void) ag_registerFooterViewForClass:(Class<AGViewReusable>)cls;
+- (void) ag_registerNibFooterViewForClass:(Class<AGViewReusable>)cls;
+- (__kindof UICollectionReusableView *) ag_dequeueFooterViewWithClass:(Class<AGViewReusable>)cls for:(NSIndexPath *)indexPath;
+
+
+#pragma mark collection view header view
+- (void) ag_registerHeaderViewForClass:(Class<AGViewReusable>)cls;
+- (void) ag_registerNibHeaderViewForClass:(Class<AGViewReusable>)cls;
+- (__kindof UICollectionReusableView *) ag_dequeueHeaderViewWithClass:(Class<AGViewReusable>)cls for:(NSIndexPath *)indexPath;
+
+@end
+
+```
+
 ```objective-c
 #pragma mark - ------------- ViewModel 相关协议 --------------
 #pragma mark BaseReusable Protocol
@@ -201,9 +298,9 @@ NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.tableViewManager
 - 当用户需要监听 AGViewModel 的通用字典数据变化时，后台操作就是由 AGVMNotifier 提供的。
 -AGVMNotifier 是通过KVO 来处理监听事件的。AGVMNotifier 同时也处理了KVO的崩溃问题。
 
-#### AGVMPackager 与 AGViewModel 的关系
-- AGVMPackager 就是方便打包AGViewModel 数据的单例。
-- AGVMPackager 可以对数据进行打印，打印出需要的代码。
+#### AGVMSharedPackager 与 AGViewModel 的关系
+- AGVMSharedPackager 就是方便打包AGViewModel 数据的单例。
+- AGVMSharedPackager 可以对数据进行打印，打印出需要的代码。
 
 ##### 打印需要的代码
 ```objective-c

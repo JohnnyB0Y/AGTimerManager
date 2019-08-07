@@ -29,14 +29,14 @@
     }
 }
 
-+ (__kindof UITableViewHeaderFooterView *) ag_dequeueHeaderFooterViewBy:(UITableView *)tableView
++ (instancetype) ag_dequeueHeaderFooterViewBy:(UITableView *)tableView
 {
     // 如果在此处奔溃，请优先检查视图是否已注册到 tableView。
     return [tableView dequeueReusableHeaderFooterViewWithIdentifier:[self ag_reuseIdentifier]];
 }
 
-#pragma mark - ----------- AGVMIncludable -----------
-- (CGSize) ag_viewModel:(AGViewModel *)vm sizeForBindingView:(UIScreen *)screen
+#pragma mark - ----------- AGVMResponsive -----------
+- (CGSize) ag_viewModel:(AGViewModel *)vm sizeForLayout:(UIScreen *)screen
 {
     // 有特殊需求，请在子类重写。
     CGFloat height = [vm[kAGVMViewH] floatValue];
