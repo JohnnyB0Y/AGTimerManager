@@ -32,6 +32,8 @@ typedef BOOL(^AGTMDateCountdownBlock)(NSCalendar *calendar, NSDateComponents *co
 
 @interface AGTimerManager : NSObject
 
+@property (class, readonly) AGTimerManager *defaultInstance;
+
 #pragma mark 多任务定时器🍩
 
 /**

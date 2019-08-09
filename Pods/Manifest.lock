@@ -1,9 +1,9 @@
 PODS:
-  - AGCategories (0.1.8)
+  - AGCategories (0.1.9)
   - AGViewModel (0.6.25)
 
 DEPENDENCIES:
-  - AGCategories (~> 0.1.8)
+  - AGCategories (~> 0.1.9)
   - AGViewModel (~> 0.6.25)
 
 SPEC REPOS:
@@ -12,9 +12,9 @@ SPEC REPOS:
     - AGViewModel
 
 SPEC CHECKSUMS:
-  AGCategories: 1fcd073caad1c6f369521234cff7abf095e21c29
+  AGCategories: 1cee263e808a674b2ddd44ccf5d0aeb7221ba90e
   AGViewModel: 8e928058bde9ad08b7c3a94771ec6dc78575099d
 
-PODFILE CHECKSUM: 12a6dcc31119a08add5cf903addb843176a64f2a
+PODFILE CHECKSUM: 83cbb902f24879a73bd83e77521334c3f8abc34e
 
 COCOAPODS: 1.6.1

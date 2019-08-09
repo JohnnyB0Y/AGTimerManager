@@ -440,6 +440,11 @@ static void *kAGTMTimerStrongToWeakMapTableProperty = &kAGTMTimerStrongToWeakMap
 
 @implementation AGTimerManager
 
++ (AGTimerManager *)defaultInstance
+{
+    return [[self alloc] init];
+}
+
 #pragma mark 共享定时器🍩
 - (void) ag_prepareTaskTimer:(NSString **)timerKey
                     interval:(NSTimeInterval)ti
